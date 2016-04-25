@@ -1,24 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "vSt.h"
+#include "lenla.h"
+
 typedef unsigned int *u32;
 
 typedef NimheSt *NimheP;
 
 
-struct VerticeSt  {
+/*struct VerticeSt  {
     u32 nombreV;
     u32 gradoV;
     u32 colorV;
-
-};
+    //gamma 
+};*/
 
 struct NimheSt {
+
     u32 cantVertices;
     u32 cantLados;
     u32 cantcolor;
-    u32 *PrimerOrden;
-    u32 *SegundoOrden;
+    VerticeSt *PrimerOrden; //Tengo dudas aca si deberia ser una lista 
+                            //de vertices completos o de numero de vertices
+    VerticeSt *SegundoOrden;
+    
     //hash_link
     //Espacio para mas cosas
 };
@@ -26,6 +32,7 @@ struct NimheSt {
 NimheP NuevoNimhe() {
     u32 cantv, cantl;
     char input[80];
+    input[0] = 'c';
     while (input[0] == 'c') {
         scanf("%s", &input);
     }
@@ -78,3 +85,6 @@ NimheP NuevoNimhe() {
     for (uint i = 0; i < cantv; ++i) {
         uf->trep[i] = -1;
     }*/
+VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
+    IesimoVecinoPlus(G->SegundoOrden, i);
+}

@@ -35,6 +35,14 @@ u32 NombreDelVertice(VerticeSt x) {
     return(x->nombreV);
 }
 
+u32 IesimoVecinoPlus(i, VerticeSt x) {
+    return(IesimoElem(x->vecinosV, i));
+}
+
+void CambiaColorA(VerticeSt x, i) {
+    x->colorV = i;
+}
+
 /*void ImprimirVecinosDelVertice(VerticeSt x,NimheP G) {
         curr = x->vecinosV;
         printf("Los vecinos de %d son: \n", x);

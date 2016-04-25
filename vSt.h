@@ -22,3 +22,12 @@ u32 NombreDelVertice(VerticeSt x);
 /*
  * Devuelve el nombre del vértice dado.
  */
+
+u32 IesimoVecinoPlus(VerticeSt x, i);
+/*
+ * Devuelve el iesimo vecino del vertice x (No es el que piden en la catedra)
+ */
+void CambiarColorA(VerticeSt x, i);
+/*
+ * Cambia el color del vertice a i
+ */
