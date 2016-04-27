@@ -3,6 +3,14 @@
 
 #include "lenla.h"
 
+struct VerticeSt  {
+    u32 nombreV;
+    u32 gradoV;
+    u32 colorV;
+    u32 cantVecinos;
+    lenla *vecinosV;
+};
+
 VerticeSt NuevoVertice(u32 n);
 /*
  * Devuelve un nuevo vértice 'n' de color 0 y con grado 0.
@@ -30,4 +38,8 @@ u32 IesimoVecinoPlus(VerticeSt x, i);
 void CambiarColorA(VerticeSt x, i);
 /*
  * Cambia el color del vertice a i
+ */
+void AgregarLado(VerticeSt x, i);
+/*
+ * Agrega vecino i a x
  */

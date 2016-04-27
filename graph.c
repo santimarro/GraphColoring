@@ -88,3 +88,12 @@ NimheP NuevoNimhe() {
 VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
     IesimoVecinoPlus(G->SegundoOrden, i);
 }
+
+void nuevoLado(NimheSt *G, u32 i, u32 j) { //Dudas aca si deberia ser puntero G
+    NuevoVertice(i);
+    NuevoVertice(j);
+    VerticeSt f = G->SegundoOrden[i];
+    VerticeSt s = G->SegundoOrden[j];
+    AgregarLado(f, j);
+    AgregarLado(j, f); //Pnesar mejor implementacion pero no cambia mucho
+}

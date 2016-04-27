@@ -10,6 +10,7 @@ struct VerticeSt  {
     u32 nombreV;
     u32 gradoV;
     u32 colorV;
+    u32 cantVecinos;
     lenla *vecinosV;
 };
 
@@ -19,6 +20,7 @@ VerticeSt NuevoVertice(u32 n) {
     v->nombreV = n;
     v->gradoV = 0;
     v->colorV = 0;
+    v->cantVecinos = 0;
     v->lenla = lenlaVacia();
     return(v);
 }
@@ -42,6 +44,11 @@ u32 IesimoVecinoPlus(i, VerticeSt x) {
 void CambiaColorA(VerticeSt x, i) {
     x->colorV = i;
 }
+void AgregarLado(VerticeSt x, i) {
+    AgregarVecino(i ,x->vecinosV);
+    x->cantVecinos++;
+}
+
 
 /*void ImprimirVecinosDelVertice(VerticeSt x,NimheP G) {
         curr = x->vecinosV;
