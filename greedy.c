@@ -12,7 +12,7 @@
  */
 
 void greedy(NimheSt *G) {
-    u32 V = G->cantVertices;
+    u32 V = G.cantVertices;
     // u32 E = G->cantLados;
     u32 color;
     VerticeSt vertice = NULL;
@@ -28,7 +28,7 @@ void greedy(NimheSt *G) {
         // Revisamos los vecinos del vertice u
         // y flageamos los colores usados.
         vertice = G->SegundoOrden[u];
-        u32 cantVecinos = vertice->cantVecinos;
+        u32 cantVecinos = vertice.cantVecinos;
         for (int h = 0; h < cantVecinos; h++) {
             vecino = IesimoVecinoPlus(vertice, h);
             color = ColorDelVertice(vecino);
