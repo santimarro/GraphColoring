@@ -10,17 +10,15 @@ struct VerticeSt  {
     u32 nombreV;
     u32 gradoV;
     u32 colorV;
-    u32 cantVecinos;
     lenla *vecinosV;
 };
 
 VerticeSt NuevoVertice(u32 n) {
     VerticeSt v;
-    v = malloc(1*(sizeof(struct VerticeSt)));
+    // Borré la linea del malloc porque ya se inicializan todos los vértices en graph.c .
     v.nombreV = n;
     v.gradoV = 0;
     v.colorV = 0;
-    v.cantVecinos = 0;
     v->vecinosV = lenlaVacia();
     return(v);
 }
@@ -46,18 +44,17 @@ void CambiaColorA(VerticeSt x, i) {
 }
 void AgregarLado(VerticeSt x, i) {
     AgregarVecino(i ,x->vecinosV);
-    x.cantVecinos++;
+    x.gradoV++;
 }
 
-
-/*void ImprimirVecinosDelVertice(VerticeSt x,NimheP G) {
-        curr = x->vecinosV;
-        printf("Los vecinos de %d son: \n", x);
-        for(curr; curr != NULL; curr = curr->next) {
-            printf("%d ", curr->vecino);
-        } // Ubicar esta función donde corresponda (ver los inputs para darse cuenta!)
-        printf("\n");
-}*/
+void ImprimirVecinosDelVertice(VerticeSt x, NimheP G) {
+    curr = x->vecinosV;
+    printf("Los vecinos de %d son: \n", x);
+    for(curr; curr != NULL; curr = curr->next) {
+        printf("%d ", curr->vecino);
+    } // Ubicar esta función donde corresponda (ver los inputs para darse cuenta!)
+    printf("\n");
+}
 
 
 

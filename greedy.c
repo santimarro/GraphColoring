@@ -17,9 +17,9 @@ void greedy(NimheSt *G) {
     u32 color;
     VerticeSt vertice = NULL;
     VerticeSt vecino = NULL;
-    bool usado[V]; //Array para indicar colores no disponibles.
+    bool usado[V];          // Array para indicar colores no disponibles.
     for (int i = 0; i < V; i++) {
-        usado[i] = false;
+        usado[i] = false;   // Inicializo todos los colores en false(sin usar).
     }
     vertice = G->SegundoOrden[0];
     CambiarColorA(vertice, 1);

@@ -16,8 +16,8 @@ node LenlaVacia(void) {
 void AgregarVecino(u32 i, node *head) {
     node nodo;
     vecino = malloc(sizeof(*node));
-    nodo->vecino = i;
-    nodo->next = NULL;
+    nodo->vecino = i;       // El vecino dado.
+    nodo->next = NULL;      // Lo agrega al final.
     node *curr = head;
     while(curr->next != NULL) {
         if(curr->next == NULL) {
