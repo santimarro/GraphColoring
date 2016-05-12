@@ -35,14 +35,14 @@ u32 NombreDelVertice(VerticeSt x) {
     return(x.nombreV);
 }
 
-u32 IesimoVecinoPlus(i, VerticeSt x) {
+u32 IesimoVecinoPlus(u32 i, VerticeSt x) {
     return(IesimoElem(x->vecinosV, i));
 }
 
-void CambiaColorA(VerticeSt x, i) {
+void CambiaColorA(VerticeSt x, u32 i) {
     x.colorV = i;
 }
-void AgregarLado(VerticeSt x, i) {
+void AgregarLado(VerticeSt x, u32 i) {
     AgregarVecino(i ,x->vecinosV);
     x.gradoV++;
 }

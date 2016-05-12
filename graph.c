@@ -19,6 +19,11 @@ struct NimheSt {
     //hash_link
     //Espacio para mas cosas
 };
+/*
+ * 1. Implementar hash_table, esto soluciona el tema de revisar si es vertice en O(1);
+ * 2. 
+ */
+
 
 bool esVertice(VerticeSt *v, u32 longitud, u32 n) {
     bool result;
@@ -36,8 +41,10 @@ void nuevoLado(NimheSt *G, u32 i, u32 j) { //Dudas aca si deberia ser puntero G
     if (!esVertice(grafo->vertices, m)
         agregarVertice(grafo->vertices,m);    
     
-    AgregarLado(f, j);
-    AgregarLado(j, f); //Pensar mejor implementacion pero no cambia mucho
+    //---Corregir esta parte con la hash ya uqe el nombre no es el indice ---------------------//
+    AgregarLado(grafo->vertices[i], j);
+    AgregarLado(grafo->vertices[j], i); //Pensar mejor implementacion pero no cambia mucho
+    // --------------------------------------------------------------------------------------//
 }
 
 void inicOrdenes(u32 *primero, u32 *segundo, VerticeSt *v) {
@@ -52,11 +59,11 @@ NimheP NuevoNimhe() {
     char input[80];
     input[0] = 'c';
     while (input[0] == 'c') {
-        scanf("%s", &input);
+        getline(input, 80);
     }
     if (input[0] != 'p') {
-        printf("(Input invalido");
-        return NULL;
+        printf("Input invalido");
+        return;
     }
 
     char *edge;
@@ -66,12 +73,13 @@ NimheP NuevoNimhe() {
     //Chequeo el input correcto
     if (edge != "edge") {
         printf("Input invalido\n");
-        return NULL;
+        return;
     }
     NimheP grafo = NULL;
     grafo = malloc(1*sizeof(struct NimheSt));
     grafo->cantVertices = cantv;
     grafo->cantLados = cantl;
+    
     struct VerticeSt *arreglov[cantv] = {NULL};// Creo un arreglo de vértices en NULL.
     grafo->vertices = arreglov;// Apunto a lo mismo que arreglov. ¿Debería setear en NULL a arreglov ahora?
     // Las dos lineas de arriba podrían ser una función inicVertices, hablarlo luego.
@@ -83,17 +91,19 @@ NimheP NuevoNimhe() {
     bool existe = false;
     u32 len = 0;
     for (u32 i = 0; i < cantl; i++) {
-        scanf("%s", &input);
+        getline(input, 80);
         sscanf(input, input_format_2, "%c, %u, %u", p, &n, &m);
-        if (p != 'e')
-            return NULL;
+        if (p != 'e') {
+            printf("Lado mal puesto\n");
+            return;
+        }
         nuevoLado(n, m); // <- VER CAMBIOS EN IMPLEMENTACIÓN .
         for (u32 i = 0; i < cantv; i++) {
             existe = existe || PrimerOrden[i] == n; // Ver inicOrdenes a ver si se puede sacar esto.   
         }
         if (!existe) {
-            PrimerOrden[len];
-            SegundoOrden[len];
+            PrimerOrden[len] = n;
+            SegundoOrden[len] = n;
             ++len;
         }
     }
@@ -104,6 +114,8 @@ NimheP NuevoNimhe() {
 VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
     IesimoVecinoPlus(G->SegundoOrden, i);
 }
+
+// Cambiar cuando este la hash.
 
 void agregarVertice(VerticeSt *v, u32 n, u32 longitud) {
     u32 i = 0;
