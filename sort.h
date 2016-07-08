@@ -2,6 +2,11 @@
 #include <stdlib.h>
 
 
+/* Disclaimer:
+ * Me parece que lo mejor que podemos usar es la funcion qsort() que esta en stdlib.h
+ * http://www.tutorialspoint.com/c_standard_library/c_function_qsort.htm 
+ */  
+
 // Ordena los vertices en orden creciente de sus "nombres" reales
 void OrdenNatural(NimheP G);
 
