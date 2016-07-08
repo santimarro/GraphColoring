@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "vSt.h"
-#include "lenla.h"+
-#include "hashlink.h"
+
+#include "graph.h"
 
 typedef unsigned int *u32;
 
@@ -14,6 +13,7 @@ struct NimheSt {
     u32 cantLados;
     u32 cantcolor;
     hashLink hashLink;
+    u32 *PrimerOrden;
     /*
      * u32 *PrimerOrden;       // Tengo dudas aca si deberia ser una lista
      * u32 *SegundoOrden;                                  //^ es de esto!
@@ -87,4 +87,7 @@ void agregarVertice(VerticeSt *v, u32 n, u32 longitud) {
         ++i;
     }
 }
+
+// Funciones para extraer informacion de grafo.
+u32 NumeroDeVertices()
 

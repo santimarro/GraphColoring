@@ -7,7 +7,7 @@ typedef unsigned int *u32;
 
 
 struct hashList {
-    VerticeSt heads[SIZE];
+    VerticeSt *heads;
     VerticeSt data[SIZE];
     bool used[SIZE];
     VerticeSt next[SIZE];
@@ -16,7 +16,9 @@ struct hashList {
 hashList newhashList(u32 n) {
     hashList h;
     h = malloc(1*sizeof(struct hashList));
-    memset(h.heads, -1, sizeof(heads));
+    VerticeSt heads_[n];
+    memset(heads_, -1, sizeof(heads));
+    h.heads = &heads_;
 }
 // adds new edge (x, y)
 boolean hash_add(u32 x, u32 y, hashList h) {

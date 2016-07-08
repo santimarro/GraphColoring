@@ -10,7 +10,6 @@ struct VerticeSt  {
     u32 nombreV;
     u32 gradoV;
     u32 colorV;
-    lenla *vecinosV;
 };
 
 VerticeSt NuevoVertice(u32 n) {
