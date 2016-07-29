@@ -2,79 +2,108 @@
 #include <stdlib.h>
 #include "hashlink.h"
 #include <math.h>
+#include "lados.h"
 
 typedef unsigned int *u32;
 
-
 struct hashList {
-    VerticeSt *heads;
-    VerticeSt data[SIZE];
-    bool used[SIZE];
-    VerticeSt next[SIZE];
+    u32 *heads;
+    LadoSt *data;
+    bool *used;
+    u32 *next;
+    u32 size;
 };
+
 // n number of vertices
 hashList newhashList(u32 n) {
     hashList h;
     h = malloc(1*sizeof(struct hashList));
-    VerticeSt heads_[n];
-    memset(heads_, -1, sizeof(heads));
+    u32 heads_[n];
+    LadoSt data_[n];
+    bool used_[n];
+    h.data = &data_;
+    h.used = &used_;
+    h.next = &next_;
+    memset(heads_, -1, sizeof(u32));
+    memset(used_, 0, sizeof(bool));
+    memset(next_, 0, sizeof(u32));
+    memset(data_, NULL, sizeof(LadoSt));
     h.heads = &heads_;
+    h.size = n;
 }
+
 // adds new edge (x, y)
-boolean hash_add(u32 x, u32 y, hashList h) {
-    u32 code = hash_code(x, y);
-    u32 hash = hash(x, y);
+boolean hash_add(VerticeSt x, VerticeSt y, hashList h) {
+    LadoSt l = crearLado(x, y);
+    u32 hash = hash(x.nombreV, y.nombreV);
+
     while (h.used[hash]) {
-        if (h.data[hash] == code) {
+        if (obtenerNombre(h.data[hash]) == obtenerNombre(l)) {
             return false;
         }
         else {
-            hash = (hash + 1) % SIZE;
+            hash = (hash + 1) % h.size; //TODO ver SIZE si meterlo en la hashlist
         }
     }
-    h.data[hash] = code;
+    h.data[hash] = l;
     h.used[hash] = true;
-    h.next[hash] = heads[x];
-    h.heads[x] = hash;
+    h.next[hash] = h.heads[x.nombreV];
+    h.heads[x.nombreV] = hash;
+
     return true;
 }
 // returns true if edge (x, y) is contained in the graph
-boolean hash_contains(u32 x, u32 y, hashList h) {
-    u32 code = hash_code(x, y);
-    u32 hash = hash(x, y);
+
+boolean hash_contains(VerticeSt x, VerticeSt y, hashList h) {
+    LadoSt lado = crearLado(x, y);
+    u32 hash = hash(x.nombreV, y.nombreV);
     while (h.used[hash]) {
-        if (h.data[hash] == code) {
+        if (obtenerNombre(h.data[hash]) == obtenerNombre(lado)) {
+            destruirLado(lado);
             return true;
         }
         else {
-            hash = (hash + 1) % SIZE;
+            hash = (hash + 1) % h.size;
+            destruirLado(lado);
             return false;
         }
     }
 }
 
-u32 hash_search(u32 x, hashList h) {
+/*u32 hash_search(u32 x, hashList h) {
     u32 code = hash_code(x, y);
+
     u32 hash = hash(x, y);
     while (h.used[hash]) {
         if (h.data[hash] == code) {
             return h.data[hash];
         }
     }
-}
+}*/
 
 // enumerates the vertices adjacent to x
-void hash_enumerate(u32 x, hashList h) {
-    for (u32 i = h.heads[x]; i != -1; i = h.next[i]) {
-        u32 y = (u32) h.data[i];
-// do something with y
+void hash_enumerate(VerticeSt x, hashList h) {
+    for (u32 i = h.heads[x.nombreV]; i != -1; i = h.next[i]) {
+        printf("%d", obtenerNombre(h.data[i]));
+        if (h.next[i] != -1)
+            printf(",");
     }
+    printf(".");
+
 }
+
 // returns hash code for edge (x, y)
-u32 hash(u32 x, u32 y) {
-    return fabs((x + 111111) * (y - 333333) % SIZE);
+u32 hash(VerticeSt x, VerticeSt y) {
+    return fabs((x.nombreV + 111111) * (y.nombreV - 333333) % SIZE);
 }
-// converts pair (x, y) to single integer value
-u32 hash_code(u32 x, u32 y) {
-    return ((1 * x) << 32) | y;
+
+void destruirHashList (hashList h) {
+    for (int i = 0; i>h.size; i++) {
+        destruirLado(h.data[i]);
+    }
+    free(h.heads);
+    free(h.data);
+    free(h.next);
+    free(h.used);
+    free(h.size);
 }
