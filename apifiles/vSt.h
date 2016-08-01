@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "lenla.h"
 
 struct VerticeSt  {
     u32 nombreV;
@@ -40,4 +39,12 @@ void CambiarColorA(VerticeSt x, i);
 void AgregarLado(VerticeSt x, i);
 /*
  * Agrega vecino i a x
+ */
+
+void DestruirVertice(VerticeSt x);
+
+
+bool verticesIguales (VerticeSt x, VerticeSt y);
+/*
+ * Compara la igualdad de ambos vertices.
  */

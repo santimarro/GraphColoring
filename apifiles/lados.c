@@ -8,22 +8,24 @@ LadoSt crearLado(VerticeSt x1, VerticeSt x2) {
     l.x = x1;
     l.y = x2;
 }
-void destruirLado(LadoSt l) {
+void DestruirLado(LadoSt l) {
+    DestruirVertice(l.x);
+    DestruirVertice(l.y);
     free(l);
 }
 
-VerticeSt obtenerVerticeX(LadoSt l) {
+VerticeSt ObtenerVerticeX(LadoSt l) {
     return l.x;
 }
 
-VerticeSt obtenerVerticeY(LadoSt l) {
+VerticeSt ObtenerVerticeY(LadoSt l) {
     return l.y;
 }
 
-u32 obtenerNombre(LadoSt l) {
+u32 ObtenerNombre(LadoSt l) {
     return l.nombre;
 }
 
-void cambiarNombre(LadoSt l, u32 x) {
+void CambiarNombre(LadoSt l, u32 x) {
     l.nombre = x;
 }

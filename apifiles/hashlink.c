@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "hashlink.h"
-#include <math.h>
-#include "lados.h"
 
 typedef unsigned int *u32;
 
@@ -34,15 +32,15 @@ hashList newhashList(u32 n) {
 
 // adds new edge (x, y)
 boolean hash_add(VerticeSt x, VerticeSt y, hashList h) {
-    LadoSt l = crearLado(x, y);
+    LadoSt l = CrearLado(x, y);
     u32 hash = hash(x.nombreV, y.nombreV);
 
     while (h.used[hash]) {
-        if (obtenerNombre(h.data[hash]) == obtenerNombre(l)) {
+        if (ObtenerNombre(h.data[hash]) == hash) {
             return false;
         }
         else {
-            hash = (hash + 1) % h.size; //TODO ver SIZE si meterlo en la hashlist
+            hash = (hash + 1) % h.size;
         }
     }
     h.data[hash] = l;
@@ -55,36 +53,42 @@ boolean hash_add(VerticeSt x, VerticeSt y, hashList h) {
 // returns true if edge (x, y) is contained in the graph
 
 boolean hash_contains(VerticeSt x, VerticeSt y, hashList h) {
-    LadoSt lado = crearLado(x, y);
     u32 hash = hash(x.nombreV, y.nombreV);
     while (h.used[hash]) {
-        if (obtenerNombre(h.data[hash]) == obtenerNombre(lado)) {
-            destruirLado(lado);
+        if (ObtenerNombre(h.data[hash]) == hash) {
+            DestruirLado(lado);
             return true;
         }
         else {
             hash = (hash + 1) % h.size;
-            destruirLado(lado);
             return false;
         }
     }
 }
 
-/*u32 hash_search(u32 x, hashList h) {
-    u32 code = hash_code(x, y);
-
-    u32 hash = hash(x, y);
+VerticeSt HashSearch(VerticeSt x, VerticeSt y, hashList h) {
+    u32 hash = hash(x.nombreV, y.nombreV);
     while (h.used[hash]) {
-        if (h.data[hash] == code) {
-            return h.data[hash];
+        if (ObtenerNombre(h.data[hash]) == hash) {
+            DestruirLado(lado);
+            return true;
+        }
+        else {
+            hash = (hash + 1) % h.size;
+            return false;
         }
     }
-}*/
+}
+
 
 // enumerates the vertices adjacent to x
 void hash_enumerate(VerticeSt x, hashList h) {
     for (u32 i = h.heads[x.nombreV]; i != -1; i = h.next[i]) {
-        printf("%d", obtenerNombre(h.data[i]));
+        if(verticesIguales(x, ObtenerVerticeX(h.data[i]))) {
+            printf("%d", ObtenerVerticeY(h.data[i]).nombreV);
+        }
+        else
+            printf("%d", ObtenerVerticeX(h.data[i]).nombreV);
         if (h.next[i] != -1)
             printf(",");
     }
@@ -97,9 +101,9 @@ u32 hash(VerticeSt x, VerticeSt y) {
     return fabs((x.nombreV + 111111) * (y.nombreV - 333333) % SIZE);
 }
 
-void destruirHashList (hashList h) {
+void DestruirHashList (hashList h) {
     for (int i = 0; i>h.size; i++) {
-        destruirLado(h.data[i]);
+        DestruirLado(h.data[i]);
     }
     free(h.heads);
     free(h.data);

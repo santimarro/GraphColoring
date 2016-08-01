@@ -13,7 +13,6 @@ struct NimheSt {
     u32 cantLados;
     u32 cantcolor;
     hashLink hashLink;
-    u32 *PrimerOrden;
     /*
      * u32 *PrimerOrden;       // Tengo dudas aca si deberia ser una lista
      * u32 *SegundoOrden;                                  //^ es de esto!
@@ -42,6 +41,7 @@ NimheP NuevoNimhe() {
         printf("Input invalido\n");
         return NULL;
     }
+    //TODO terminar de chequear el input
     NimheP grafo = NULL;
     grafo = malloc(1*sizeof(struct NimheSt));
     grafo->cantVertices = cantv;
@@ -66,28 +66,19 @@ NimheP NuevoNimhe() {
             printf("Lado mal puesto\n");
             return NULL;
         }
+        VerticeSt x = NuevoVertice(n);
+        VerticeSt y = NuevoVertice(m);
 
+        if(!hash_add(x, y, grafo->hashLink))
+            return NULL;
     }
     return grafo;
 }
 
-VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
-    IesimoVecinoPlus(G->SegundoOrden, i);
+int DestruirNimhe(NimheP G) {
+    Destruir
 }
 
 // Cambiar cuando este la hash.
 
-void agregarVertice(VerticeSt *v, u32 n, u32 longitud) {
-    u32 i = 0;
-    while (i < longitud) {
-        if (v[i] == NULL) {
-            v[i] = NuevoVertice(n);
-            break;
-        }
-        ++i;
-    }
-}
-
 // Funciones para extraer informacion de grafo.
-u32 NumeroDeVertices()
-

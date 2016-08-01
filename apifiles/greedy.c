@@ -38,16 +38,14 @@ void greedy(NimheSt *G) {
         }
         //Busquemos el primero color disponible
         for (int j = 0; j < V; j++) {
-            if (usado[j] == false)
+            if (!usado[j])
                 break;
         }
         // Le ponemos el color encontrado
         CambiarColorA(vertice, j);
 
         // Reseteamos el array de colores disponibles a falso
-        for (i = 0; i < V; i++) {
-            usado[i] = false;
-        }
+        memset(usado, false, sizeof(bool));
     }
 }
 

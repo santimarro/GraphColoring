@@ -19,6 +19,12 @@ struct NimheSt {
 
 NimheP NuevoNimhe();
 
+int DestruirNimhe(NimheP G);
+/*
+ * Destruye G y libera la memoria alocada.
+ * Retorna 1 si todo anduvo bien y 0 si no.
+ */
+
 u32 NumeroDeVertices(NimheP G);
 
 u32 NumeroDeLados(NimheP G);

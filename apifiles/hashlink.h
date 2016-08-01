@@ -1,6 +1,8 @@
 //
 // Created by ophion on 23/06/16.
 //
+#include <math.h>
+#include "lados.h"
 
 u32 SIZE = 1000000;
 

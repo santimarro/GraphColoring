@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "lenla.h"
 #include "vSt.h"
 
 typedef unsigned int *u32;
@@ -14,11 +13,9 @@ struct VerticeSt  {
 
 VerticeSt NuevoVertice(u32 n) {
     VerticeSt v;
-    // Borré la linea del malloc porque ya se inicializan todos los vértices en graph.c .
     v.nombreV = n;
     v.gradoV = 0;
     v.colorV = 0;
-    v->vecinosV = lenlaVacia();
     return(v);
 }
 
@@ -41,19 +38,15 @@ u32 IesimoVecinoPlus(u32 i, VerticeSt x) {
 void CambiaColorA(VerticeSt x, u32 i) {
     x.colorV = i;
 }
-void AgregarLado(VerticeSt x, u32 i) {
-    AgregarVecino(i ,x->vecinosV);
-    x.gradoV++;
-}
 
-void ImprimirVecinosDelVertice(VerticeSt x, NimheP G) {
-    curr = x->vecinosV;
-    printf("Los vecinos de %d son: \n", x);
-    for(curr; curr != NULL; curr = curr->next) {
-        printf("%d ", curr->vecino);
-    } // Ubicar esta función donde corresponda (ver los inputs para darse cuenta!)
-    printf("\n");
+bool VerticesIguales (VerticeSt x, VerticeSt y) {
+    if (x.nombreV == y.nombreV)
+        return true;
+    else
+        return false;
 }
 
 
-
+void DestruirVertice(VerticeSt x) {
+    free(x);
+}
