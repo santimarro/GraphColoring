@@ -4,39 +4,39 @@
 #include <math.h>
 #include "lados.h"
 
-u32 SIZE = 1000000;
 
-hashList newhashList(u32 n);
+struct hashList {
+    u32 *heads;
+    LadoSt *data;
+    bool *used;
+    u32 *next;
+    u32 size;
+};
+
+hashList HashNuevaHash(u32 n, u32 m);
 /*
  * Crea una hashList donde n es la cantidad de vertices.
  */
 
-boolean add(u32 x, u32 y);
+boolean HashAgregar(VerticeSt x, VerticeSt y, hashList h);
 /*
  * Agrega una arista a la hashlist, donde x e y son los vertices unidos por la misma.
  */
 
-boolean contains(u32 x, u32 y);
+boolean HashContiene(VerticeSt x, VerticeSt y, hashList h);
 /*
  * Chequea si la hashlist contiene o no determinada arista (x,y).
  */
 
-void enumerate(u32 x);
+void HashEnumerar(VerticeSt x, hashList h);
 /*
  * Enumera los vertices vecinos de x
  */
 
-u32 hash_search(u32 x, hashList h):
-/*
- * Returns the element un hashList
- */
-
-u32 hash(u32 x, u32 y);
+u32 hash(VerticeSt x, VerticeSt y);
 /*
  * Genera el hash para determinada arista a agregar
  */
 
-u32 code(u32 x, u32 y);
-/*
- * Convierte el par de vecinos (x,y) a un solo valor u32
- */
+
+void DestruirHashList (hashList h);

@@ -4,15 +4,14 @@
 
 #include "graph.h"
 
-typedef unsigned int *u32;
 
-typedef NimheSt *NimheP;
 
 struct NimheSt {
     u32 cantVertices;
     u32 cantLados;
     u32 cantcolor;
     hashLink hashLink;
+    u32 *Orden;
     /*
      * u32 *PrimerOrden;       // Tengo dudas aca si deberia ser una lista
      * u32 *SegundoOrden;                                  //^ es de esto!
@@ -42,11 +41,14 @@ NimheP NuevoNimhe() {
         return NULL;
     }
     //TODO terminar de chequear el input
+
+    u32 mOrden[n];
     NimheP grafo = NULL;
     grafo = malloc(1*sizeof(struct NimheSt));
     grafo->cantVertices = cantv;
     grafo->cantLados = cantl;
     grafo->hashLink = newhashList(cantv);
+    grafo->Orden = &mOrden;
 
     /*
     struct VerticeSt *arreglov[cantv] = {NULL};// Creo un arreglo de vértices en NULL.
@@ -69,16 +71,22 @@ NimheP NuevoNimhe() {
         VerticeSt x = NuevoVertice(n);
         VerticeSt y = NuevoVertice(m);
 
-        if(!hash_add(x, y, grafo->hashLink))
+        if(!HashAgregar(x, y, grafo->hashLink))
             return NULL;
     }
     return grafo;
 }
 
 int DestruirNimhe(NimheP G) {
-    Destruir
+    DestruirHashList(G->hashLink);
+    free(G);
+    return 1;
 }
 
-// Cambiar cuando este la hash.
+void ImprimirVecinosDelVertice(VerticeSt x, NimheP G) {
+    HashEnumerar(x, G->hashLink);
+}
 
 // Funciones para extraer informacion de grafo.
+
+u32 NumeroDeVertices(NimheP G);
