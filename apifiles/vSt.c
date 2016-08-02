@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "vSt.h"
-
-typedef unsigned int *u32;
 
 struct VerticeSt  {
     u32 nombreV;
@@ -12,31 +7,31 @@ struct VerticeSt  {
 };
 
 VerticeSt NuevoVertice(u32 n) {
-    VerticeSt v;
-    v.nombreV = n;
-    v.gradoV = 0;
-    v.colorV = 0;
+    VerticeSt v = malloc(sizeof(struct VerticeSt_t));
+    v->nombreV = n;
+    v->gradoV = 0;
+    v->colorV = 0;
     return(v);
 }
 
 u32 ColorDelVertice(VerticeSt x) {
-    return(x.colorV);
+    return(x->colorV);
 }
 
 u32 GradoDelVertice(VerticeSt x) {
-    return(x.gradoV);
+    return(x->gradoV);
 }
 
 u32 NombreDelVertice(VerticeSt x) {
-    return(x.nombreV);
+    return(x->nombreV);
 }
 
 void CambiaColorA(VerticeSt x, u32 i) {
-    x.colorV = i;
+    x->colorV = i;
 }
 
 bool VerticesIguales (VerticeSt x, VerticeSt y) {
-    if (x.nombreV == y.nombreV)
+    if (x->nombreV == y->nombreV)
         return true;
     else
         return false;

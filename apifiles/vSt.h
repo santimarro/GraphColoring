@@ -1,12 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 
-struct VerticeSt  {
+typedef unsigned int *u32;
+
+struct VerticeSt_t  {
     u32 nombreV;
     u32 gradoV;
     u32 colorV;
 };
+
+typedef struct VerticeSt_t *VerticeSt;
 
 VerticeSt NuevoVertice(u32 n);
 /*
@@ -28,23 +33,14 @@ u32 NombreDelVertice(VerticeSt x);
  * Devuelve el nombre del vértice dado.
  */
 
-u32 IesimoVecinoPlus(VerticeSt x, i);
-/*
- * Devuelve el iesimo vecino del vertice x (No es el que piden en la catedra)
- */
-void CambiarColorA(VerticeSt x, i);
+void CambiarColorA(VerticeSt x, u32 i);
 /*
  * Cambia el color del vertice a i
  */
-void AgregarLado(VerticeSt x, i);
-/*
- * Agrega vecino i a x
- */
-
 void DestruirVertice(VerticeSt x);
 
 
-bool verticesIguales (VerticeSt x, VerticeSt y);
+bool VerticesIguales (VerticeSt x, VerticeSt y);
 /*
  * Compara la igualdad de ambos vertices.
  */

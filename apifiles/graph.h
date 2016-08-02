@@ -1,12 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#include "vSt.h"
+#include <stdbool.h>
 #include "hashlink.h"
 
-typedef NimheSt *NimheP;
-
 typedef unsigned int *u32;
+
+struct NimheSt {
+    u32 cantVertices;
+    u32 cantLados;
+    u32 cantcolor;
+    hashList hashList;
+    u32 *Orden;
+};
+
+typedef struct NimheSt *NimheP;
+
 
 NimheP NuevoNimhe();
 

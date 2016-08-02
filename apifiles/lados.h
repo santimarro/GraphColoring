@@ -6,12 +6,13 @@
 #include <stdlib.h>
 #include "vSt.h"
 
-
-struct LadoSt  {
+struct LadoSt_t  {
     VerticeSt x;
     VerticeSt y;
     u32 nombre;
 };
+
+typedef struct LadoSt_t *LadoSt;
 
 LadoSt CrearLado(VerticeSt x1, VerticeSt x2);
 

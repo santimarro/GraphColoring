@@ -1,29 +1,36 @@
 //
 // Created by ophion on 23/06/16.
 //
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include <math.h>
 #include "lados.h"
 
+typedef unsigned int *u32;
 
-struct hashList {
-    u32 *heads;
+struct hashList_t {
+    int *heads;
     LadoSt *data;
     bool *used;
-    u32 *next;
+    int *next;
     u32 size;
+    int *orden;
 };
+
+typedef struct hashList_t *hashList;
 
 hashList HashNuevaHash(u32 n, u32 m);
 /*
  * Crea una hashList donde n es la cantidad de vertices.
  */
 
-boolean HashAgregar(VerticeSt x, VerticeSt y, hashList h);
+bool HashAgregar(u32 x, u32 y, hashList h);
 /*
  * Agrega una arista a la hashlist, donde x e y son los vertices unidos por la misma.
  */
 
-boolean HashContiene(VerticeSt x, VerticeSt y, hashList h);
+bool HashContiene(VerticeSt x, VerticeSt y, hashList h);
 /*
  * Chequea si la hashlist contiene o no determinada arista (x,y).
  */

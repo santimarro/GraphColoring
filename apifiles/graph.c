@@ -1,23 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-
 #include "graph.h"
 
-
-
-struct NimheSt {
-    u32 cantVertices;
-    u32 cantLados;
-    u32 cantcolor;
-    hashLink hashLink;
-    u32 *Orden;
-    /*
-     * u32 *PrimerOrden;       // Tengo dudas aca si deberia ser una lista
-     * u32 *SegundoOrden;                                  //^ es de esto!
-     * VerticeSt *vertices;    // Array de vértices.
-    */
-};
 
 NimheP NuevoNimhe() {
     u32 cantv, cantl;
@@ -47,16 +29,8 @@ NimheP NuevoNimhe() {
     grafo = malloc(1*sizeof(struct NimheSt));
     grafo->cantVertices = cantv;
     grafo->cantLados = cantl;
-    grafo->hashLink = newhashList(cantv);
+    grafo->hashList = HashNuevaHash(cantv, cantl);
     grafo->Orden = &mOrden;
-
-    /*
-    struct VerticeSt *arreglov[cantv] = {NULL};// Creo un arreglo de vértices en NULL.
-    grafo->vertices = arreglov;// Apunto a lo mismo que arreglov. ¿Debería setear en NULL a arreglov ahora?
-    // Las dos lineas de arriba podrían ser una función inicVertices, hablarlo luego.
-    grafo->PrimerOrden, grafo->SegundoOrden = malloc(cantv*sizeof(u32));
-    */
-    /* FALTA AGREGAR ESTRUCTURA A CADA VERTICE Y CONTAR EL GRADO.*/
 
     u32 n, m;
     bool existe = false;
@@ -68,23 +42,21 @@ NimheP NuevoNimhe() {
             printf("Lado mal puesto\n");
             return NULL;
         }
-        VerticeSt x = NuevoVertice(n);
-        VerticeSt y = NuevoVertice(m);
 
-        if(!HashAgregar(x, y, grafo->hashLink))
+        if(!HashAgregar(n, m, grafo->hashList))
             return NULL;
     }
     return grafo;
 }
 
 int DestruirNimhe(NimheP G) {
-    DestruirHashList(G->hashLink);
+    DestruirHashList(G->hashList);
     free(G);
     return 1;
 }
 
 void ImprimirVecinosDelVertice(VerticeSt x, NimheP G) {
-    HashEnumerar(x, G->hashLink);
+    HashEnumerar(x, G->hashList);
 }
 
 // Funciones para extraer informacion de grafo.
