@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 
-typedef unsigned int *u32;
+typedef unsigned int u32;
 
 struct VerticeSt_t  {
     u32 nombreV;

@@ -1,4 +1,4 @@
-
+#include "sort.h"
 
 int CrecienteComp (const void * a, const void * b)
 {
@@ -8,7 +8,7 @@ int CrecienteComp (const void * a, const void * b)
 // Ordena los vertices en orden creciente de sus "nombres" reales
 void OrdenNatural(NimheP G) {
 
-	qsort(G.OrdenActual, G.cantVertices, sizeof(int), CrecienteComp);
+	qsort(G->hashList->orden, G->cantVertices, sizeof(int), CrecienteComp);
 }
 
 /*Ordena los vertices de G de acuerdo con el orden Welsh-Powell, es decir,

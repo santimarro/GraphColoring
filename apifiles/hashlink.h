@@ -5,9 +5,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include <string.h>
 #include "lados.h"
 
-typedef unsigned int *u32;
+typedef unsigned int u32;
 
 struct hashList_t {
     int *heads;
@@ -40,10 +41,11 @@ void HashEnumerar(VerticeSt x, hashList h);
  * Enumera los vertices vecinos de x
  */
 
-u32 hash(VerticeSt x, VerticeSt y);
+u32 HashCode(u32 x, u32 y, hashList h);
 /*
  * Genera el hash para determinada arista a agregar
  */
 
+//int HashNombre(u32 x);
 
 void DestruirHashList (hashList h);

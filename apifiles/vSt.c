@@ -1,10 +1,5 @@
 #include "vSt.h"
 
-struct VerticeSt  {
-    u32 nombreV;
-    u32 gradoV;
-    u32 colorV;
-};
 
 VerticeSt NuevoVertice(u32 n) {
     VerticeSt v = malloc(sizeof(struct VerticeSt_t));

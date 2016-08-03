@@ -1,16 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "hashlink.h"
 
-typedef unsigned int *u32;
+#define _POSIX_C_SOURCE 1
+
+typedef unsigned int u32;
 
 struct NimheSt {
     u32 cantVertices;
     u32 cantLados;
     u32 cantcolor;
     hashList hashList;
-    u32 *Orden;
 };
 
 typedef struct NimheSt *NimheP;
@@ -39,4 +41,4 @@ u32 CantidadDeColores(NimheP G);
 
 VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i);
 
-VerticeSt IesimoVecino(Nimhep G, VerticeSt x, u32 i);
+VerticeSt IesimoVecino(NimheP G, VerticeSt x, u32 i);

@@ -7,6 +7,7 @@ LadoSt crearLado(VerticeSt x1, VerticeSt x2) {
     LadoSt l = malloc(sizeof(struct LadoSt_t));
     l->x = x1;
     l->y = x2;
+    return l;
 }
 void DestruirLado(LadoSt l) {
     DestruirVertice(l->x);

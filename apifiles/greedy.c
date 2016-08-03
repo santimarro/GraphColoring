@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "graph.c"
-#include "vSt.h"
+#include "graph.h"
 
 /*
  * Implementacion de greedy, revisar complejidad
@@ -11,38 +7,39 @@
  * complejidad
  */
 
-void greedy(NimheSt *G) {
-    u32 V = G.cantVertices;
-    // u32 E = G->cantLados;
+void greedy(NimheP G) {
+    u32 V = G->cantVertices;
     u32 color;
     VerticeSt vertice = NULL;
     VerticeSt vecino = NULL;
     bool usado[V];          // Array para indicar colores no disponibles.
-    for (int i = 0; i < V; i++) {
+    for (u32 i = 0; i < V; i++) {
         usado[i] = false;   // Inicializo todos los colores en false(sin usar).
     }
-    vertice = G->SegundoOrden[0];
+    vertice = G->hashList->orden[0];
     CambiarColorA(vertice, 1);
-    for (int u = 1; u < V; u++)
+    for (u32 u = 1; u < V; u++)
     {
         // Revisamos los vecinos del vertice u
         // y flageamos los colores usados.
-        vertice = G->SegundoOrden[u];
-        u32 cantVecinos = vertice.cantVecinos;
-        for (int h = 0; h < cantVecinos; h++) {
-            vecino = IesimoVecinoPlus(vertice, h);
+        vertice = G->hashList->orden[u];
+        u32 cantVecinos = vertice->gradoV;
+
+        for (u32 h = 0; h < cantVecinos; h++) {
+            //vecino = IesimoVecinoPlus(vertice, h);
             color = ColorDelVertice(vecino);
             if(color != 0) {
                 usado[color] = true;
             }
         }
         //Busquemos el primero color disponible
-        for (int j = 0; j < V; j++) {
-            if (!usado[j])
+        for (u32 j = 0; j < V; j++) {
+            if (!usado[j]) {
+                // Le ponemos el color encontrado
+                CambiarColorA(vertice, j);
                 break;
+            }
         }
-        // Le ponemos el color encontrado
-        CambiarColorA(vertice, j);
 
         // Reseteamos el array de colores disponibles a falso
         memset(usado, false, sizeof(bool));
