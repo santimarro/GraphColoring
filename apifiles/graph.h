@@ -1,10 +1,10 @@
+#define _XOPEN_SOURCE 700
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "hashlink.h"
 
-#define _POSIX_C_SOURCE 1
+#include "hashlink.h"
 
 typedef unsigned int u32;
 

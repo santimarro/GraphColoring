@@ -12,11 +12,12 @@ typedef unsigned int u32;
 
 struct hashList_t {
     int *heads;
-    LadoSt *data;
-    bool *used;
     int *next;
     u32 size;
-    int *orden;
+    bool *used;
+    LadoSt *data;
+    VerticeSt *vertices; // Arreglo de VerticeP en el orden original
+    VerticeSt *orden;   // Arreglo de VerticeP ordenados segun qsort.
 };
 
 typedef struct hashList_t *hashList;
@@ -46,6 +47,9 @@ u32 HashCode(u32 x, u32 y, hashList h);
  * Genera el hash para determinada arista a agregar
  */
 
-//int HashNombre(u32 x);
+//u32 HashNombre(u32 x);
+
+
+void HashEnumerarGrafo(hashList h);
 
 void DestruirHashList (hashList h);

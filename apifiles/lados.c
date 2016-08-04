@@ -3,7 +3,7 @@
 //
 #include "lados.h"
 
-LadoSt crearLado(VerticeSt x1, VerticeSt x2) {
+LadoSt CrearLado(VerticeSt x1, VerticeSt x2) {
     LadoSt l = malloc(sizeof(struct LadoSt_t));
     l->x = x1;
     l->y = x2;
@@ -30,3 +30,12 @@ u32 ObtenerNombre(LadoSt l) {
 void CambiarNombre(LadoSt l, u32 x) {
     l->nombre = x;
 }
+
+bool CompararLados(LadoSt l1, LadoSt l2) {
+    if(l1->x->nombreV == l2->x->nombreV) {
+        if (l1->y->nombreV == l2->y->nombreV)
+            return true;
+    }
+    return false;
+}
+

@@ -17,7 +17,8 @@ void greedy(NimheP G) {
         usado[i] = false;   // Inicializo todos los colores en false(sin usar).
     }
     vertice = G->hashList->orden[0];
-    CambiarColorA(vertice, 1);
+    vertice->colorV = 1;
+    //CambiarColorA(vertice, 1);
     for (u32 u = 1; u < V; u++)
     {
         // Revisamos los vecinos del vertice u
@@ -27,7 +28,8 @@ void greedy(NimheP G) {
 
         for (u32 h = 0; h < cantVecinos; h++) {
             //vecino = IesimoVecinoPlus(vertice, h);
-            color = ColorDelVertice(vecino);
+            color = vecino->colorV;
+            //color = ColorDelVertice(vecino);
             if(color != 0) {
                 usado[color] = true;
             }
@@ -36,7 +38,8 @@ void greedy(NimheP G) {
         for (u32 j = 0; j < V; j++) {
             if (!usado[j]) {
                 // Le ponemos el color encontrado
-                CambiarColorA(vertice, j);
+                vertice->colorV = j;
+                //CambiarColorA(vertice, j);
                 break;
             }
         }

@@ -24,3 +24,5 @@ VerticeSt ObtenerVerticeY(LadoSt l);
 
 u32 ObtenerNombre(LadoSt l);
 
+bool CompararLados(LadoSt l1, LadoSt l2);
+
