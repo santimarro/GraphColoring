@@ -50,6 +50,6 @@ u32 HashCode(u32 x, u32 y, hashList h);
 //u32 HashNombre(u32 x);
 
 
-void HashEnumerarGrafo(hashList h);
+void HashEnumerarGrafo(hashList h, u32 n);
 
 void DestruirHashList (hashList h);

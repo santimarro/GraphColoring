@@ -60,6 +60,9 @@ NimheP NuevoNimhe() {
                 //Agrego el lado a la hashlist
                 if(!HashAgregar(n, m, grafo->hashList))
                     return NULL;
+
+                if(!HashAgregar(m, n, grafo->hashList))
+                    return NULL;
             }
         }
         else {
@@ -68,7 +71,7 @@ NimheP NuevoNimhe() {
         }
     }
 
-    HashEnumerarGrafo(grafo->hashList);
+    HashEnumerarGrafo(grafo->hashList, grafo->cantVertices);
     return grafo;
 }
 

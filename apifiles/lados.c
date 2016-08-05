@@ -32,8 +32,8 @@ void CambiarNombre(LadoSt l, u32 x) {
 }
 
 bool CompararLados(LadoSt l1, LadoSt l2) {
-    if(l1->x->nombreV == l2->x->nombreV) {
-        if (l1->y->nombreV == l2->y->nombreV)
+    if(l1->x->nombreV == l2->x->nombreV || l1->x->nombreV == l2->y->nombreV) {
+        if (l1->y->nombreV == l2->y->nombreV || l1->y->nombreV == l2->x->nombreV)
             return true;
     }
     return false;

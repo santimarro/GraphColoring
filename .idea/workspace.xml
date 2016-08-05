@@ -15,13 +15,9 @@
     <list default="true" id="cc8bde94-a835-42a6-b61e-1a9e6a467fab" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/graph.c" afterPath="$PROJECT_DIR$/apifiles/graph.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/graph.h" afterPath="$PROJECT_DIR$/apifiles/graph.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/greedy.c" afterPath="$PROJECT_DIR$/apifiles/greedy.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/hashlink.c" afterPath="$PROJECT_DIR$/apifiles/hashlink.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/hashlink.h" afterPath="$PROJECT_DIR$/apifiles/hashlink.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/lados.c" afterPath="$PROJECT_DIR$/apifiles/lados.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/lados.h" afterPath="$PROJECT_DIR$/apifiles/lados.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dirmain/main.c" afterPath="$PROJECT_DIR$/dirmain/main.c" />
     </list>
     <ignored path="matem-tica-discreta-ii.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,8 +51,8 @@
       <file leaf-file-name="graph.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apifiles/graph.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+            <state relative-caret-position="248">
+              <caret line="73" column="58" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -72,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hashlink.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hashlink.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apifiles/hashlink.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1132">
-              <caret line="114" column="38" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
+            <state relative-caret-position="210">
+              <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -85,18 +81,18 @@
       <file leaf-file-name="lados.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apifiles/lados.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
+            <state relative-caret-position="413">
+              <caret line="35" column="71" selection-start-line="35" selection-start-column="71" selection-end-line="35" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hashlink.h" pinned="false" current-in-tab="false">
+      <file leaf-file-name="hashlink.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apifiles/hashlink.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="518">
-              <caret line="52" column="35" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
+              <caret line="52" column="40" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -136,10 +132,10 @@
         <option value="$PROJECT_DIR$/apifiles/greedy.c" />
         <option value="$PROJECT_DIR$/dirmain/main.c" />
         <option value="$PROJECT_DIR$/apifiles/lados.h" />
-        <option value="$PROJECT_DIR$/apifiles/hashlink.h" />
         <option value="$PROJECT_DIR$/apifiles/lados.c" />
-        <option value="$PROJECT_DIR$/apifiles/graph.c" />
         <option value="$PROJECT_DIR$/apifiles/hashlink.c" />
+        <option value="$PROJECT_DIR$/apifiles/graph.c" />
+        <option value="$PROJECT_DIR$/apifiles/hashlink.h" />
       </list>
     </option>
   </component>
@@ -150,8 +146,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
-    <option name="width" value="1368" />
+    <option name="width" value="1366" />
     <option name="height" value="743" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -392,10 +387,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1368" height="743" extended-state="7" />
+    <frame x="0" y="0" width="1366" height="743" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12509307" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12453393" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3118971" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
@@ -591,14 +586,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dirmain/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apifiles/graph.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -607,34 +594,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apifiles/hashlink.h">
+    <entry file="file://$PROJECT_DIR$/dirmain/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="52" column="35" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apifiles/graph.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apifiles/lados.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
+        <state relative-caret-position="413">
+          <caret line="35" column="71" selection-start-line="35" selection-start-column="71" selection-end-line="35" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apifiles/hashlink.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1132">
-          <caret line="114" column="38" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
+        <state relative-caret-position="210">
+          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apifiles/graph.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="73" column="58" selection-start-line="73" selection-start-column="58" selection-end-line="73" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apifiles/hashlink.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="52" column="40" selection-start-line="52" selection-start-column="40" selection-end-line="52" selection-end-column="40" />
           <folding />
         </state>
       </provider>

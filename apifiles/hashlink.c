@@ -10,16 +10,16 @@ hashList HashNuevaHash(u32 n, u32 m) {
     h->heads = malloc(n*sizeof(int));
     memset(h->heads, -1, n*sizeof(int));
 
-    h->used = calloc(m, sizeof(bool));
-    h->data = calloc(m, sizeof(struct LadoSt_t));
-    h->next = calloc(m, sizeof(int));
+    h->used = calloc(2*m, sizeof(bool));
+    h->data = calloc(2*m, sizeof(struct LadoSt_t));
+    h->next = calloc(2*m, sizeof(int));
 
     h->vertices = malloc((int) n*sizeof(VerticeSt));
     h->orden = malloc((int) n*sizeof(VerticeSt));
-    memset(h->vertices, 0, sizeof(VerticeSt));
-    memset(h->orden, 0, sizeof(VerticeSt));
+    memset(h->vertices, 0, n*sizeof(VerticeSt));
+    memset(h->orden, 0, n*sizeof(VerticeSt));
 
-    h->size = n;
+    h->size = 2*m;
     return h;
 }
 
@@ -48,47 +48,58 @@ bool HashAgregar(u32 z, u32 w, hashList h) {
 
 
     LadoSt l = CrearLado(x, y);
-    x->gradoV++;
-    y->gradoV++;
-    u32 hashX = HashCode(z, w, h);
-    u32 hashY = HashCode(w, z, h);
 
-    while (h->used[hashX]) {
-        if (CompararLados(h->data[hashX], l)) {
-            return false;
+    if(!HashContiene(x, y, h)) {
+        y->gradoV++;
+        x->gradoV++;
+    }
+
+    u32 hash = HashCode(z, w, h);
+
+    while (h->used[hash]) {
+        if (CompararLados(h->data[hash], l)) {
+            if(h->data[hash]->x->nombreV == x->nombreV)
+                return false;
+            else
+                hash = (hash + 1) % h->size;
         }
         else {
-            hashX = (hashX + 1) % h->size;
+            hash = (hash + 1) % h->size;
         }
     }
-    h->data[hashX] = l;
-    h->used[hashX] = true;
-    h->next[hashX] = h->heads[x->nombreV];
+    h->data[hash] = l;
+    h->used[hash] = true;
+    h->next[hash] = h->heads[x->nombreV];
 
-    h->heads[x->nombreV] = hashX;
-
-    h->next[hashY] = h->heads[y->nombreV];
-    h->heads[y->nombreV] = hashY;
-
+    h->heads[x->nombreV] = hash;
 
 
     return true;
 }
 // returns true if edge (x, y) is contained in the graph
 
-/*bool HashContiene(u32 x, u32 y, hashList h) {
-    u32 hash = HashCode(x, y, h);
-    LadoSt l = CrearLado()
-    while (h->used[hash]) {
-        if (CompararLados(h->data[hash]) == hash) {
+bool HashContiene(VerticeSt x, VerticeSt y, hashList h) {
+    u32 hashX = HashCode(x->nombreV, y->nombreV, h);
+    u32 hashY = HashCode(y->nombreV, x->nombreV, h);
+    LadoSt l = CrearLado(x, y);
+    while (h->used[hashX]) {
+        if (CompararLados(h->data[hashX], l)) {
             return true;
         }
         else {
-            hash = (hash + 1) % h->size;
+            hashX = (hashX + 1) % h->size;
+        }
+    }
+    while (h->used[hashY]) {
+        if (CompararLados(h->data[hashY], l)) {
+            return true;
+        }
+        else {
+            hashY = (hashY + 1) % h->size;
         }
     }
     return false;
-}*/
+}
 
 // enumerates the vertices adjacent to x
 void HashEnumerar(VerticeSt x, hashList h) {
@@ -107,9 +118,9 @@ void HashEnumerar(VerticeSt x, hashList h) {
 
 }
 
-void HashEnumerarGrafo(hashList h) {
+void HashEnumerarGrafo(hashList h, u32 n) {
 
-    for(u32 j = 0; j < h->size; j++ ) {
+    for(u32 j = 0; j < n; j++ ) {
         printf("%d: ",j);
         for (int i = h->heads[j]; i != -1; i = h->next[i]) {
             if(j == ObtenerVerticeX(h->data[i])->nombreV)
