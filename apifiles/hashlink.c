@@ -134,18 +134,19 @@ void HashEnumerarGrafo(hashList h, u32 n) {
     }
 }
 
-/*
-u32 HashIesimoVecino(VerticeSt x, u32 z, hashList h) {
-    for (u32 i = h->heads[x->nombreV]; i != -1; i = h->next[i]) {
-        if(verticesIguales(x, ObtenerVerticeX(h->data[i]))) {
-            printf("%d", ObtenerVerticeY(h->data[i])->nombreV);
-        }
-        else
-            printf("%d", ObtenerVerticeX(h->data[i])->nombreV);
-        if (h->next[i] != -1)
+VerticeSt HashIesimoVecino(VerticeSt x, u32 z, hashList h) {
+    int i = h->heads[x->nombreV];
+    u32 j = 0;
 
+    for (;i != -1 && j < z; i = h->next[i])
+        j++;
+
+    if(VerticesIguales(x, ObtenerVerticeX(h->data[i]))) {
+        return ObtenerVerticeY(h->data[i]);
+    }
+    else
+        return ObtenerVerticeX(h->data[i]);
 }
-*/
 
 // returns hash code for edge (x, y)
 u32 HashCode(u32 x, u32 y, hashList h) {

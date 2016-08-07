@@ -52,4 +52,7 @@ u32 HashCode(u32 x, u32 y, hashList h);
 
 void HashEnumerarGrafo(hashList h, u32 n);
 
+
+VerticeSt HashIesimoVecino(VerticeSt x, u32 z, hashList h);
+
 void DestruirHashList (hashList h);

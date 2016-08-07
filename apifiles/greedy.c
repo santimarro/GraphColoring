@@ -12,40 +12,43 @@ void greedy(NimheP G) {
     u32 color;
     VerticeSt vertice = NULL;
     VerticeSt vecino = NULL;
-    bool usado[V];          // Array para indicar colores no disponibles.
-    for (u32 i = 0; i < V; i++) {
-        usado[i] = false;   // Inicializo todos los colores en false(sin usar).
-    }
+    bool usado[V+1];          // Array para indicar colores no disponibles. V+1 ya que el color 0 no se usa
+
+    memset(usado, false, (V+1)*sizeof(bool));   // Inicializo todos los colores en false(sin usar).
+
     vertice = G->hashList->orden[0];
     vertice->colorV = 1;
+    printf("Vertice: %d Color: %d\n", vertice->nombreV, vertice->colorV);
     //CambiarColorA(vertice, 1);
-    for (u32 u = 1; u < V; u++)
-    {
+    for (u32 u = 1; u < V; u++) {
         // Revisamos los vecinos del vertice u
         // y flageamos los colores usados.
         vertice = G->hashList->orden[u];
-        u32 cantVecinos = vertice->gradoV;
+        if (vertice != NULL) {
+            u32 cantVecinos = vertice->gradoV;
 
-        for (u32 h = 0; h < cantVecinos; h++) {
-            //vecino = IesimoVecinoPlus(vertice, h);
-            color = vecino->colorV;
-            //color = ColorDelVertice(vecino);
-            if(color != 0) {
-                usado[color] = true;
+            for (u32 h = 0; h < cantVecinos; h++) {
+                vecino = HashIesimoVecino(vertice, h, G->hashList);
+                color = vecino->colorV;
+                //color = ColorDelVertice(vecino);
+                if (color != 0) {
+                    usado[color] = true;
+                }
             }
-        }
-        //Busquemos el primero color disponible
-        for (u32 j = 0; j < V; j++) {
-            if (!usado[j]) {
-                // Le ponemos el color encontrado
-                vertice->colorV = j;
-                //CambiarColorA(vertice, j);
-                break;
+            //Busquemos el primero color disponible
+            for (u32 j = 1; j < V + 1; j++) {
+                if (!usado[j]) {
+                    // Le ponemos el color encontrado
+                    vertice->colorV = j;
+                    printf("Vertice: %d Color: %d\n", vertice->nombreV, j);
+                    //CambiarColorA(vertice, j);
+                    break;
+                }
             }
-        }
 
-        // Reseteamos el array de colores disponibles a falso
-        memset(usado, false, sizeof(bool));
+            // Reseteamos el array de colores disponibles a falso
+            memset(usado, false, (V + 1) * sizeof(bool));
+        }
     }
 }
 
