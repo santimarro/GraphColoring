@@ -13,7 +13,8 @@ typedef unsigned int u32;
 struct hashList_t {
     int *heads;
     int *next;
-    u32 size;
+    u32 aristas;
+    u32 nvertices;
     bool *used;
     LadoSt *data;
     VerticeSt *vertices; // Arreglo de VerticeP en el orden original
@@ -54,5 +55,7 @@ void HashEnumerarGrafo(hashList h, u32 n);
 
 
 VerticeSt HashIesimoVecino(VerticeSt x, u32 z, hashList h);
+
+u32 HashNombre(u32 x, hashList h);
 
 void DestruirHashList (hashList h);

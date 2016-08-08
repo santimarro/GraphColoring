@@ -1,3 +1,5 @@
+
+#define MAX(a,b) (((a)>(b))?(a):(b))
 #include "graph.h"
 
 /*
@@ -10,6 +12,7 @@
 void greedy(NimheP G) {
     u32 V = G->cantVertices;
     u32 color;
+    u32 max_color = 0;
     VerticeSt vertice = NULL;
     VerticeSt vecino = NULL;
     bool usado[V+1];          // Array para indicar colores no disponibles. V+1 ya que el color 0 no se usa
@@ -40,6 +43,7 @@ void greedy(NimheP G) {
                 if (!usado[j]) {
                     // Le ponemos el color encontrado
                     vertice->colorV = j;
+                    max_color = MAX(max_color, j);
                     printf("Vertice: %d Color: %d\n", vertice->nombreV, j);
                     //CambiarColorA(vertice, j);
                     break;
@@ -50,6 +54,7 @@ void greedy(NimheP G) {
             memset(usado, false, (V + 1) * sizeof(bool));
         }
     }
+    printf("Colores usados: %d \n", max_color);
 }
 
 

@@ -70,7 +70,7 @@ NimheP NuevoNimhe() {
             return NULL;
         }
     }
-    memcpy(grafo->hashList->orden, grafo->hashList->vertices, cantv);
+    memcpy(grafo->hashList->orden, grafo->hashList->vertices, cantv*sizeof(VerticeSt));
     //HashEnumerarGrafo(grafo->hashList, grafo->cantVertices);
     return grafo;
 }

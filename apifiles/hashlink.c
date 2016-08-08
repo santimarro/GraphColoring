@@ -19,7 +19,8 @@ hashList HashNuevaHash(u32 n, u32 m) {
     memset(h->vertices, 0, n*sizeof(VerticeSt));
     memset(h->orden, 0, n*sizeof(VerticeSt));
 
-    h->size = 2*m;
+    h->nvertices = n;
+    h->aristas = 2*m;
     return h;
 }
 
@@ -27,23 +28,35 @@ hashList HashNuevaHash(u32 n, u32 m) {
 bool HashAgregar(u32 z, u32 w, hashList h) {
     VerticeSt x = NULL;
     VerticeSt y = NULL;
+    u32 id_z = HashNombre(z, h);
+    u32 id_w = HashNombre(w, h);
 
-    if(h->orden[z] == 0) {
-        h->vertices[z] = NuevoVertice(z);
-        h->orden[z] = h->vertices[z];
-        x = h->vertices[z];
+
+    while (h->vertices[id_z]) {
+        if (h->vertices[id_z]->nombreV == z) {
+            x = h->vertices[id_z];
+            break;
+        }
+        else
+            id_z = (id_z + 1) % h->nvertices;
     }
-    else {
-        x = h->vertices[z];
+    if(h->vertices[id_z] == NULL) {
+        h->vertices[id_z] = NuevoVertice(z);
+        x = h->vertices[id_z];
     }
 
-   if(h->orden[w] == 0) {
-       h->vertices[w] = NuevoVertice(w);
-       h->orden[w] = h->vertices[w];
-       y = h->vertices[w];
+    while (h->vertices[id_w]) {
+        if (h->vertices[id_w]->nombreV == w) {
+            y = h->vertices[id_w];
+            break;
+        }
+        else
+            id_w = (id_w + 1) % h->nvertices;
     }
-    else {
-        y = h->vertices[w];
+
+    if(h->vertices[id_w] == NULL) {
+        h->vertices[id_w] = NuevoVertice(w);
+        y = h->vertices[id_w];
     }
 
 
@@ -61,17 +74,17 @@ bool HashAgregar(u32 z, u32 w, hashList h) {
             if(h->data[hash]->x->nombreV == x->nombreV)
                 return false;
             else
-                hash = (hash + 1) % h->size;
+                hash = (hash + 1) % h->aristas;
         }
         else {
-            hash = (hash + 1) % h->size;
+            hash = (hash + 1) % h->aristas;
         }
     }
     h->data[hash] = l;
     h->used[hash] = true;
-    h->next[hash] = h->heads[x->nombreV];
+    h->next[hash] = h->heads[HashNombre(x->nombreV, h)];
 
-    h->heads[x->nombreV] = hash;
+    h->heads[HashNombre(x->nombreV, h)] = hash;
 
 
     return true;
@@ -87,7 +100,7 @@ bool HashContiene(VerticeSt x, VerticeSt y, hashList h) {
             return true;
         }
         else {
-            hashX = (hashX + 1) % h->size;
+            hashX = (hashX + 1) % h->aristas;
         }
     }
     while (h->used[hashY]) {
@@ -95,7 +108,7 @@ bool HashContiene(VerticeSt x, VerticeSt y, hashList h) {
             return true;
         }
         else {
-            hashY = (hashY + 1) % h->size;
+            hashY = (hashY + 1) % h->aristas;
         }
     }
     return false;
@@ -104,7 +117,7 @@ bool HashContiene(VerticeSt x, VerticeSt y, hashList h) {
 // enumerates the vertices adjacent to x
 void HashEnumerar(VerticeSt x, hashList h) {
 
-    for (int i = h->heads[NombreDelVertice(x)]; i != -1; i = h->next[i]) {
+    for (int i = h->heads[HashNombre(x->nombreV, h)]; i != -1; i = h->next[i]) {
         if(VerticesIguales(x, ObtenerVerticeX(h->data[i]))) {
             //Comparacion para sacar el Vertice contrario.
             printf("%d", NombreDelVertice(ObtenerVerticeY(h->data[i])));
@@ -135,7 +148,7 @@ void HashEnumerarGrafo(hashList h, u32 n) {
 }
 
 VerticeSt HashIesimoVecino(VerticeSt x, u32 z, hashList h) {
-    int i = h->heads[x->nombreV];
+    int i = h->heads[HashNombre(x->nombreV, h)];
     u32 j = 0;
 
     for (;i != -1 && j < z; i = h->next[i])
@@ -150,17 +163,18 @@ VerticeSt HashIesimoVecino(VerticeSt x, u32 z, hashList h) {
 
 // returns hash code for edge (x, y)
 u32 HashCode(u32 x, u32 y, hashList h) {
-    u32 i = (u32) (x + 111111) * (y - 333333) % h->size;
+    u32 i = (u32) (x + 111111) * (y - 333333) % h->aristas;
     return i;
 }
 
-/*
-int HashNombre(u32 x) {
-    return (int) x;
-}*/
+
+u32 HashNombre(u32 x, hashList h) {
+    u32 hash = x % h->nvertices;
+    return hash;
+}
 
 void DestruirHashList (hashList h) {
-    for (u32 i = 0; i>h->size; i++) {
+    for (u32 i = 0; i>h->aristas; i++) {
         DestruirLado(h->data[i]);
     }
     free(h->heads);
