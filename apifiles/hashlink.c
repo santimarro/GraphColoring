@@ -58,7 +58,8 @@ bool HashAgregar(u32 z, u32 w, hashList h) {
         h->vertices[id_w] = NuevoVertice(w);
         y = h->vertices[id_w];
     }
-
+    x->hashV = id_z;
+    y->hashV = id_w;
 
     LadoSt l = CrearLado(x, y);
 
@@ -82,9 +83,9 @@ bool HashAgregar(u32 z, u32 w, hashList h) {
     }
     h->data[hash] = l;
     h->used[hash] = true;
-    h->next[hash] = h->heads[HashNombre(x->nombreV, h)];
+    h->next[hash] = h->heads[id_z];
 
-    h->heads[HashNombre(x->nombreV, h)] = hash;
+    h->heads[id_z] = hash;
 
 
     return true;
@@ -117,7 +118,7 @@ bool HashContiene(VerticeSt x, VerticeSt y, hashList h) {
 // enumerates the vertices adjacent to x
 void HashEnumerar(VerticeSt x, hashList h) {
 
-    for (int i = h->heads[HashNombre(x->nombreV, h)]; i != -1; i = h->next[i]) {
+    for (int i = h->heads[x->hashV]; i != -1; i = h->next[i]) {
         if(VerticesIguales(x, ObtenerVerticeX(h->data[i]))) {
             //Comparacion para sacar el Vertice contrario.
             printf("%d", NombreDelVertice(ObtenerVerticeY(h->data[i])));
@@ -148,7 +149,7 @@ void HashEnumerarGrafo(hashList h, u32 n) {
 }
 
 VerticeSt HashIesimoVecino(VerticeSt x, u32 z, hashList h) {
-    int i = h->heads[HashNombre(x->nombreV, h)];
+    int i = h->heads[x->hashV];
     u32 j = 0;
 
     for (;i != -1 && j < z; i = h->next[i])
@@ -174,7 +175,7 @@ u32 HashNombre(u32 x, hashList h) {
 }
 
 void DestruirHashList (hashList h) {
-    for (u32 i = 0; i>h->aristas; i++) {
+    for (u32 i = 0; i > h->aristas; i++) {
         DestruirLado(h->data[i]);
     }
     free(h->heads);

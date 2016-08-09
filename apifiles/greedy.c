@@ -21,7 +21,7 @@ void greedy(NimheP G) {
 
     vertice = G->hashList->orden[0];
     vertice->colorV = 1;
-    printf("Vertice: %d Color: %d\n", vertice->nombreV, vertice->colorV);
+    //printf("Vertice: %u Color: %d\n", vertice->nombreV, vertice->colorV);
     //CambiarColorA(vertice, 1);
     for (u32 u = 1; u < V; u++) {
         // Revisamos los vecinos del vertice u
@@ -44,8 +44,7 @@ void greedy(NimheP G) {
                     // Le ponemos el color encontrado
                     vertice->colorV = j;
                     max_color = MAX(max_color, j);
-                    printf("Vertice: %d Color: %d\n", vertice->nombreV, j);
-                    //CambiarColorA(vertice, j);
+                    //printf("Vertice: %u Color: %d\n", vertice->nombreV, j);
                     break;
                 }
             }

@@ -9,6 +9,7 @@ struct VerticeSt_t  {
     u32 nombreV;
     u32 gradoV;
     u32 colorV;
+    u32 hashV;
 };
 
 typedef struct VerticeSt_t *VerticeSt;
