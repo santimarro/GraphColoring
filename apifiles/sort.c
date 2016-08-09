@@ -1,19 +1,38 @@
 #include "sort.h"
 
-int CrecienteComp (const void * a, const void * b)
-{
-   return ( *(int*)a - *(int*)b );
+int CrecienteCompNombre(const void * x, const void * y) {
+    VerticeSt v1 = *(VerticeSt*) x;
+    VerticeSt v2 = *(VerticeSt*) y;
+
+    if(v1->nombreV < v2->nombreV)
+        return -1;
+    else
+        return 1;
+}
+
+int CompWelshPowell(const void * x, const void * y) {
+    VerticeSt v1 = *(VerticeSt*) x;
+    VerticeSt v2 = *(VerticeSt*) y;
+
+    if(v1->gradoV < v2->gradoV)
+        return 1;
+    else if (v1->gradoV == v2->gradoV)
+        return 0;
+    else
+        return -1;
 }
 
 // Ordena los vertices en orden creciente de sus "nombres" reales
 void OrdenNatural(NimheP G) {
 
-	qsort(G->hashList->orden, G->cantVertices, sizeof(int), CrecienteComp);
+	qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), CrecienteCompNombre);
 }
 
 /*Ordena los vertices de G de acuerdo con el orden Welsh-Powell, es decir,
  * con los grados en orden no creciente. */
-void OrdenWelshPowell(NimheP G);
+void OrdenWelshPowell(NimheP G) {
+    qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), CompWelshPowell);
+}
 
 /*
  * Si G esta coloreado con r colores y W1 sno los vertices coloreados con 1,
