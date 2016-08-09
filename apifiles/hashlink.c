@@ -149,6 +149,7 @@ void HashEnumerarGrafo(hashList h, u32 n) {
 }
 
 VerticeSt HashIesimoVecino(VerticeSt x, u32 z, hashList h) {
+
     int i = h->heads[x->hashV];
     u32 j = 0;
 

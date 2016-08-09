@@ -87,4 +87,55 @@ void ImprimirVecinosDelVertice(VerticeSt x, NimheP G) {
 
 // Funciones para extraer informacion de grafo.
 
-u32 NumeroDeVertices(NimheP G);
+u32 NumeroDeVertices(NimheP G) {
+    return G->cantVertices;
+}
+
+u32 NumeroDeLados(NimheP G) {
+    return G->cantLados;
+}
+
+u32 NumeroVerticesDeColor(NimheP G, u32 i) {
+    u32 result = 0;
+    for(u32 h = 0; h < G->cantVertices; h++){
+        if(G->hashList->vertices[h]->colorV == i) {
+            result++;
+        }
+    }
+    return result;
+}
+
+u32 ImprimirVerticesDeColor(NimheP G, u32 i) {
+    u32 result = 0;
+    printf("Vertices de Color %u: ", i);
+    bool flag = false;
+    for(u32 h = 0; h < G->cantVertices; h++){
+        if(G->hashList->vertices[h]->colorV == i) {
+            printf(", ");
+            printf("%u", G->hashList->vertices[h]->nombreV);
+            result++;
+            flag = true;
+        }
+    }
+    if(flag) {
+        printf(".");
+    }
+    else {
+        printf("No hay vertices de color %u: ", i);
+    }
+    return result;
+}
+
+
+u32 CantidadDeColores(NimheP G) {
+    return G->cantcolor;
+}
+
+struct VerticeSt_t IesimoVerticeEnElOrden(NimheP G, u32 i) {
+    return *G->hashList->orden[i];
+}
+
+struct VerticeSt_t IesimoVecino(NimheP G, struct VerticeSt_t x, u32 i) {
+    struct VerticeSt_t vecino = *HashIesimoVecino(&x, i, G->hashList);
+    return vecino;
+}

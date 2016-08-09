@@ -44,6 +44,7 @@ void greedy(NimheP G) {
                     // Le ponemos el color encontrado
                     vertice->colorV = j;
                     max_color = MAX(max_color, j);
+                    G->cantcolor = max_color;
                     //printf("Vertice: %u Color: %d\n", vertice->nombreV, j);
                     break;
                 }
@@ -53,7 +54,6 @@ void greedy(NimheP G) {
             memset(usado, false, (V + 1) * sizeof(bool));
         }
     }
-    printf("Colores usados: %d \n", max_color);
 }
 
 

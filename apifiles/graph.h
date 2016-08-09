@@ -39,6 +39,6 @@ u32 ImprimirVerticesDeColor(NimheP G, u32 i);
 
 u32 CantidadDeColores(NimheP G);
 
-VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i);
+struct VerticeSt_t IesimoVerticeEnElOrden(NimheP G, u32 i);
 
-VerticeSt IesimoVecino(NimheP G, VerticeSt x, u32 i);
+struct VerticeSt_t IesimoVecino(NimheP G, struct VerticeSt_t x, u32 i);
