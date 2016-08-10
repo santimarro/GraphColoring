@@ -81,7 +81,12 @@ void ChicoGrande(NimheP G) {
  * etc, entonces esta funcion ordena los vertices poniendo primero los vertices de Wr (en algun orden)
  * luego los de W r−1 (en algun orden), etc. */
 void Revierte(NimheP G){
-
+    for(i = 0, j = G->cantVertices-1; i < j; i++, j--) {
+        int t;
+        t = G->hashList->orden[j];
+        G->hashList->orden[j] = G->hashList->orden[i];
+        G->hashList->orden[i] = t;
+    }
 }
 // Leer el pdf, muy largo.
 void OrdenEspecifico(NimheP G, u32 *x){
