@@ -9,12 +9,12 @@ int main(void) {
     printf("Numero de vertices de color %u: %u\n", 1, ImprimirVerticesDeColor(G, 1));
     printf("Primer orden: \n");
     for(u32 i = 0; i < G->cantVertices; i++) {
-        printf("%u, ", G->hashList->orden[i]->gradoV);
+        printf("%u, ", G->hashList->orden[i]->colorV);
     }
-    OrdenWelshPowell(G);
+    GrandeChico(G);
     printf("Segundo orden: \n");
     for(u32 i = 0; i < G->cantVertices; i++) {
-        printf("%u, ", G->hashList->orden[i]->gradoV);
+        printf("%u, ", G->hashList->orden[i]->colorV);
     }
 
     DestruirNimhe(G);

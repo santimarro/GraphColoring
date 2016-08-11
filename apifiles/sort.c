@@ -40,17 +40,6 @@ int CompReordenAleatorio(const void * x, const void * y) {
     else
         return 0;
 }
-// Funcion de comparacion para Grande Chico
-/*int CompDecreciente(const void * x, const void * y) {
-    VerticeSt v1 = *(VerticeSt*) x;
-    VerticeSt v2 = *(VerticeSt*) y;
-    if(a > b)
-        return -1;
-    else if (a < b)
-        return 1;
-    else
-        return 0;
-}*/
 
 int CrecienteCompColores(const void * x, const void * y) {
     VerticeSt v1 = *(VerticeSt*) x;
@@ -121,15 +110,35 @@ void ReordenAleatorioRestringido(NimheP G) {
  * W2 los con 2, etc. Se ordena poniendo primero los vertices de Wj1(en algun orden)
  * luego los de Wj2 etc, donde j1,j2,..,etc son tales que |Wj1| >= |Wj2| >= ... >= |Wjr|
  */
-void GrandeChico(NimheP G); /* {
-     u32 VerticesDeColor[G->cantcolor];
-     for(int i = 0; i < G->cantcolor; i++) {
-         VerticesDeColor[i] = NumeroVerticesDeColor(G, i);
+void GrandeChico(NimheP G) {
+     u32 VerticesDeColor[G->cantcolor + 1];
+     memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
+     u32 color;
+     for(u32 i = 0; i < G->cantVertices; i++) {
+         color = G->hashList->vertices[i]->colorV;
+         VerticesDeColor[color]++;
      }
-     qsort(VerticesDeColor, G->cantcolor, sizeof(u32), CompDecreciente);
+     // Funcion de comparacion para Grande Chico
+     int CompDecreciente(const void * x, const void * y) {
+        VerticeSt v1 = *(VerticeSt*) x;
+        VerticeSt v2 = *(VerticeSt*) y;
 
-    qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), CrecienteCompColores);
-}*/
+         if(VerticesDeColor[v1->colorV] > VerticesDeColor[v2->colorV])
+            return -1;
+        else if (VerticesDeColor[v1->colorV] == VerticesDeColor[v2->colorV])
+             if(v1->colorV == v2->colorV)
+                return 0;
+             else {
+                 if(v1->colorV > v2->colorV)
+                    return -1;
+                 else
+                     return 1;
+             }
+        else
+            return 1;
+    }
+     qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeSt), CompDecreciente);
+ }
 // Igual que el anterior pero al reves los ordenes.. |Wj1| <= |Wj2|<= ...
 void ChicoGrande(NimheP G); /* {
     qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), DecreCompColores);
