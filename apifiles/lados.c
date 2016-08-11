@@ -10,8 +10,6 @@ LadoSt CrearLado(VerticeSt x1, VerticeSt x2) {
     return l;
 }
 void DestruirLado(LadoSt l) {
-    DestruirVertice(l->x);
-    DestruirVertice(l->y);
     free(l);
 }
 

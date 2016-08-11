@@ -150,8 +150,12 @@ u32 HashNombre(u32 x, hashList h) {
 }
 
 void DestruirHashList (hashList h) {
-    for (u32 i = 0; i > h->aristas; i++) {
+    for (u32 i = 0; i < h->aristas; i++) {
         DestruirLado(h->data[i]);
+    }
+
+    for (u32 i = 0; i < h->nvertices; i++) {
+        DestruirVertice(h->vertices[i]);
     }
     free(h->heads);
     free(h->data);

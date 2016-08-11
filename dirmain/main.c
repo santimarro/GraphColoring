@@ -16,6 +16,7 @@ int main(void) {
     for(u32 i = 0; i < G->cantVertices; i++) {
         printf("%u, ", G->hashList->orden[i]->gradoV);
     }
+
     DestruirNimhe(G);
 
     return 1;
