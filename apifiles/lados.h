@@ -9,7 +9,6 @@
 struct LadoSt_t  {
     VerticeSt x;
     VerticeSt y;
-    u32 nombre;
 };
 
 typedef struct LadoSt_t *LadoSt;
@@ -21,8 +20,6 @@ void DestruirLado(LadoSt l);
 VerticeSt ObtenerVerticeX(LadoSt l);
 
 VerticeSt ObtenerVerticeY(LadoSt l);
-
-u32 ObtenerNombre(LadoSt l);
 
 bool CompararLados(LadoSt l1, LadoSt l2);
 

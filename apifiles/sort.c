@@ -1,5 +1,7 @@
 #include "sort.h"
 
+u32 random = 0;
+
 int CrecienteCompNombre(const void * x, const void * y) {
     VerticeSt v1 = *(VerticeSt*) x;
     VerticeSt v2 = *(VerticeSt*) y;
@@ -21,6 +23,34 @@ int CompWelshPowell(const void * x, const void * y) {
     else
         return -1;
 }
+// Funcion de comparacion para ReordenAletorioRestringido
+int CompReordenAleatorio(const void * x, const void * y) {
+    VerticeSt v1 = *(VerticeSt*) x;
+    VerticeSt v2 = *(VerticeSt*) y;
+    u32 i = random;
+    if(v1->colorV == i && v2->colorV == i) {
+        return 0;
+    }
+    else if (v1->colorV == i) {
+        return -1;
+    }
+    else if(v2->colorV == i) {
+        return 1;
+    }
+    else
+        return 0;
+}
+// Funcion de comparacion para Grande Chico
+/*int CompDecreciente(const void * x, const void * y) {
+    VerticeSt v1 = *(VerticeSt*) x;
+    VerticeSt v2 = *(VerticeSt*) y;
+    if(a > b)
+        return -1;
+    else if (a < b)
+        return 1;
+    else
+        return 0;
+}*/
 
 int CrecienteCompColores(const void * x, const void * y) {
     VerticeSt v1 = *(VerticeSt*) x;
@@ -56,13 +86,34 @@ void OrdenWelshPowell(NimheP G) {
     qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), CompWelshPowell);
 }
 
+
 /*
  * Si G esta coloreado con r colores y W1 sno los vertices coloreados con 1,
  * W2 los con 2, etc. Se ordena poniendo primero los vertices de Wj1(en algun orden)
  * luego los de Wj2 etc, donde j1,j2,..,etc son aleatorios distintos
  */
 void ReordenAleatorioRestringido(NimheP G) {
+    u32 seed = time(NULL);
+    srand(seed);
+    u32 i = 0;
+    random = rand() % G->cantcolor + 1;
 
+    bool available[G->cantcolor + 1];
+    memset(available, true, (G->cantcolor + 1)*sizeof(bool));
+
+    u32 CantVerticesDeColor = NumeroVerticesDeColor(G, random);
+    qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), CompReordenAleatorio);
+    available[random] = false;
+
+    while(i < G->cantcolor - 1) {
+        random = rand() % G->cantcolor + 1;
+        if(available[random]) {
+            qsort(G->hashList->orden + CantVerticesDeColor, G->cantVertices - CantVerticesDeColor, sizeof(VerticeSt), CompReordenAleatorio);
+            CantVerticesDeColor = CantVerticesDeColor + NumeroVerticesDeColor(G, random);
+            available[random] = false;
+            i++;
+        }
+    }
 }
 
 
@@ -70,25 +121,30 @@ void ReordenAleatorioRestringido(NimheP G) {
  * W2 los con 2, etc. Se ordena poniendo primero los vertices de Wj1(en algun orden)
  * luego los de Wj2 etc, donde j1,j2,..,etc son tales que |Wj1| >= |Wj2| >= ... >= |Wjr|
  */
-void GrandeChico(NimheP G) {
+void GrandeChico(NimheP G); /* {
+     u32 VerticesDeColor[G->cantcolor];
+     for(int i = 0; i < G->cantcolor; i++) {
+         VerticesDeColor[i] = NumeroVerticesDeColor(G, i);
+     }
+     qsort(VerticesDeColor, G->cantcolor, sizeof(u32), CompDecreciente);
+
     qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), CrecienteCompColores);
-}
+}*/
 // Igual que el anterior pero al reves los ordenes.. |Wj1| <= |Wj2|<= ...
-void ChicoGrande(NimheP G) {
+void ChicoGrande(NimheP G); /* {
     qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), DecreCompColores);
-}
+}*/
 /*Si G esta coloreado con r colores y W 1 son los vertices coloreados con 1, W 2 los coloreados con 2,
  * etc, entonces esta funcion ordena los vertices poniendo primero los vertices de Wr (en algun orden)
  * luego los de W r−1 (en algun orden), etc. */
-void Revierte(NimheP G){
+
+/*void Revierte(NimheP G){
     for(i = 0, j = G->cantVertices-1; i < j; i++, j--) {
         int t;
         t = G->hashList->orden[j];
         G->hashList->orden[j] = G->hashList->orden[i];
         G->hashList->orden[i] = t;
     }
-}
+}*/
 // Leer el pdf, muy largo.
-void OrdenEspecifico(NimheP G, u32 *x){
-
-}
+void OrdenEspecifico(NimheP G, u32 *x);

@@ -11,7 +11,7 @@ hashList HashNuevaHash(u32 n, u32 m) {
     memset(h->heads, -1, n*sizeof(int));
 
     h->used = calloc(2*m, sizeof(bool));
-    h->data = calloc(2*m, sizeof(struct LadoSt_t));
+    h->data = calloc(2*m, sizeof(LadoSt));
     h->next = calloc(2*m, sizeof(int));
 
     h->vertices = malloc((int) n*sizeof(VerticeSt));
@@ -63,10 +63,7 @@ bool HashAgregar(u32 z, u32 w, hashList h) {
 
     LadoSt l = CrearLado(x, y);
 
-    if(!HashContiene(x, y, h)) {
-        y->gradoV++;
-        x->gradoV++;
-    }
+    x->gradoV++;
 
     u32 hash = HashCode(z, w, h);
 
@@ -89,30 +86,6 @@ bool HashAgregar(u32 z, u32 w, hashList h) {
 
 
     return true;
-}
-// returns true if edge (x, y) is contained in the graph
-
-bool HashContiene(VerticeSt x, VerticeSt y, hashList h) {
-    u32 hashX = HashCode(x->nombreV, y->nombreV, h);
-    u32 hashY = HashCode(y->nombreV, x->nombreV, h);
-    LadoSt l = CrearLado(x, y);
-    while (h->used[hashX]) {
-        if (CompararLados(h->data[hashX], l)) {
-            return true;
-        }
-        else {
-            hashX = (hashX + 1) % h->aristas;
-        }
-    }
-    while (h->used[hashY]) {
-        if (CompararLados(h->data[hashY], l)) {
-            return true;
-        }
-        else {
-            hashY = (hashY + 1) % h->aristas;
-        }
-    }
-    return false;
 }
 
 // enumerates the vertices adjacent to x
@@ -156,11 +129,12 @@ VerticeSt HashIesimoVecino(VerticeSt x, u32 z, hashList h) {
     for (;i != -1 && j < z; i = h->next[i])
         j++;
 
-    if(VerticesIguales(x, ObtenerVerticeX(h->data[i]))) {
+    return ObtenerVerticeY(h->data[i]);
+    /*if(VerticesIguales(x, ObtenerVerticeX(h->data[i]))) {
         return ObtenerVerticeY(h->data[i]);
     }
     else
-        return ObtenerVerticeX(h->data[i]);
+        return ObtenerVerticeX(h->data[i]);*/
 }
 
 // returns hash code for edge (x, y)
@@ -183,5 +157,7 @@ void DestruirHashList (hashList h) {
     free(h->data);
     free(h->next);
     free(h->used);
+    free(h->vertices);
+    free(h->orden);
     free(h);
 }
