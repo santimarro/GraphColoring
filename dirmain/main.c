@@ -12,7 +12,7 @@ int main(void) {
     for(u32 i = 0; i < G->cantVertices; i++) {
         printf("%u, ", G->hashList->orden[i]->colorV);
     }
-    GrandeChico(G);
+    ChicoGrande(G);
     printf("Segundo orden: \n");
     for(u32 i = 0; i < G->cantVertices; i++) {
         printf("%u, ", G->hashList->orden[i]->colorV);

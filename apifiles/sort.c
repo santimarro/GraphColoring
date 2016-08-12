@@ -140,20 +140,41 @@ void GrandeChico(NimheP G) {
      qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeSt), CompDecreciente);
  }
 // Igual que el anterior pero al reves los ordenes.. |Wj1| <= |Wj2|<= ...
-void ChicoGrande(NimheP G); /* {
-    qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), DecreCompColores);
-}*/
+void ChicoGrande(NimheP G) {
+     u32 VerticesDeColor[G->cantcolor + 1];
+     memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
+     u32 color;
+     for(u32 i = 0; i < G->cantVertices; i++) {
+         color = G->hashList->vertices[i]->colorV;
+         VerticesDeColor[color]++;
+     }
+     // Funcion de comparacion para Grande Chico
+     int CompDecreciente(const void * x, const void * y) {
+        VerticeSt v1 = *(VerticeSt*) x;
+        VerticeSt v2 = *(VerticeSt*) y;
+
+         if(VerticesDeColor[v1->colorV] < VerticesDeColor[v2->colorV])
+            return -1;
+        else if (VerticesDeColor[v1->colorV] == VerticesDeColor[v2->colorV])
+             if(v1->colorV == v2->colorV)
+                return 0;
+             else {
+                 if(v1->colorV > v2->colorV)
+                    return -1;
+                 else
+                     return 1;
+             }
+        else
+            return 1;
+    }
+     qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeSt), CompDecreciente);
+}
 /*Si G esta coloreado con r colores y W 1 son los vertices coloreados con 1, W 2 los coloreados con 2,
  * etc, entonces esta funcion ordena los vertices poniendo primero los vertices de Wr (en algun orden)
  * luego los de W r−1 (en algun orden), etc. */
 
-/*void Revierte(NimheP G){
-    for(i = 0, j = G->cantVertices-1; i < j; i++, j--) {
-        int t;
-        t = G->hashList->orden[j];
-        G->hashList->orden[j] = G->hashList->orden[i];
-        G->hashList->orden[i] = t;
-    }
-}*/
+void Revierte(NimheP G){
+   qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), DecreCompColores); 
+}
 // Leer el pdf, muy largo.
 void OrdenEspecifico(NimheP G, u32 *x);
