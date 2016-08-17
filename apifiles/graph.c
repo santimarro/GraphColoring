@@ -5,13 +5,15 @@ NimheP NuevoNimhe() {
     u32 cantv, cantl;// cant = cantidad de vertices cantl= cantidad de lados
 
     char *input; // Donde guardaremos cada linea de input
-    size_t bufsize = 80; // largo de las lineas
+
+    int bufsize = 80;// largo de las lineas
+
 
     input = (char *)malloc(bufsize * sizeof(char)); // array donde se guardan las lineas.
     input[0] = 'c';
     while (input[0] == 'c'){
-        //Pedimos lineas hasta que no sean mas comentarios.
-        if(getline(&input, &bufsize, stdin) == -1) {
+        //Pedimos lineas hasta que no sean mas comentarios
+        if(fgets(input, bufsize, stdin) == NULL) {
             printf("Error interno");
             return NULL;
         }
@@ -49,7 +51,7 @@ NimheP NuevoNimhe() {
 
     u32 n, m;
     for (u32 i = 0; i < cantl; i++) {
-        if(getline(&input, &bufsize, stdin) != -1) {
+        if(fgets(input, bufsize, stdin) != NULL) {
             // Parseo los lados
             sscanf(input, "%c %u %u", &p, &n, &m);
             if (p != 'e') {

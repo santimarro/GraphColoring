@@ -14,13 +14,15 @@ int main(void) {
     printf(".\n");
     
     u32 x[] = {4,0,3,2,2};
-    
-    
+
     OrdenEspecifico(G, x);
+
     printf("Segundo orden: \n");
+
     for(u32 i = 0; i < G->cantVertices; i++) {
-        printf("%u, ", G->hashList->orden[i]->nombreV);
+        printf("%u, ", G->hashList->orden[i]->colorV);
     }
+
     printf(".\n");
 
     DestruirNimhe(G);
