@@ -177,4 +177,32 @@ void Revierte(NimheP G){
    qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), DecreCompColores); 
 }
 // Leer el pdf, muy largo.
-void OrdenEspecifico(NimheP G, u32 *x);
+void OrdenEspecifico(NimheP G, u32 *x){
+    OrdenNatural(G);
+    u32 i = 0;
+    bool* Xusados = calloc(G->cantVertices, sizeof(bool));
+    while(i < G->cantVertices){
+        if(x[i] >= G->cantVertices) {
+            printf("x tiene elementos mas grandes que la cantidad de vertices\n");
+            return;
+        }
+        if(!Xusados[x[i]])
+            Xusados[x[i]] = true;
+        else {
+            printf("dos elementos en x iguales\n");
+            return;
+        }
+        i++;
+    }
+    free(Xusados);
+    VerticeSt tmp;
+    tmp = G->hashList->orden[i];
+    G->hashList->orden[i] = G->hashList->orden[x[i]];
+    G->hashList->orden[x[i]] = tmp;
+    for(u32 j = i; j <= G->cantVertices; j++){
+        if(x[j] == i){
+            x[j] = x[i];
+            break;
+        }
+    }
+}
