@@ -2,20 +2,21 @@
 
 
 NimheP NuevoNimhe() {
-    u32 cantv, cantl;
+    u32 cantv, cantl;// cant = cantidad de vertices cantl= cantidad de lados
 
     char *input; // Donde guardaremos cada linea de input
-    size_t bufsize = 80;
+    size_t bufsize = 80; // largo de las lineas
 
-    input = (char *)malloc(bufsize * sizeof(char));
+    input = (char *)malloc(bufsize * sizeof(char)); // array donde se guardan las lineas.
     input[0] = 'c';
     while (input[0] == 'c'){
-        //Pedimos lineas hasta que no sean mas comentarios
+        //Pedimos lineas hasta que no sean mas comentarios.
         if(getline(&input, &bufsize, stdin) == -1) {
             printf("Error interno");
             return NULL;
         }
     }
+    // nos fijamos que la linea p venga luego de los comentarios.
     if (input[0] != 'p') {
         printf("Input invalido 3");
         return NULL;
@@ -23,9 +24,8 @@ NimheP NuevoNimhe() {
     char p = 'o';
     char edge[4];
     edge[0] = 'f';
-
-    //char input_format[] = {'p',' ', 'e', 'd', 'g', 'e', ' ', 'n', ' ', 'm'}; //Establecemos dos plantillas
-    //char input_format_2[] = {'e', ' ', 'n', ' ', 'm'};
+    
+    // parseamos la linea
     sscanf(input, "%c %s %u %u", &p, edge, &cantv, &cantl);
 
     //Chequeo el input correcto

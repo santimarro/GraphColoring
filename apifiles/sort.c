@@ -1,71 +1,69 @@
 #include "sort.h"
 
-u32 random = 0;
+u32 random = 0; // numero random ver la funcion ReordenAleatorioRestringido.
 
+//funcion auxiliar para comparar nombres de vertices.
 int CrecienteCompNombre(const void * x, const void * y) {
     VerticeSt v1 = *(VerticeSt*) x;
     VerticeSt v2 = *(VerticeSt*) y;
-
+    // definimos como dos vertices se van a comparar, en este caso por su nombre.
     if(v1->nombreV < v2->nombreV)
         return -1;
     else
         return 1;
 }
-
+//funcion auxiliar para comparar grados de vertices.
 int CompWelshPowell(const void * x, const void * y) {
     VerticeSt v1 = *(VerticeSt*) x;
     VerticeSt v2 = *(VerticeSt*) y;
-
+    //se devuelve uno si la comparacion decreciente es correcta.
     if(v1->gradoV < v2->gradoV)
         return 1;
+    //se devuelve 0 si la comparacion es igual.
     else if (v1->gradoV == v2->gradoV)
         return 0;
     else
         return -1;
 }
-// Funcion de comparacion para ReordenAletorioRestringido
+// Funcion de comparacion para ReordenAletorioRestringido.
 int CompReordenAleatorio(const void * x, const void * y) {
     VerticeSt v1 = *(VerticeSt*) x;
     VerticeSt v2 = *(VerticeSt*) y;
     u32 i = random;
+    //compara el color elegido con los colores de los dos vertices.
     if(v1->colorV == i && v2->colorV == i) {
         return 0;
+        // 0 para los dos vertices del mismo color entonces no hace nada
     }
     else if (v1->colorV == i) {
         return -1;
+        // -1 lo mueve a la izquierda en el qsort
     }
     else if(v2->colorV == i) {
         return 1;
+        // 1 lo mueve a la derecha en qsort
     }
     else
         return 0;
 }
 
-int CrecienteCompColores(const void * x, const void * y) {
-    VerticeSt v1 = *(VerticeSt*) x;
-    VerticeSt v2 = *(VerticeSt*) y;
 
-    if(v1->colorV > v2->colorV)
-        return 1;
-    else if (v1->colorV == v2->colorV)
-        return 0;
-    else
-        return -1;
-}
 int DecreCompColores(const void * x, const void * y) {
     VerticeSt v1 = *(VerticeSt*) x;
     VerticeSt v2 = *(VerticeSt*) y;
     
     if(v1->colorV < v2->colorV)
         return 1;
+        // lo mueve a la derecha
     else if(v1->colorV == v2->colorV)
         return 0;
+        // no lo mueve
     else
         return -1;
+        // lo mueve a la izquierda
 }
 // Ordena los vertices en orden creciente de sus "nombres" reales
 void OrdenNatural(NimheP G) {
-
 	qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeSt), CrecienteCompNombre);
 }
 
@@ -119,7 +117,7 @@ void GrandeChico(NimheP G) {
          VerticesDeColor[color]++;
      }
      // Funcion de comparacion para Grande Chico
-     int CompDecreciente(const void * x, const void * y) {
+     int CompGrandeChico(const void * x, const void * y) {
         VerticeSt v1 = *(VerticeSt*) x;
         VerticeSt v2 = *(VerticeSt*) y;
 
@@ -137,7 +135,7 @@ void GrandeChico(NimheP G) {
         else
             return 1;
     }
-     qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeSt), CompDecreciente);
+     qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeSt), CompGrandeChico  );
  }
 // Igual que el anterior pero al reves los ordenes.. |Wj1| <= |Wj2|<= ...
 void ChicoGrande(NimheP G) {
@@ -148,8 +146,8 @@ void ChicoGrande(NimheP G) {
          color = G->hashList->vertices[i]->colorV;
          VerticesDeColor[color]++;
      }
-     // Funcion de comparacion para Grande Chico
-     int CompDecreciente(const void * x, const void * y) {
+     // Funcion de comparacion para Chico Grande
+     int CompChicoGrande(const void * x, const void * y) {
         VerticeSt v1 = *(VerticeSt*) x;
         VerticeSt v2 = *(VerticeSt*) y;
 
@@ -167,7 +165,7 @@ void ChicoGrande(NimheP G) {
         else
             return 1;
     }
-     qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeSt), CompDecreciente);
+     qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeSt), CompChicoGrande);
 }
 /*Si G esta coloreado con r colores y W 1 son los vertices coloreados con 1, W 2 los coloreados con 2,
  * etc, entonces esta funcion ordena los vertices poniendo primero los vertices de Wr (en algun orden)
