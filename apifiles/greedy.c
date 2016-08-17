@@ -1,6 +1,6 @@
 
 #define MAX(a,b) (((a)>(b))?(a):(b))
-#include "graph.h"
+#include "Nimhe.h"
 
 /*
  * Implementacion de greedy, revisar complejidad
@@ -31,7 +31,7 @@ void greedy(NimheP G) {
             u32 cantVecinos = vertice->gradoV;
 
             for (u32 h = 0; h < cantVecinos; h++) {
-                vecino = HashIesimoVecino(vertice, h, G->hashList);
+                vecino = HashIesimoVecino(vertice, h, G->hashList); //TODO mejorar la implementacion de recorrer los vecinos
                 color = vecino->colorV;
                 //color = ColorDelVertice(vecino);
                 if (color != 0) {

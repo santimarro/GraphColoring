@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "Nimhe.h"
 
 
 NimheP NuevoNimhe() {
@@ -59,9 +59,6 @@ NimheP NuevoNimhe() {
             else {
                 //Agrego el lado a la hashlist
                 if(!HashAgregar(n, m, grafo->hashList))
-                    return NULL;
-
-                if(!HashAgregar(m, n, grafo->hashList))
                     return NULL;
             }
         }

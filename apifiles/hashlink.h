@@ -11,8 +11,10 @@
 typedef unsigned int u32;
 
 struct hashList_t {
-    int *heads;
-    int *next;
+    int *heads_ida; // Primer grafo dirigido (de ida)
+    int *heads_vuelta; // Segundo grafo dirigido (de vuelta)
+    int *next_ida;
+    int *next_vuelta;
     u32 aristas;
     u32 nvertices;
     bool *used;
