@@ -1,4 +1,3 @@
-#define _XOPEN_SOURCE 700
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -27,7 +26,7 @@ int DestruirNimhe(NimheP G);
  */
 
 
-void ImprimirVecinosDelVertice(VerticeSt x, NimheP G);
+void ImprimirVecinosDelVertice(struct VerticeSt x, NimheP G);
 
 u32 NumeroDeVertices(NimheP G);
 
@@ -39,6 +38,6 @@ u32 ImprimirVerticesDeColor(NimheP G, u32 i);
 
 u32 CantidadDeColores(NimheP G);
 
-struct VerticeSt_t IesimoVerticeEnElOrden(NimheP G, u32 i);
+struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i);
 
-struct VerticeSt_t IesimoVecino(NimheP G, struct VerticeSt_t x, u32 i);
+struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i);

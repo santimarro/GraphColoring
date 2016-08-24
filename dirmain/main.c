@@ -8,8 +8,8 @@ int main(void) {
     //HashEnumerarGrafo(G->hashList, G->cantVertices);
 
     //HashEnumerarGrafo(G->hashList, G->cantVertices);
-    //greedy(G);
-    //printf("Colores usados: %d \n", CantidadDeColores(G));
+    greedy(G);
+    printf("Colores usados: %d \n", CantidadDeColores(G));
 
     /*
     printf("Numero de vertices de color %u: %u\n", 1, ImprimirVerticesDeColor(G, 1));

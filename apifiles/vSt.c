@@ -1,31 +1,31 @@
 #include "vSt.h"
 
 
-VerticeSt NuevoVertice(u32 n) {
-    VerticeSt v = malloc(sizeof(struct VerticeSt_t));
+VerticeP NuevoVertice(u32 n) {
+    VerticeP v = malloc(sizeof(struct VerticeSt));
     v->nombreV = n;
     v->gradoV = 0;
     v->colorV = 0;
     return(v);
 }
 
-u32 ColorDelVertice(VerticeSt x) {
-    return(x->colorV);
+u32 ColorDelVertice(struct VerticeSt x) {
+    return(x.colorV);
 }
 
-u32 GradoDelVertice(VerticeSt x) {
-    return(x->gradoV);
+u32 GradoDelVertice(struct VerticeSt x) {
+    return(x.gradoV);
 }
 
-u32 NombreDelVertice(VerticeSt x) {
-    return(x->nombreV);
+u32 NombreDelVertice(struct VerticeSt x) {
+    return(x.nombreV);
 }
 
-void CambiaColorA(VerticeSt x, u32 i) {
-    x->colorV = i;
+void CambiaColorA(struct VerticeSt x, u32 i) {
+    x.colorV = i;
 }
 
-bool VerticesIguales (VerticeSt x, VerticeSt y) {
+bool VerticesIguales (VerticeP x, VerticeP y) {
     if (x->nombreV == y->nombreV)
         return true;
     else
@@ -33,6 +33,6 @@ bool VerticesIguales (VerticeSt x, VerticeSt y) {
 }
 
 
-void DestruirVertice(VerticeSt x) {
+void DestruirVertice(VerticeP x) {
     free(x);
 }

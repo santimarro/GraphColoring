@@ -17,10 +17,11 @@ struct hashList_t {
     int *next_vuelta;
     u32 aristas;
     u32 nvertices;
+    bool *vertices_usados;
     bool *used;
-    LadoSt *data;
-    VerticeSt *vertices; // Arreglo de VerticeP en el orden original
-    VerticeSt *orden;   // Arreglo de VerticeP ordenados segun qsort.
+    struct LadoSt *data;
+    struct VerticeSt *vertices; // Arreglo de VerticeP en el orden original
+    VerticeP *orden;   // Arreglo de VerticeP ordenados segun qsort.
 };
 
 typedef struct hashList_t *hashList;
@@ -35,7 +36,7 @@ bool HashAgregar(u32 x, u32 y, hashList h);
  * Agrega una arista a la hashlist, donde x e y son los vertices unidos por la misma.
  */
 
-void HashEnumerar(VerticeSt x, hashList h);
+void HashEnumerar(VerticeP x, hashList h);
 /*
  * Enumera los vertices vecinos de x
  */
@@ -51,7 +52,7 @@ u32 HashCode(u32 x, u32 y, hashList h);
 void HashEnumerarGrafo(hashList h, u32 n);
 
 
-VerticeSt HashIesimoVecino(VerticeSt x, u32 z, hashList h);
+VerticeP HashIesimoVecino(VerticeP x, u32 z, hashList h);
 
 u32 HashNombre(u32 x, hashList h);
 

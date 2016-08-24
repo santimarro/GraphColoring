@@ -1,5 +1,5 @@
 #include "Nimhe.h"
-
+#include <assert.h>
 
 NimheP NuevoNimhe() {
     u32 cantv, cantl;// cant = cantidad de vertices cantl= cantidad de lados
@@ -45,6 +45,7 @@ NimheP NuevoNimhe() {
 
     NimheP grafo = NULL;
     grafo = malloc(1*sizeof(struct NimheSt));
+    assert(grafo != NULL);
     grafo->cantVertices = cantv;
     grafo->cantLados = cantl;
     grafo->hashList = HashNuevaHash(cantv, cantl);
@@ -60,8 +61,11 @@ NimheP NuevoNimhe() {
             }
             else {
                 //Agrego el lado a la hashlist
-                if(!HashAgregar(n, m, grafo->hashList))
+                if(!HashAgregar(n, m, grafo->hashList)) {
+                    printf("LADO YA EXISTE");
                     return NULL;
+                }
+                printf("Iteracion: %u. Cantidad total: %u\n", i, cantl);
             }
         }
         else {
@@ -69,9 +73,9 @@ NimheP NuevoNimhe() {
             return NULL;
         }
     }
-    memcpy(grafo->hashList->orden, grafo->hashList->vertices, cantv*sizeof(VerticeSt));
     //HashEnumerarGrafo(grafo->hashList, grafo->cantVertices);
     free(input);
+    printf("TERMINO DE CARGAR");
     return grafo;
 }
 
@@ -81,8 +85,8 @@ int DestruirNimhe(NimheP G) {
     return 1;
 }
 
-void ImprimirVecinosDelVertice(VerticeSt x, NimheP G) {
-    HashEnumerar(x, G->hashList);
+void ImprimirVecinosDelVertice(struct VerticeSt x, NimheP G) {
+    HashEnumerar(&x, G->hashList);
 }
 
 // Funciones para extraer informacion de grafo.
@@ -98,7 +102,7 @@ u32 NumeroDeLados(NimheP G) {
 u32 NumeroVerticesDeColor(NimheP G, u32 i) {
     u32 result = 0;
     for(u32 h = 0; h < G->cantVertices; h++){
-        if(G->hashList->vertices[h]->colorV == i) {
+        if(G->hashList->vertices[h].colorV == i) {
             result++;
         }
     }
@@ -110,9 +114,9 @@ u32 ImprimirVerticesDeColor(NimheP G, u32 i) {
     printf("Vertices de Color %u: ", i);
     bool flag = false;
     for(u32 h = 0; h < G->cantVertices; h++){
-        if(G->hashList->vertices[h]->colorV == i) {
+        if(G->hashList->vertices[h].colorV == i) {
             printf(", ");
-            printf("%u", G->hashList->vertices[h]->nombreV);
+            printf("%u", G->hashList->vertices[h].nombreV);
             result++;
             flag = true;
         }
@@ -131,11 +135,11 @@ u32 CantidadDeColores(NimheP G) {
     return G->cantcolor;
 }
 
-struct VerticeSt_t IesimoVerticeEnElOrden(NimheP G, u32 i) {
+struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
     return *G->hashList->orden[i];
 }
 
-struct VerticeSt_t IesimoVecino(NimheP G, struct VerticeSt_t x, u32 i) {
-    struct VerticeSt_t vecino = *HashIesimoVecino(&x, i, G->hashList);
+struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i) {
+    struct VerticeSt vecino = *HashIesimoVecino(&x, i, G->hashList);
     return vecino;
 }

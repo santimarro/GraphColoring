@@ -6,20 +6,20 @@
 #include <stdlib.h>
 #include "vSt.h"
 
-struct LadoSt_t  {
-    VerticeSt x;
-    VerticeSt y;
+struct LadoSt  {
+    VerticeP x;
+    VerticeP y;
 };
 
-typedef struct LadoSt_t *LadoSt;
+typedef struct LadoSt *LadoSt;
 
-LadoSt CrearLado(VerticeSt x1, VerticeSt x2);
+LadoSt CrearLado(VerticeP x1, VerticeP x2);
 
 void DestruirLado(LadoSt l);
 
-VerticeSt ObtenerVerticeX(LadoSt l);
+VerticeP ObtenerVerticeX(struct LadoSt l);
 
-VerticeSt ObtenerVerticeY(LadoSt l);
+VerticeP ObtenerVerticeY(struct LadoSt l);
 
-bool CompararLados(LadoSt l1, LadoSt l2);
+bool CompararLados(struct LadoSt l1, struct LadoSt l2);
 
