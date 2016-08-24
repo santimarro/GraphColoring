@@ -2,7 +2,7 @@
 #include <assert.h>
 
 NimheP NuevoNimhe() {
-    u32 cantv, cantl;// cant = cantidad de vertices cantl= cantidad de lados
+    u32 cantv, cantl;// cant = cantidad de vertices cantl = cantidad de lados
 
     char *input; // Donde guardaremos cada linea de input
 
@@ -27,10 +27,10 @@ NimheP NuevoNimhe() {
     char edge[4];
     edge[0] = 'f';
     
-    // parseamos la linea
+    //Parseamos la linea.
     sscanf(input, "%c %s %u %u", &p, edge, &cantv, &cantl);
 
-    //Chequeo el input correcto
+    //Chequeo el input correcto.
     if (strncmp(edge, "edge", 4) != 0) {
         printf("Input invalido 1\n");
         return NULL;
@@ -42,19 +42,22 @@ NimheP NuevoNimhe() {
     }
 
     //TODO Que pasa si cantv o cantl no son ints.
-
+    // Creo el grafo.
     NimheP grafo = NULL;
+    // Le asigno memoria.
     grafo = malloc(1*sizeof(struct NimheSt));
-    assert(grafo != NULL);
+    // Completo los campos del grafo.
     grafo->cantVertices = cantv;
     grafo->cantLados = cantl;
     grafo->hashList = HashNuevaHash(cantv, cantl);
 
-    u32 n, m;
+    u32 n, m;// Vertices de los lados que ponen en el input.
     for (u32 i = 0; i < cantl; i++) {
+        // Si la linea es del largo correcto y tiene contenido.
         if(fgets(input, bufsize, stdin) != NULL) {
-            // Parseo los lados
+            // Parseo los lados.
             sscanf(input, "%c %u %u", &p, &n, &m);
+            // Si p no es 'e', la linea esta mal puesta.
             if (p != 'e') {
                 printf("Lado mal puesto\n");
                 return NULL;
@@ -62,10 +65,9 @@ NimheP NuevoNimhe() {
             else {
                 //Agrego el lado a la hashlist
                 if(!HashAgregar(n, m, grafo->hashList)) {
-                    printf("LADO YA EXISTE");
-                    return NULL;
+                    printf("LADO YA EXISTE\n");
                 }
-                printf("Iteracion: %u. Cantidad total: %u\n", i, cantl);
+                printf("Iteracion: %u. Cantidad total: %u\n", i, cantl - 1);
             }
         }
         else {
@@ -73,13 +75,15 @@ NimheP NuevoNimhe() {
             return NULL;
         }
     }
-    //HashEnumerarGrafo(grafo->hashList, grafo->cantVertices);
+    // Guardo una lista de vertices para ordenar.
+    memcpy(grafo->hashList->orden, grafo->hashList->vertices, cantv*sizeof(VerticeSt));
     free(input);
-    printf("TERMINO DE CARGAR");
+    printf("TERMINO DE CARGAR\n");
     return grafo;
 }
 
 int DestruirNimhe(NimheP G) {
+    // Destruyo la hashList y luego libero memoria
     DestruirHashList(G->hashList);
     free(G);
     return 1;
@@ -112,7 +116,7 @@ u32 NumeroVerticesDeColor(NimheP G, u32 i) {
 u32 ImprimirVerticesDeColor(NimheP G, u32 i) {
     u32 result = 0;
     printf("Vertices de Color %u: ", i);
-    bool flag = false;
+    bool flag = false;//Flag que se vuelve verdadera si existe un vertices con el color i.
     for(u32 h = 0; h < G->cantVertices; h++){
         if(G->hashList->vertices[h].colorV == i) {
             printf(", ");
