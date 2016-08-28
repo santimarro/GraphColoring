@@ -1,7 +1,6 @@
 /* 
- * 1. Terminar la hashlist
- * 2. Corregir las warnings al compilar y cambiar lo de struct VerticeSt y todos los tipos
- * 3. Hacer algoritmos de ordenacion, ver algortimo que usa una funcion y ordena acorde a la misma.
- * 4. Hacer el Main.
- * 5. 
+ * 1. El programa corre muy lento en Greedy. Se incluyo un main de juan para testearlo con el de el. Por lo tanto leer inciso 2).
+ * 2. Hacer el Main.
+ * 3. Mejorar los ordenes por si acaso.
+ * 4. 300 o 400 mb estan bien para el caso borde. El tiempo tiene que ser menos de 1hr sino no pasamos.
  */
