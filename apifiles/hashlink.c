@@ -51,7 +51,6 @@ bool HashAgregar(u32 z, u32 w, hashList h) {
                 id_z = 0;
         }
     }
-
     if(xPuntero == NULL) {
         x.nombreV = z;
         x.colorV = 0;
@@ -74,7 +73,6 @@ bool HashAgregar(u32 z, u32 w, hashList h) {
                 id_w = 0;
         }
     }
-
     if(yPuntero == NULL) {
         y.nombreV = w;
         y.colorV = 0;
@@ -99,13 +97,7 @@ bool HashAgregar(u32 z, u32 w, hashList h) {
 
     while (h->used[hash]) {
         if (CompararLados(h->data[hash], l)) {
-            if(h->data[hash].x->nombreV == xPuntero->nombreV)
-                return false;
-            else {
-                hash++;
-                if(hash == h->aristas)
-                    hash = 0;
-            }
+            return false;
         }
         else {
             hash++;

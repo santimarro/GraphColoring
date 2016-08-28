@@ -9,7 +9,7 @@
  * complejidad
  */
 
-void greedy(NimheP G) {
+u32 greedy(NimheP G) {
     u32 V = G->cantVertices;
     u32 color;
     u32 max_color = 0;
@@ -80,9 +80,12 @@ void greedy(NimheP G) {
             }
 
             // Reseteamos el array de colores disponibles a falso
-            memset(usado, false, (V + 1) * sizeof(bool));
+            for (u32 i = 0; i < cantVecinos; i++) {
+                usado[i] = false;
+            }
         }
     }
+    return max_color;
 }
 
 

@@ -175,32 +175,35 @@ void Revierte(NimheP G){
    qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeP), DecreCompColores);
 }
 // Leer el pdf, muy largo.
-void OrdenEspecifico(NimheP G, u32 *x){
+void OrdenEspecifico(NimheP G, u32 *x) {
+    u32 x_copia[G->cantVertices];
+    memcpy(x_copia, x, G->cantVertices * sizeof(u32));
     OrdenNatural(G);
     u32 i = 0;
-    bool* Xusados = calloc(G->cantVertices, sizeof(bool));
-    while(i < G->cantVertices){
-        if(x[i] >= G->cantVertices) {
+    VerticeP tmp;
+    bool *Xusados = calloc(G->cantVertices, sizeof(bool));
+    while (i < G->cantVertices) {
+        if (x_copia[i] >= G->cantVertices) {
             printf("x tiene elementos mas grandes que la cantidad de vertices\n");
             return;
         }
-        if(!Xusados[x[i]])
+        if (!Xusados[x[i]])
             Xusados[x[i]] = true;
         else {
             printf("dos elementos en x iguales\n");
             return;
         }
+
+        tmp = G->hashList->orden[i];
+        G->hashList->orden[i] = G->hashList->orden[x_copia[i]];
+        G->hashList->orden[x_copia[i]] = tmp;
+        for (u32 j = i; j < G->cantVertices; j++) {
+            if (x_copia[j] == i) {
+                x_copia[j] = x_copia[i];
+                break;
+            }
+        }
         i++;
     }
     free(Xusados);
-    VerticeP tmp;
-    tmp = G->hashList->orden[i];
-    G->hashList->orden[i] = G->hashList->orden[x[i]];
-    G->hashList->orden[x[i]] = tmp;
-    for(u32 j = i; j <= G->cantVertices; j++){
-        if(x[j] == i){
-            x[j] = x[i];
-            break;
-        }
-    }
 }

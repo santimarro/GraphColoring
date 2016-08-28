@@ -12,20 +12,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc8bde94-a835-42a6-b61e-1a9e6a467fab" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lux2" afterPath="$PROJECT_DIR$/lux2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/matem-tica-discreta-ii.iml" afterPath="$PROJECT_DIR$/.idea/matem-tica-discreta-ii.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/Nimhe.c" afterPath="$PROJECT_DIR$/apifiles/Nimhe.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/Nimhe.h" afterPath="$PROJECT_DIR$/apifiles/Nimhe.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/ToDo.c" afterPath="$PROJECT_DIR$/apifiles/ToDo.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/greedy.c" afterPath="$PROJECT_DIR$/apifiles/greedy.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/greedy.h" afterPath="$PROJECT_DIR$/apifiles/greedy.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/hashlink.c" afterPath="$PROJECT_DIR$/apifiles/hashlink.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/hashlink.h" afterPath="$PROJECT_DIR$/apifiles/hashlink.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/lados.c" afterPath="$PROJECT_DIR$/apifiles/lados.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/lados.h" afterPath="$PROJECT_DIR$/apifiles/lados.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/sort.c" afterPath="$PROJECT_DIR$/apifiles/sort.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/vSt.c" afterPath="$PROJECT_DIR$/apifiles/vSt.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apifiles/vSt.h" afterPath="$PROJECT_DIR$/apifiles/vSt.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dirmain/main.c" afterPath="$PROJECT_DIR$/dirmain/main.c" />
     </list>
     <ignored path="matem-tica-discreta-ii.iws" />
@@ -47,11 +39,97 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="hashlink.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="hashlink.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apifiles/hashlink.c">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="67">
+              <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mainAguilarMorales.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dirmain/mainAguilarMorales.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="92" column="38" selection-start-line="92" selection-start-column="27" selection-end-line="92" selection-end-column="38" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sort.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apifiles/sort.h">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
+              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="greedy.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apifiles/greedy.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Nimhe.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apifiles/Nimhe.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Nimhe.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apifiles/Nimhe.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="72" column="14" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sort.c" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apifiles/sort.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="195" column="0" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dirmain/main.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lados.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apifiles/lados.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -60,8 +138,8 @@
       <file leaf-file-name="greedy.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apifiles/greedy.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+            <state relative-caret-position="165">
+              <caret line="11" column="3" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -92,7 +170,6 @@
         <option value="$PROJECT_DIR$/hashlink.c" />
         <option value="$PROJECT_DIR$/hashlink.h" />
         <option value="$PROJECT_DIR$/apifiles/graph.h" />
-        <option value="$PROJECT_DIR$/apifiles/greedy.h" />
         <option value="$PROJECT_DIR$/apifiles/sort.h" />
         <option value="$PROJECT_DIR$/apifiles/graph.c" />
         <option value="$PROJECT_DIR$/apifiles/ToDo.c" />
@@ -101,12 +178,14 @@
         <option value="$PROJECT_DIR$/apifiles/lados.h" />
         <option value="$PROJECT_DIR$/apifiles/lados.c" />
         <option value="$PROJECT_DIR$/apifiles/hashlink.h" />
-        <option value="$PROJECT_DIR$/apifiles/sort.c" />
-        <option value="$PROJECT_DIR$/dirmain/main.c" />
         <option value="$PROJECT_DIR$/apifiles/Nimhe.h" />
-        <option value="$PROJECT_DIR$/apifiles/Nimhe.c" />
         <option value="$PROJECT_DIR$/apifiles/greedy.c" />
+        <option value="$PROJECT_DIR$/apifiles/greedy.h" />
+        <option value="$PROJECT_DIR$/dirmain/mainAguilarMorales.c" />
+        <option value="$PROJECT_DIR$/dirmain/main.c" />
+        <option value="$PROJECT_DIR$/apifiles/Nimhe.c" />
         <option value="$PROJECT_DIR$/apifiles/hashlink.c" />
+        <option value="$PROJECT_DIR$/apifiles/sort.c" />
       </list>
     </option>
   </component>
@@ -452,14 +531,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apifiles/greedy.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apifiles/hashlink.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -513,41 +584,12 @@
     <entry file="file://$PROJECT_DIR$/lados.h" />
     <entry file="file://$PROJECT_DIR$/hashlink.c" />
     <entry file="file://$PROJECT_DIR$/sort.c" />
-    <entry file="file://$PROJECT_DIR$/apifiles/greedy.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apifiles/graph.c" />
-    <entry file="file://$PROJECT_DIR$/apifiles/sort.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apifiles/graph.h" />
     <entry file="file://$PROJECT_DIR$/apifiles/ToDo.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="56" selection-start-line="2" selection-start-column="56" selection-end-line="2" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apifiles/lados.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dirmain/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -562,23 +604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apifiles/sort.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="146" column="34" selection-start-line="146" selection-start-column="34" selection-end-line="146" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apifiles/Nimhe.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -598,26 +623,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apifiles/Nimhe.c">
+    <entry file="file://$PROJECT_DIR$/apifiles/lados.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+        <state relative-caret-position="375">
+          <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apifiles/greedy.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+        <state relative-caret-position="165">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="3" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apifiles/Nimhe.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apifiles/hashlink.c">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dirmain/main.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apifiles/greedy.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dirmain/mainAguilarMorales.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="92" column="38" selection-start-line="92" selection-start-column="27" selection-end-line="92" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apifiles/sort.h">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="61" column="25" selection-start-line="61" selection-start-column="25" selection-end-line="61" selection-end-column="25" />
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apifiles/Nimhe.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="72" column="14" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apifiles/sort.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="195" column="0" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
           <folding />
         </state>
       </provider>

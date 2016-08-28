@@ -4,4 +4,4 @@
 #include "Nimhe.h"
 #include <string.h>
 
-void greedy(NimheP G);
+u32 greedy(NimheP G);

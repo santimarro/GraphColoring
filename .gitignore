@@ -2,4 +2,5 @@ KM.txt
 CMakeLists.txt
 PP
 perf.data
-perd.data.old
+perf.data.old
+perf.*

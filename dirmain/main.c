@@ -5,10 +5,10 @@ int main(void) {
 
     NimheP G = NuevoNimhe();
 
-    //HashEnumerarGrafo(G->hashList, G->cantVertices);
-
-    //HashEnumerarGrafo(G->hashList, G->cantVertices);
     greedy(G);
+
+    OrdenNatural(G);
+
     printf("Colores usados: %d \n", CantidadDeColores(G));
 
     /*
@@ -18,10 +18,9 @@ int main(void) {
         printf("%u, ", G->hashList->orden[i]->nombreV);
     }
     printf(".\n");
-    
+
     u32 x[] = {4,0,3,2,2};
 
-    //OrdenEspecifico(G, x);
 
     printf("Segundo orden: \n");
 

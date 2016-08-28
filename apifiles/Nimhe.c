@@ -67,7 +67,7 @@ NimheP NuevoNimhe() {
                 if(!HashAgregar(n, m, grafo->hashList)) {
                     printf("LADO YA EXISTE\n");
                 }
-                printf("Iteracion: %u. Cantidad total: %u\n", i, cantl - 1);
+                //printf("Iteracion: %u. Cantidad total: %u\n", i, cantl - 1);
             }
         }
         else {
@@ -76,7 +76,7 @@ NimheP NuevoNimhe() {
         }
     }
     // Guardo una lista de vertices para ordenar.
-    memcpy(grafo->hashList->orden, grafo->hashList->vertices, cantv*sizeof(VerticeSt));
+    //memcpy(grafo->hashList->orden, grafo->hashList->vertices, cantv*sizeof(VerticeP));
     free(input);
     printf("TERMINO DE CARGAR\n");
     return grafo;
