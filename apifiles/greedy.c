@@ -34,13 +34,7 @@ u32 greedy(NimheP G) {
             for (int i = G->hashList->heads_ida[vertice->hashV];i != -1 && q < cantVecinos; i = G->hashList->next_ida[i]) {
                 q++;
                 if(i != -1) {
-
-                    if (VerticesIguales(vertice, ObtenerVerticeX(G->hashList->data[i]))) {
-                        vecino = ObtenerVerticeY(G->hashList->data[i]);
-                    }
-                    else
-                        vecino = ObtenerVerticeX(G->hashList->data[i]);
-
+                    vecino = ObtenerVerticeY(G->hashList->data[i]);
                     color = vecino->colorV;
                     //color = ColorDelVertice(vecino);
                     if (color != 0) {
@@ -52,13 +46,7 @@ u32 greedy(NimheP G) {
             for (int i = G->hashList->heads_vuelta[vertice->hashV];i != -1 && q < cantVecinos; i = G->hashList->next_vuelta[i]) {
                 q++;
                 if(i != -1) {
-
-                    if (VerticesIguales(vertice, ObtenerVerticeX(G->hashList->data[i]))) {
-                        vecino = ObtenerVerticeY(G->hashList->data[i]);
-                    }
-                    else
-                        vecino = ObtenerVerticeX(G->hashList->data[i]);
-
+                    vecino = ObtenerVerticeX(G->hashList->data[i]);
                     color = vecino->colorV;
                     //color = ColorDelVertice(vecino);
                     if (color != 0) {
@@ -81,7 +69,7 @@ u32 greedy(NimheP G) {
 
             // Reseteamos el array de colores disponibles a falso
             for (u32 i = 0; i < cantVecinos; i++) {
-                usado[i] = false;
+                usado[i] = false; //TODO Chequear esto qeu esta remil mal
             }
         }
     }
