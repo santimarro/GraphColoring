@@ -5,14 +5,16 @@
 
 typedef unsigned int u32;
 
+typedef struct VerticeSt *VerticeP;
+
 struct VerticeSt {
     u32 nombreV;
     u32 gradoV;
     u32 colorV;
     u32 hashV;
+    VerticeP *vecinos;
 };
 
-typedef struct VerticeSt *VerticeP;
 
 VerticeP NuevoVertice(u32 n);
 /*

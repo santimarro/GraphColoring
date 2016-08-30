@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "hashlink.h"
 
 typedef unsigned int u32;
 
@@ -11,7 +10,9 @@ struct NimheSt {
     u32 cantVertices;
     u32 cantLados;
     u32 cantcolor;
-    hashList hashList;
+    VerticeSt *vertices;
+    VerticeP *orden;
+    bool *vertices_usados;
 };
 
 typedef struct NimheSt *NimheP;
@@ -41,3 +42,7 @@ u32 CantidadDeColores(NimheP G);
 struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i);
 
 struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i);
+
+u32 HashNombre(u32 hash, NimheP G);
+
+VerticeP AgregarLado(NimheP G, u32 z);

@@ -1,17 +1,18 @@
 
-#include "../apifiles/sort.h"
+#include "../apifiles/Nimhe.h"
 
 int main(void) {
 
     NimheP G = NuevoNimhe();
 
+    /*
     greedy(G);
 
     OrdenNatural(G);
 
     printf("Colores usados: %d \n", CantidadDeColores(G));
 
-    /*
+    
     printf("Numero de vertices de color %u: %u\n", 1, ImprimirVerticesDeColor(G, 1));
     printf("Primer orden: \n");
     for(u32 i = 0; i < G->cantVertices; i++) {

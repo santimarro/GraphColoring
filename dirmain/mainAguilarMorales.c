@@ -90,13 +90,16 @@ int main() {
     printf("\n");
     printf("====Comenzando Greedy Iterado 1001 veces====\n\n");
 
-    OrdenEspecifico(nimhe, mejor_orden);
+    //OrdenEspecifico(nimhe, mejor_orden);
     greedy(nimhe);
 
+    
+    
     u32 a, b, c, d;
     a = b = c = d = 0;
 
     for (u32 i = 0; i != 1001; ++i) {
+        
         u32 numero_random = ((u32) rand() % 16) + 1; // 1 <= numero_random <= 16
 
         if (numero_random <= 8) {
@@ -112,13 +115,13 @@ int main() {
             ReordenAleatorioRestringido(nimhe);
             ++d;
         }
-
+                
         cantidad_de_colores = min(cantidad_de_colores, greedy(nimhe));
     }
 
     Revierte(nimhe);
+
     cantidad_de_colores = min(cantidad_de_colores, greedy(nimhe));
-    printf("Mejor coloreo con Greedy iterado 1001 veces: %u colores\n"
-           "(%u CG,%u GC, %d R, %d RAR)",
-           cantidad_de_colores, a, b, c, d);
+    printf("Mejor coloreo con Greedy iterado 1001 veces: %u colores\n",
+           cantidad_de_colores);
 }

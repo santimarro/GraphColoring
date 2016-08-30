@@ -32,6 +32,16 @@ bool VerticesIguales (VerticeP x, VerticeP y) {
         return false;
 }
 
+bool AgregarVecino(VerticeP x, VerticeP y) {
+    if(x->vecinos[x->gradoV + 1] != NULL) {
+        x->gradoV++;
+        x->vecinos[x.gradoV] = y;
+    }
+    else {
+        //realloc de x.vecinos dandole 5 lugares más.
+    }
+}
+
 
 void DestruirVertice(VerticeP x) {
     free(x);

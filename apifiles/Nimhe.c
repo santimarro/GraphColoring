@@ -49,9 +49,13 @@ NimheP NuevoNimhe() {
     // Completo los campos del grafo.
     grafo->cantVertices = cantv;
     grafo->cantLados = cantl;
-    grafo->hashList = HashNuevaHash(cantv, cantl);
+    grafo->vertices = malloc(cantv*sizeof(struct VerticeSt));
+    grafo->orden = malloc(cantv*sizeof(VerticeP));
+    grafo->vertices_usados = calloc(n, sizeof(bool));
 
     u32 n, m;// Vertices de los lados que ponen en el input.
+    VerticeP xPuntero = NULL;
+    VerticeP yPuntero = NULL;
     for (u32 i = 0; i < cantl; i++) {
         // Si la linea es del largo correcto y tiene contenido.
         if(fgets(input, bufsize, stdin) != NULL) {
@@ -63,11 +67,25 @@ NimheP NuevoNimhe() {
                 return NULL;
             }
             else {
-                //Agrego el lado a la hashlist
-                if(!HashAgregar(n, m, grafo->hashList)) {
-                    printf("LADO YA EXISTE\n");
+                
+                //Agrego el lado.
+                xPuntero = AgregarLado(grafo, n);
+                yPuntero = AgregarLado(grafo, m);
+                
+                if(xPuntero != NULL)
+                    AgregarVecino(xPuntero, yPuntero);
+                else {
+                    printf("Error en la carga de lado\n");
+                    return NULL;
                 }
-                //printf("Iteracion: %u. Cantidad total: %u\n", i, cantl - 1);
+                
+                if(yPuntero != NULL)
+                    AgregarVecino(yPuntero, xPuntero);
+                else {
+                    printf("Error en la carga de lado\n");
+                    return NULL;
+                }
+                
             }
         }
         else {
@@ -146,4 +164,42 @@ struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
 struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i) {
     struct VerticeSt vecino = *HashIesimoVecino(&x, i, G->hashList);
     return vecino;
+}
+
+VerticeP AgregarLado(NimheP G, u32 z) {
+    VerticeP xPuntero = NULL;
+    u32 id_z = HashNombre(z, h);
+
+    while (G->vertices_usados[id_z]) {
+        if (G->vertices[id_z].nombreV == z) {
+            xPuntero = &G->vertices[id_z];
+            break;
+        }
+        else {
+            id_z++;
+            if (id_z == G->nvertices)
+                id_z = 0;
+        }
+    }
+    if(xPuntero == NULL) {
+        struct VerticeSt x;
+        x.nombreV = z;
+        x.colorV = 0;
+        x.gradoV = 0;
+        x.hashV = id_z;
+        G->vertices[id_z] = x;
+        xPuntero = &G->vertices[id_z];
+        G->vertices_usados[id_z] = true;
+        G->orden[id_z] = xPuntero;
+    }
+    return xPuntero;
+}
+
+u32 HashNombre(u32 hash, NimheP G) {
+    hash ^= (hash >> 16);
+    hash *= 0x85ebca6b;
+    hash ^= (hash >> 13);
+    hash *= 0xc2b2ae35;
+    hash ^= (hash >> 16);
+    return hash % G->cantVertices;
 }
