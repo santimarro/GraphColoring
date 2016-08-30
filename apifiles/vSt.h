@@ -12,11 +12,12 @@ struct VerticeSt {
     u32 gradoV;
     u32 colorV;
     u32 hashV;
+    u32 capacidad;
     VerticeP *vecinos;
 };
 
 
-VerticeP NuevoVertice(u32 n);
+struct VerticeSt NuevoVertice(u32 n, u32 id);
 /*
  * Devuelve un nuevo vértice 'n' de color 0 y con grado 0.
  */
@@ -47,3 +48,4 @@ bool VerticesIguales (VerticeP x, VerticeP y);
 /*
  * Compara la igualdad de ambos vertices.
  */
+void AgregarVecino(VerticeP x, VerticeP y);

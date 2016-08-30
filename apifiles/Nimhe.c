@@ -49,9 +49,9 @@ NimheP NuevoNimhe() {
     // Completo los campos del grafo.
     grafo->cantVertices = cantv;
     grafo->cantLados = cantl;
-    grafo->vertices = malloc(cantv*sizeof(struct VerticeSt));
-    grafo->orden = malloc(cantv*sizeof(VerticeP));
-    grafo->vertices_usados = calloc(n, sizeof(bool));
+    grafo->vertices = calloc(cantv,sizeof(struct VerticeSt));
+    //grafo->orden = malloc(cantv*sizeof(VerticeP));
+    grafo->vertices_usados = calloc(cantv, sizeof(bool));
 
     u32 n, m;// Vertices de los lados que ponen en el input.
     VerticeP xPuntero = NULL;
@@ -101,17 +101,20 @@ NimheP NuevoNimhe() {
 }
 
 int DestruirNimhe(NimheP G) {
-    // Destruyo la hashList y luego libero memoria
-    DestruirHashList(G->hashList);
+    
+    free(G->vertices);
+    //free(G->orden);
+    free(G->vertices_usados);
     free(G);
     return 1;
 }
-
+/*
 void ImprimirVecinosDelVertice(struct VerticeSt x, NimheP G) {
     HashEnumerar(&x, G->hashList);
 }
 
 // Funciones para extraer informacion de grafo.
+
 
 u32 NumeroDeVertices(NimheP G) {
     return G->cantVertices;
@@ -165,10 +168,12 @@ struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i) {
     struct VerticeSt vecino = *HashIesimoVecino(&x, i, G->hashList);
     return vecino;
 }
+*/
 
 VerticeP AgregarLado(NimheP G, u32 z) {
     VerticeP xPuntero = NULL;
-    u32 id_z = HashNombre(z, h);
+    u32 n = G->cantVertices;
+    u32 id_z = HashNombre(z, n);
 
     while (G->vertices_usados[id_z]) {
         if (G->vertices[id_z].nombreV == z) {
@@ -177,29 +182,26 @@ VerticeP AgregarLado(NimheP G, u32 z) {
         }
         else {
             id_z++;
-            if (id_z == G->nvertices)
+            if (id_z == n)
                 id_z = 0;
         }
     }
     if(xPuntero == NULL) {
-        struct VerticeSt x;
-        x.nombreV = z;
-        x.colorV = 0;
-        x.gradoV = 0;
-        x.hashV = id_z;
+        struct VerticeSt x = NuevoVertice(z, id_z);
         G->vertices[id_z] = x;
         xPuntero = &G->vertices[id_z];
         G->vertices_usados[id_z] = true;
-        G->orden[id_z] = xPuntero;
+        //G->orden[id_z] = xPuntero;
     }
+    
     return xPuntero;
 }
 
-u32 HashNombre(u32 hash, NimheP G) {
+u32 HashNombre(u32 hash, u32 n) {
     hash ^= (hash >> 16);
     hash *= 0x85ebca6b;
     hash ^= (hash >> 13);
     hash *= 0xc2b2ae35;
     hash ^= (hash >> 16);
-    return hash % G->cantVertices;
+    return hash % n;
 }

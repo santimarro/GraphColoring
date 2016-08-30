@@ -1,12 +1,15 @@
 #include "vSt.h"
 
 
-VerticeP NuevoVertice(u32 n) {
-    VerticeP v = malloc(sizeof(struct VerticeSt));
-    v->nombreV = n;
-    v->gradoV = 0;
-    v->colorV = 0;
-    return(v);
+struct VerticeSt NuevoVertice(u32 n, u32 id) {
+    struct VerticeSt x;
+	x.nombreV = n;
+	x.colorV = 0;
+	x.gradoV = 0;
+	x.hashV = id;
+    x.capacidad = 5;
+	x.vecinos = malloc((x.capacidad)*sizeof(VerticeP));
+    return(x);
 }
 
 u32 ColorDelVertice(struct VerticeSt x) {
@@ -32,17 +35,23 @@ bool VerticesIguales (VerticeP x, VerticeP y) {
         return false;
 }
 
-bool AgregarVecino(VerticeP x, VerticeP y) {
-    if(x->vecinos[x->gradoV + 1] != NULL) {
-        x->gradoV++;
-        x->vecinos[x.gradoV] = y;
+void AgregarVecino(VerticeP x, VerticeP y) {
+    u32 grado = x->gradoV;
+    if(grado == x->capacidad) {
+
+		VerticeP *vecinos;
+        vecinos = realloc(x->vecinos, (x->capacidad + 5)*sizeof(VerticeP));
+        x->capacidad += 5;
+		x->vecinos = vecinos;
+        
+        //realloc de x->vecinos dandole 5 lugares más.
     }
-    else {
-        //realloc de x.vecinos dandole 5 lugares más.
-    }
+    x->vecinos[x->gradoV] = y;
+    x->gradoV++;
 }
 
 
 void DestruirVertice(VerticeP x) {
+	free(x->vecinos);
     free(x);
 }

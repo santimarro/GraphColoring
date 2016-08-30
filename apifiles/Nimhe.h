@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-
+#include "vSt.h"
 
 typedef unsigned int u32;
 
@@ -10,8 +10,8 @@ struct NimheSt {
     u32 cantVertices;
     u32 cantLados;
     u32 cantcolor;
-    VerticeSt *vertices;
-    VerticeP *orden;
+    struct VerticeSt *vertices;
+    //VerticeP *orden;
     bool *vertices_usados;
 };
 
@@ -43,6 +43,6 @@ struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i);
 
 struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i);
 
-u32 HashNombre(u32 hash, NimheP G);
+u32 HashNombre(u32 hash, u32 n);
 
 VerticeP AgregarLado(NimheP G, u32 z);
