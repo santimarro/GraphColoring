@@ -55,7 +55,7 @@ int main() {
             x[j] = temporal;
         }
 
-        OrdenEspecifico(nimhe, x);
+        OrdenNatural(nimhe);
         cantidad_de_colores = greedy(nimhe);
 
         if (cantidad_de_colores < mejor_cantidad_de_colores) {
@@ -97,11 +97,14 @@ int main() {
     
     u32 a, b, c, d;
     a = b = c = d = 0;
+    //u32 t1 = 0;
+    //u32 t2 = 0;
 
     for (u32 i = 0; i != 1001; ++i) {
+        //printf("Iteracion: %u\n", i);
         
         u32 numero_random = ((u32) rand() % 16) + 1; // 1 <= numero_random <= 16
-
+        //t1 = time(NULL);
         if (numero_random <= 8) {
             ChicoGrande(nimhe);
             ++a;
@@ -112,11 +115,15 @@ int main() {
             Revierte(nimhe);
             ++c;
         } else if (numero_random == 16) {
-            ReordenAleatorioRestringido(nimhe);
+            //ReordenAleatorioRestringido(nimhe);
             ++d;
         }
-                
+        //t2 = time(NULL);
+        //printf("Orden en: %u\n", t2 -t1);
+        //t1 = time(NULL);
         cantidad_de_colores = min(cantidad_de_colores, greedy(nimhe));
+        //t2 = time(NULL);
+        //printf("Greedy en: %u\n", t2 - t1);
     }
 
     Revierte(nimhe);

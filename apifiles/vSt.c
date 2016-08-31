@@ -26,6 +26,7 @@ u32 NombreDelVertice(struct VerticeSt x) {
 
 void CambiaColorA(struct VerticeSt x, u32 i) {
     x.colorV = i;
+    return;
 }
 
 bool VerticesIguales (VerticeP x, VerticeP y) {

@@ -50,7 +50,7 @@ NimheP NuevoNimhe() {
     grafo->cantVertices = cantv;
     grafo->cantLados = cantl;
     grafo->vertices = calloc(cantv,sizeof(struct VerticeSt));
-    //grafo->orden = malloc(cantv*sizeof(VerticeP));
+    grafo->orden = malloc(cantv*sizeof(VerticeP));
     grafo->vertices_usados = calloc(cantv, sizeof(bool));
 
     u32 n, m;// Vertices de los lados que ponen en el input.
@@ -103,18 +103,22 @@ NimheP NuevoNimhe() {
 int DestruirNimhe(NimheP G) {
     
     free(G->vertices);
-    //free(G->orden);
+    free(G->orden);
     free(G->vertices_usados);
     free(G);
     return 1;
 }
-/*
+
 void ImprimirVecinosDelVertice(struct VerticeSt x, NimheP G) {
-    HashEnumerar(&x, G->hashList);
+    for (u32 i = 0; i < x.gradoV; i++) {
+        printf("%u,", x.vecinos[i]->nombreV);
+    }
+    u32 cantidad = G->cantLados;
+    cantidad++;
+    printf(".");
 }
 
 // Funciones para extraer informacion de grafo.
-
 
 u32 NumeroDeVertices(NimheP G) {
     return G->cantVertices;
@@ -127,7 +131,7 @@ u32 NumeroDeLados(NimheP G) {
 u32 NumeroVerticesDeColor(NimheP G, u32 i) {
     u32 result = 0;
     for(u32 h = 0; h < G->cantVertices; h++){
-        if(G->hashList->vertices[h].colorV == i) {
+        if(G->vertices[h].colorV == i) {
             result++;
         }
     }
@@ -139,9 +143,9 @@ u32 ImprimirVerticesDeColor(NimheP G, u32 i) {
     printf("Vertices de Color %u: ", i);
     bool flag = false;//Flag que se vuelve verdadera si existe un vertices con el color i.
     for(u32 h = 0; h < G->cantVertices; h++){
-        if(G->hashList->vertices[h].colorV == i) {
+        if(G->vertices[h].colorV == i) {
             printf(", ");
-            printf("%u", G->hashList->vertices[h].nombreV);
+            printf("%u", G->vertices[h].nombreV);
             result++;
             flag = true;
         }
@@ -161,14 +165,16 @@ u32 CantidadDeColores(NimheP G) {
 }
 
 struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
-    return *G->hashList->orden[i];
+    return *G->orden[i];
 }
 
-struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i) {
-    struct VerticeSt vecino = *HashIesimoVecino(&x, i, G->hashList);
+/*struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i) {
+    u32 cantidad = G->cantLados;
+    cantidad++;
+    struct VerticeSt vecino = &(x.vecinos[i]);
     return vecino;
-}
-*/
+}*/
+
 
 VerticeP AgregarLado(NimheP G, u32 z) {
     VerticeP xPuntero = NULL;
@@ -191,7 +197,7 @@ VerticeP AgregarLado(NimheP G, u32 z) {
         G->vertices[id_z] = x;
         xPuntero = &G->vertices[id_z];
         G->vertices_usados[id_z] = true;
-        //G->orden[id_z] = xPuntero;
+        G->orden[id_z] = xPuntero;
     }
     
     return xPuntero;

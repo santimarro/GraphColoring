@@ -64,13 +64,13 @@ int DecreCompColores(const void * x, const void * y) {
 }
 // Ordena los vertices en orden creciente de sus "nombres" reales
 void OrdenNatural(NimheP G) {
-	qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeP), CrecienteCompNombre);
+    qsort(G->orden, G->cantVertices, sizeof(VerticeP), CrecienteCompNombre);
 }
 
 /*Ordena los vertices de G de acuerdo con el orden Welsh-Powell, es decir,
  * con los grados en orden no creciente. */
 void OrdenWelshPowell(NimheP G) {
-    qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeP), CompWelshPowell);
+    qsort(G->orden, G->cantVertices, sizeof(VerticeP), CompWelshPowell);
 }
 
 
@@ -89,13 +89,13 @@ void ReordenAleatorioRestringido(NimheP G) {
     memset(available, true, (G->cantcolor + 1)*sizeof(bool));
 
     u32 CantVerticesDeColor = NumeroVerticesDeColor(G, random_number);
-    qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeP), CompReordenAleatorio);
+    qsort(G->orden, G->cantVertices, sizeof(VerticeP), CompReordenAleatorio);
     available[random_number] = false;
 
     while(i < G->cantcolor - 1) {
         random_number = rand() % G->cantcolor + 1;
         if(available[random_number]) {
-            qsort(G->hashList->orden + CantVerticesDeColor, G->cantVertices - CantVerticesDeColor, sizeof(VerticeP), CompReordenAleatorio);
+            qsort(G->orden + CantVerticesDeColor, G->cantVertices - CantVerticesDeColor, sizeof(VerticeP), CompReordenAleatorio);
             CantVerticesDeColor = CantVerticesDeColor + NumeroVerticesDeColor(G, random_number);
             available[random_number] = false;
             i++;
@@ -113,7 +113,7 @@ void GrandeChico(NimheP G) {
      memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
      u32 color;
      for(u32 i = 0; i < G->cantVertices; i++) {
-         color = G->hashList->orden[i]->colorV;
+         color = G->orden[i]->colorV;
          VerticesDeColor[color]++;
      }
      // Funcion de comparacion para Grande Chico
@@ -135,7 +135,7 @@ void GrandeChico(NimheP G) {
         else
             return 1;
     }
-     qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeP), CompGrandeChico  );
+     qsort(G->orden, NumeroDeVertices(G), sizeof(VerticeP), CompGrandeChico  );
  }
 // Igual que el anterior pero al reves los ordenes.. |Wj1| <= |Wj2|<= ...
 void ChicoGrande(NimheP G) {
@@ -143,7 +143,7 @@ void ChicoGrande(NimheP G) {
      memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
      u32 color;
      for(u32 i = 0; i < G->cantVertices; i++) {
-         color = G->hashList->orden[i]->colorV;
+         color = G->orden[i]->colorV;
          VerticesDeColor[color]++;
      }
      // Funcion de comparacion para Chico Grande
@@ -165,14 +165,14 @@ void ChicoGrande(NimheP G) {
         else
             return 1;
     }
-     qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeP), CompChicoGrande);
+     qsort(G->orden, NumeroDeVertices(G), sizeof(VerticeP), CompChicoGrande);
 }
 /*Si G esta coloreado con r colores y W 1 son los vertices coloreados con 1, W 2 los coloreados con 2,
  * etc, entonces esta funcion ordena los vertices poniendo primero los vertices de Wr (en algun orden)
  * luego los de W r−1 (en algun orden), etc. */
 
 void Revierte(NimheP G){
-   qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeP), DecreCompColores);
+   qsort(G->orden, G->cantVertices, sizeof(VerticeP), DecreCompColores);
 }
 // Leer el pdf, muy largo.
 void OrdenEspecifico(NimheP G, u32 *x) {
@@ -194,9 +194,9 @@ void OrdenEspecifico(NimheP G, u32 *x) {
             return;
         }
 
-        tmp = G->hashList->orden[i];
-        G->hashList->orden[i] = G->hashList->orden[x_copia[i]];
-        G->hashList->orden[x_copia[i]] = tmp;
+        tmp = G->orden[i];
+        G->orden[i] = G->orden[x_copia[i]];
+        G->orden[x_copia[i]] = tmp;
         for (u32 j = i; j < G->cantVertices; j++) {
             if (x_copia[j] == i) {
                 x_copia[j] = x_copia[i];

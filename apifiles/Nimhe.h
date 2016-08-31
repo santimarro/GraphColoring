@@ -11,7 +11,7 @@ struct NimheSt {
     u32 cantLados;
     u32 cantcolor;
     struct VerticeSt *vertices;
-    //VerticeP *orden;
+    VerticeP *orden;
     bool *vertices_usados;
 };
 
