@@ -55,7 +55,7 @@ int main() {
             x[j] = temporal;
         }
 
-        OrdenNatural(nimhe);
+        OrdenEspecifico(nimhe, x);
         cantidad_de_colores = greedy(nimhe);
 
         if (cantidad_de_colores < mejor_cantidad_de_colores) {
@@ -90,7 +90,7 @@ int main() {
     printf("\n");
     printf("====Comenzando Greedy Iterado 1001 veces====\n\n");
 
-    //OrdenEspecifico(nimhe, mejor_orden);
+    OrdenEspecifico(nimhe, mejor_orden);
     greedy(nimhe);
 
     

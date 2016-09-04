@@ -51,6 +51,7 @@ NimheP NuevoNimhe() {
     grafo->cantLados = cantl;
     grafo->vertices = calloc(cantv,sizeof(struct VerticeSt));
     grafo->orden = malloc(cantv*sizeof(VerticeP));
+    grafo->orden_natural = calloc(cantv, sizeof(VerticeP));
     grafo->vertices_usados = calloc(cantv, sizeof(bool));
 
     u32 n, m;// Vertices de los lados que ponen en el input.
@@ -93,8 +94,6 @@ NimheP NuevoNimhe() {
             return NULL;
         }
     }
-    // Guardo una lista de vertices para ordenar.
-    //memcpy(grafo->hashList->orden, grafo->hashList->vertices, cantv*sizeof(VerticeP));
     free(input);
     printf("TERMINO DE CARGAR\n");
     return grafo;
@@ -105,6 +104,7 @@ int DestruirNimhe(NimheP G) {
     free(G->vertices);
     free(G->orden);
     free(G->vertices_usados);
+    free(G->orden_natural);
     free(G);
     return 1;
 }
@@ -179,7 +179,7 @@ struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
 VerticeP AgregarLado(NimheP G, u32 z) {
     VerticeP xPuntero = NULL;
     u32 n = G->cantVertices;
-    u32 id_z = HashNombre(z, n);
+    u32 id_z = z % n;
 
     while (G->vertices_usados[id_z]) {
         if (G->vertices[id_z].nombreV == z) {
@@ -201,13 +201,4 @@ VerticeP AgregarLado(NimheP G, u32 z) {
     }
     
     return xPuntero;
-}
-
-u32 HashNombre(u32 hash, u32 n) {
-    hash ^= (hash >> 16);
-    hash *= 0x85ebca6b;
-    hash ^= (hash >> 13);
-    hash *= 0xc2b2ae35;
-    hash ^= (hash >> 16);
-    return hash % n;
 }

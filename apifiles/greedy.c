@@ -17,6 +17,9 @@ u32 greedy(NimheP G) {
 
     memset(usado, false, (V+1)*sizeof(bool));   // Inicializo todos los colores en false(sin usar).
 
+    for(u32 i = 0; i < V; i++) {
+        G->vertices[i].colorV = 0;
+    }
     vertice = G->orden[0];
     vertice->colorV = 1;
     //printf("Vertice: %u Color: %d\n", vertice->nombreV, vertice->colorV);

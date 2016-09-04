@@ -65,6 +65,7 @@ int DecreCompColores(const void * x, const void * y) {
 // Ordena los vertices en orden creciente de sus "nombres" reales
 void OrdenNatural(NimheP G) {
     qsort(G->orden, G->cantVertices, sizeof(VerticeP), CrecienteCompNombre);
+    memcpy(G->orden_natural, G->orden, G->cantVertices*sizeof(VerticeP));
 }
 
 /*Ordena los vertices de G de acuerdo con el orden Welsh-Powell, es decir,
@@ -176,14 +177,18 @@ void Revierte(NimheP G){
 }
 // Leer el pdf, muy largo.
 void OrdenEspecifico(NimheP G, u32 *x) {
-    u32 x_copia[G->cantVertices];
+    u32 *x_copia;
+    x_copia = malloc(G->cantVertices*sizeof(u32));
     memcpy(x_copia, x, G->cantVertices * sizeof(u32));
-    OrdenNatural(G);
-    u32 i = 0;
-    VerticeP tmp;
+    u32 n = G->cantVertices;
     bool *Xusados = calloc(G->cantVertices, sizeof(bool));
-    while (i < G->cantVertices) {
-        if (x_copia[i] >= G->cantVertices) {
+    
+    if(G->orden_natural[0] == NULL) {
+        OrdenNatural(G);
+    }
+
+    for(u32 i = 0; i < n; i++) {
+        if (x_copia[i] >= n) {
             printf("x tiene elementos mas grandes que la cantidad de vertices\n");
             return;
         }
@@ -194,16 +199,8 @@ void OrdenEspecifico(NimheP G, u32 *x) {
             return;
         }
 
-        tmp = G->orden[i];
-        G->orden[i] = G->orden[x_copia[i]];
-        G->orden[x_copia[i]] = tmp;
-        for (u32 j = i; j < G->cantVertices; j++) {
-            if (x_copia[j] == i) {
-                x_copia[j] = x_copia[i];
-                break;
-            }
-        }
-        i++;
+        G->orden[i] = G->orden_natural[x_copia[i]];
     }
+    free(x_copia);
     free(Xusados);
 }
