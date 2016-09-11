@@ -5,37 +5,34 @@
 
 #include "../apifiles/sort.h"
 
-#define min(a, b) \
-   ({ __typeof__ (a) _a = (a); \
-       __typeof__ (b) _b = (b); \
-     _a < _b ? _a : _b; })
+#define min(a,b) (((a)<(b))?(a):(b))
 
 int main() {
-    NimheP nimhe = NuevoNimhe();
+    NimheP grafo = NuevoNimhe();
 
-    if (nimhe == NULL) {
+    if (grafo == NULL) {
         printf("Error en formato de entrada\n");
         return (EXIT_FAILURE);
     }
 
     /*
-    if (Chidos(nimhe)) {
+    if (Chidos(grafo)) {
         printf("Grafo Bipartito\n");
         return (EXIT_SUCCESS);
     }*/
 
     printf("Grafo No Bipartito\n");
-    u32 semilla = (u32) time(NULL);
-    srand(semilla);
+    u32 seed = (u32) time(NULL);
+    srand(seed);
 
-    u32 cantidad_de_colores;
-    u32 cantidad_de_vertices = NumeroDeVertices(nimhe);
-    u32 mejor_cantidad_de_colores = cantidad_de_vertices;
+    u32 alduin;                      // Cantidad de colores. 
+    u32 n = NumeroDeVertices(grafo); // Cantidad de vertices del grafo
+    u32 minimos_colores = n;         // Cantidad minima de colores usados. 
 
-    u32 *x = malloc(cantidad_de_vertices * sizeof(u32));
-    u32 *mejor_orden = malloc(cantidad_de_vertices * sizeof(u32));
+    u32 *x = malloc(n * sizeof(u32));
+    u32 *mejor_orden = malloc(n * sizeof(u32));
 
-    for (u32 i = 0; i != cantidad_de_vertices; ++i)
+    for (u32 i = 0; i != n; ++i)
         x[i] = i;
 
     for (u32 i = 0; i != 10; ++i) {
@@ -47,26 +44,26 @@ int main() {
          * los ordena de manera aleatoria.
          */
 
-        for (u32 j = cantidad_de_vertices - 1; j != 0; --j) {
-            u32 numero_random = (u32) rand() % (j + 1); // 0 <= numero_random <= j
+        for (u32 j = n - 1; j != 0; --j) {
+            u32 random_number = (u32) rand() % (j + 1); // 0 <= numero_random <= j
 
-            u32 temporal = x[numero_random];
-            x[numero_random] = x[j];
-            x[j] = temporal;
+            u32 temp = x[random_number];
+            x[random_number] = x[j];
+            x[j] = temp;
         }
 
-        OrdenEspecifico(nimhe, x);
-        cantidad_de_colores = greedy(nimhe);
+        OrdenEspecifico(grafo, x);
+        alduin = Greedy(grafo);
 
-        if (cantidad_de_colores < mejor_cantidad_de_colores) {
-            mejor_cantidad_de_colores = cantidad_de_colores;
-            for (u32 k = 0; k != cantidad_de_vertices; ++k) {
-                mejor_orden[k] = x[k];
+        if (alduin < minimos_colores) {
+            minimos_colores = alduin;
+            for (u32 h = 0; h != n; ++h) {
+                mejor_orden[h] = x[h];
             }
         }
 
-        printf("coloreo aleatorio numero %u: %u colores\n", i + 1, cantidad_de_colores);
-        if (cantidad_de_colores == 3) {
+        printf("coloreo aleatorio numero %u: %u colores\n", i + 1, alduin);
+        if (alduin == 3) {
             printf("X(G)=3\n");
             free(x);
             return (EXIT_SUCCESS);
@@ -76,13 +73,13 @@ int main() {
     free(x);
     printf("\n");
 
-    OrdenWelshPowell(nimhe);
+    OrdenWelshPowell(grafo);
 
-    cantidad_de_colores = greedy(nimhe);
+    alduin = Greedy(grafo);
 
-    printf(" coloreo con Greedy en WelshPowell:%u colores\n", cantidad_de_colores);
+    printf(" coloreo con Greedy en WelshPowell:%u colores\n", alduin);
 
-    if (cantidad_de_colores == 3) {
+    if (alduin == 3) {
         printf("X(G)=3\n");
         return (EXIT_SUCCESS);
     }
@@ -90,45 +87,38 @@ int main() {
     printf("\n");
     printf("====Comenzando Greedy Iterado 1001 veces====\n\n");
 
-    OrdenEspecifico(nimhe, mejor_orden);
-    greedy(nimhe);
+    OrdenEspecifico(grafo, mejor_orden);
+    free(mejor_orden);
+    Greedy(grafo);
 
-    
-    
     u32 a, b, c, d;
     a = b = c = d = 0;
-    //u32 t1 = 0;
-    //u32 t2 = 0;
 
     for (u32 i = 0; i != 1001; ++i) {
-        //printf("Iteracion: %u\n", i);
         
         u32 numero_random = ((u32) rand() % 16) + 1; // 1 <= numero_random <= 16
-        //t1 = time(NULL);
         if (numero_random <= 8) {
-            ChicoGrande(nimhe);
+            ChicoGrande(grafo);
             ++a;
         } else if (numero_random <= 10) {
-            GrandeChico(nimhe);
+            GrandeChico(grafo);
             ++b;
         } else if (numero_random <= 15) {
-            Revierte(nimhe);
+            Revierte(grafo);
             ++c;
         } else if (numero_random == 16) {
-            //ReordenAleatorioRestringido(nimhe);
+            ReordenAleatorioRestringido(grafo);
             ++d;
         }
-        //t2 = time(NULL);
-        //printf("Orden en: %u\n", t2 -t1);
-        //t1 = time(NULL);
-        cantidad_de_colores = min(cantidad_de_colores, greedy(nimhe));
-        //t2 = time(NULL);
-        //printf("Greedy en: %u\n", t2 - t1);
+        alduin = min(alduin, Greedy(grafo));
     }
 
-    Revierte(nimhe);
+    Revierte(grafo);
 
-    cantidad_de_colores = min(cantidad_de_colores, greedy(nimhe));
+    alduin = min(alduin, Greedy(grafo));
     printf("Mejor coloreo con Greedy iterado 1001 veces: %u colores\n",
-           cantidad_de_colores);
+           alduin);
+    printf("(%u CG,%u GC, %u R, %u RAR)\n", a, b, c, d);
+
+    DestruirNimhe(grafo);
 }

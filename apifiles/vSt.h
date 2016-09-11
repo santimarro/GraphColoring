@@ -41,7 +41,7 @@ void CambiarColorA(struct VerticeSt x, u32 i);
 /*
  * Cambia el color del vertice a i
  */
-void DestruirVertice(VerticeP x);
+void DestruirVertice(struct VerticeSt x);
 
 
 bool VerticesIguales (VerticeP x, VerticeP y);

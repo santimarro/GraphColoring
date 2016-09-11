@@ -51,8 +51,7 @@ void AgregarVecino(VerticeP x, VerticeP y) {
     x->gradoV++;
 }
 
-
-void DestruirVertice(VerticeP x) {
-	free(x->vecinos);
-    free(x);
+// Se libera la lista de vecinos del vertice x.
+void DestruirVertice(struct VerticeSt x) {
+	free(x.vecinos);
 }

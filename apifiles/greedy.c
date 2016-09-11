@@ -8,7 +8,7 @@
  * complejidad
  */
 
-u32 greedy(NimheP G) {
+u32 Greedy(NimheP G) {
     u32 V = G->cantVertices;
     u32 color;
     u32 max_color = 0;

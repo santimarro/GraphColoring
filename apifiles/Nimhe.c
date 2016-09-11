@@ -100,7 +100,10 @@ NimheP NuevoNimhe() {
 }
 
 int DestruirNimhe(NimheP G) {
-    
+    // Se destruyen los vertices y luego se libera el resto de G
+    for(u32 i = 0; i < G->cantVertices; i++)
+        DestruirVertice(G->vertices[i]);
+
     free(G->vertices);
     free(G->orden);
     free(G->vertices_usados);
