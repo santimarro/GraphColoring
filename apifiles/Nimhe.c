@@ -183,8 +183,10 @@ VerticeP AgregarLado(NimheP G, u32 z) {
     VerticeP xPuntero = NULL;
     u32 n = G->cantVertices;
     u32 id_z = z % n;
+    u32 contador = 0;
 
-    while (G->vertices_usados[id_z]) {
+    while (G->vertices_usados[id_z] && contador < n) {
+        contador++;    
         if (G->vertices[id_z].nombreV == z) {
             xPuntero = &G->vertices[id_z];
             break;
@@ -195,6 +197,10 @@ VerticeP AgregarLado(NimheP G, u32 z) {
                 id_z = 0;
         }
     }
+    
+    if(contador == n)
+        return NULL;
+
     if(xPuntero == NULL) {
         struct VerticeSt x = NuevoVertice(z, id_z);
         G->vertices[id_z] = x;
