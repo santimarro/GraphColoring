@@ -1,12 +1,5 @@
 #define MAX(a,b) (((a)>(b))?(a):(b))
-#include "greedy.h"
-
-/*
- * Implementacion de greedy, revisar complejidad
- * Inspirada en una version de greedy encontrada en la web
- * Me gustó ya que es facil de entender pero hay que revisar su
- * complejidad
- */
+#include "Cthulhu.h"
 
 u32 Greedy(NimheP G) {
     u32 V = G->cantVertices;

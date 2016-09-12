@@ -1,5 +1,4 @@
-#include "Nimhe.h"
-#include <assert.h>
+#include "Cthulhu.h"
 
 NimheP NuevoNimhe() {
     u32 cantv, cantl;// cant = cantidad de vertices cantl = cantidad de lados
@@ -174,7 +173,7 @@ struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
 /*struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i) {
     u32 cantidad = G->cantLados;
     cantidad++;
-    struct VerticeSt vecino = &(x.vecinos[i]);
+    struct VerticeSt vecino = x.vecinos[i];
     return vecino;
 }*/
 
@@ -197,12 +196,12 @@ VerticeP AgregarLado(NimheP G, u32 z) {
                 id_z = 0;
         }
     }
-    
+
     if(contador == n)
         return NULL;
 
     if(xPuntero == NULL) {
-        struct VerticeSt x = NuevoVertice(z, id_z);
+        struct VerticeSt x = NuevoVertice(z);
         G->vertices[id_z] = x;
         xPuntero = &G->vertices[id_z];
         G->vertices_usados[id_z] = true;

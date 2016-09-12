@@ -1,4 +1,4 @@
-#include "sort.h"
+#include "Cthulhu.h"
 
 u32 random_number = 0; // numero random_number ver la funcion ReordenAleatorioRestringido.
 

@@ -1,12 +1,10 @@
-#include "vSt.h"
+#include "Cthulhu.h"
 
-
-struct VerticeSt NuevoVertice(u32 n, u32 id) {
+struct VerticeSt NuevoVertice(u32 n) {
     struct VerticeSt x;
 	x.nombreV = n;
 	x.colorV = 0;
 	x.gradoV = 0;
-	x.hashV = id;
     x.capacidad = 5;
 	x.vecinos = malloc((x.capacidad)*sizeof(VerticeP));
     return(x);
@@ -25,16 +23,11 @@ u32 NombreDelVertice(struct VerticeSt x) {
 }
 
 void CambiaColorA(struct VerticeSt x, u32 i) {
-    x.colorV = i;
+    u32 color = i;
+    x.colorV = color;
     return;
 }
 
-bool VerticesIguales (VerticeP x, VerticeP y) {
-    if (x->nombreV == y->nombreV)
-        return true;
-    else
-        return false;
-}
 
 void AgregarVecino(VerticeP x, VerticeP y) {
     u32 grado = x->gradoV;
