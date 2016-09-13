@@ -2,25 +2,23 @@
 #include <assert.h>
 
 NimheP NuevoNimhe() {
-    u32 cantv, cantl;// cant = cantidad de vertices cantl = cantidad de lados
+    u32 cantv, cantl; // cant = cantidad de vertices cantl = cantidad de lados
 
-    char *input; // Donde guardaremos cada linea de input
+    int bufsize = 80; // largo de las lineas
 
-    int bufsize = 80;// largo de las lineas
+    char input[bufsize];      // Donde guardaremos cada linea de input
 
-
-    input = (char *)malloc(bufsize * sizeof(char)); // array donde se guardan las lineas.
     input[0] = 'c';
     while (input[0] == 'c'){
-        //Pedimos lineas hasta que no sean mas comentarios
+        // Pedimos lineas hasta que no sean mas comentarios
         if(fgets(input, bufsize, stdin) == NULL) {
             printf("Error interno");
             return NULL;
         }
     }
-    // nos fijamos que la linea p venga luego de los comentarios.
+    // Nos fijamos que la linea p venga luego de los comentarios.
     if (input[0] != 'p') {
-        printf("Input invalido 3");
+        printf("Formato de entrada invalido\n");
         return NULL;
     }
     char p = 'o';
@@ -32,12 +30,12 @@ NimheP NuevoNimhe() {
 
     //Chequeo el input correcto.
     if (strncmp(edge, "edge", 4) != 0) {
-        printf("Input invalido 1\n");
+        printf("Formato de entrada invalido\n");
         return NULL;
     }
 
     if(cantv == 0 && cantl > 0) {
-        printf("Input invalido 2 \n");
+        printf("Formato de entrada invalido\n");
         return NULL;
     }
 
@@ -58,7 +56,7 @@ NimheP NuevoNimhe() {
     VerticeP xPuntero = NULL;
     VerticeP yPuntero = NULL;
     for (u32 i = 0; i < cantl; i++) {
-        // Si la linea es del largo correcto y tiene contenido.
+        // Se leen los lados pidiendo lineas de tamaño bufsize
         if(fgets(input, bufsize, stdin) != NULL) {
             // Parseo los lados.
             sscanf(input, "%c %u %u", &p, &n, &m);
@@ -90,7 +88,7 @@ NimheP NuevoNimhe() {
             }
         }
         else {
-            printf("Input invalido 4\n");
+            printf("Formato de entrada invalido\n");
             return NULL;
         }
     }
@@ -139,7 +137,7 @@ u32 NumeroVerticesDeColor(NimheP G, u32 i) {
 }
 
 u32 ImprimirVerticesDeColor(NimheP G, u32 i) {
-    u32 result = 0;
+    u32 result = 0; // Numero de vertices del 'i' color.
     printf("Vertices de Color %u: ", i);
     bool flag = false;//Flag que se vuelve verdadera si existe un vertices con el color i.
     for(u32 h = 0; h < G->cantVertices; h++){
@@ -173,14 +171,15 @@ struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
     cantidad++;
     struct VerticeSt vecino = &(x.vecinos[i]);
     return vecino;
-}*/
+}*/\
 
 
 VerticeP AgregarLado(NimheP G, u32 z) {
-    VerticeP xPuntero = NULL;
-    u32 n = G->cantVertices;
-    u32 id_z = z % n;
-
+    VerticeP xPuntero = NULL;   // Puntero a vertice
+    u32 n = G->cantVertices;    // Numero de vertices
+    u32 id_z = z % n;           // El Hash de 'z'
+    
+    // Buscamos si existe el vertice 'z', en caso que no exista, se le encuentra un lugar.
     while (G->vertices_usados[id_z]) {
         if (G->vertices[id_z].nombreV == z) {
             xPuntero = &G->vertices[id_z];
@@ -192,6 +191,7 @@ VerticeP AgregarLado(NimheP G, u32 z) {
                 id_z = 0;
         }
     }
+    // En el caso que no exista, se lo crea.
     if(xPuntero == NULL) {
         struct VerticeSt x = NuevoVertice(z, id_z);
         G->vertices[id_z] = x;

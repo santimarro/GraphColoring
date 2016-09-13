@@ -38,17 +38,18 @@ bool VerticesIguales (VerticeP x, VerticeP y) {
 
 void AgregarVecino(VerticeP x, VerticeP y) {
     u32 grado = x->gradoV;
+    //Chequeamos si tenemos memoria para poner el nuevo vecinos.
     if(grado == x->capacidad) {
-
+        
 		VerticeP *vecinos;
         vecinos = realloc(x->vecinos, (x->capacidad + 5)*sizeof(VerticeP));
         x->capacidad += 5;
 		x->vecinos = vecinos;
-        
-        //realloc de x->vecinos dandole 5 lugares más.
+		// Si no tenemos pedimos mas.
     }
     x->vecinos[x->gradoV] = y;
     x->gradoV++;
+    // Agregamos vecino y aumentamos el grado
 }
 
 

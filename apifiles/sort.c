@@ -152,7 +152,7 @@ void ChicoGrande(NimheP G) {
         VerticeP v1 = *(VerticeP*) x;
         VerticeP v2 = *(VerticeP*) y;
 
-         if(VerticesDeColor[v1->colorV] < VerticesDeColor[v2->colorV])
+        if(VerticesDeColor[v1->colorV] < VerticesDeColor[v2->colorV])
             return -1;
         else if (VerticesDeColor[v1->colorV] == VerticesDeColor[v2->colorV])
              if(v1->colorV == v2->colorV)
@@ -177,28 +177,31 @@ void Revierte(NimheP G){
 }
 // Leer el pdf, muy largo.
 void OrdenEspecifico(NimheP G, u32 *x) {
-    u32 *x_copia;
-    x_copia = malloc(G->cantVertices*sizeof(u32));
-    memcpy(x_copia, x, G->cantVertices * sizeof(u32));
-    u32 n = G->cantVertices;
-    bool *Xusados = calloc(G->cantVertices, sizeof(bool));
+    u32 *x_copia;                           // Copia del arreglo x.
+    u32 n = G->cantVertices;                // Cantidad de vertices a ordenar.
+    x_copia = malloc(n * sizeof(u32));      //  Pedimos memoria para la copia de x.
+    memcpy(x_copia, x, n * sizeof(u32));    // Copiamos la memoria de x a x_copia.
+
+    bool *Xusados = calloc(n, sizeof(bool));// Array con los vertices usados.
     
+    // Si no hicimos orden natural todavia, lo hacemos.
     if(G->orden_natural[0] == NULL) {
         OrdenNatural(G);
     }
-
+    
     for(u32 i = 0; i < n; i++) {
+        // Nos fijamos si los elementos del array son mas chico que la cantidad de elementos.
         if (x_copia[i] >= n) {
             printf("x tiene elementos mas grandes que la cantidad de vertices\n");
             return;
         }
+        // Nos fijamos que no se repitan elementos.
         if (!Xusados[x[i]])
             Xusados[x[i]] = true;
         else {
             printf("dos elementos en x iguales\n");
             return;
-        }
-
+        // Ordenamos el array.
         G->orden[i] = G->orden_natural[x_copia[i]];
     }
     free(x_copia);
