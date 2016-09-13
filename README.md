@@ -1,3 +1,4 @@
+
 # Laboratorio Discreta 2016.
 
 
@@ -79,6 +80,23 @@ La funcion _AgregarLado()_ realiza la siguiente tarea. Se le asigna un id provis
 La funcion _AgregarVecino()_ chequea si tiene capacidad para agregar un vecino a un vertice dado. Si ya esta lleno pide mas memoria y luego lo agrega al arreglo vecinos que es parte del vertice. Si no solo lo agrega.
 
 #### _El ordenamiento de sus vertices._
+
+Luego de cargar el grafo, lo ordenamos de difrentes formas. Acontinuacion explicamos cada una de ellas.
+
+_OrdenNatural()_ : Usamos la función _qsort()_ con la comparacion _CrecienteCompNombre_.Que compara los vertices por su nombre de mayor a menor. Copiamos el orden en el arreglo del grafo que se llama "orden_natural".
+
+_OrdenWelshPowell()_ : Parecido con el orden anterior utilizamos la funcion _qsort()_, esta vez usando la comparacion _CompWelshPowell()_. Que compara los grados y pone los vertices de menor grado primero.
+
+_ReordenAleatorioRestringido()_ : Esta vez usamos una variable global para guardar un numero aleatorio, que luego utilizamos en la funcion de comparacion que usamos en _qsort()_. Para generar nuestro numero aleatorio usamos la funcion _rand()_. De esta forma ordenamos los vertices eligiendo un color al azar. Hacemos esto multiples veces para que todos los vertices queden ordenados en grupos de colores elegidos al azar.
+
+_GrandeChico()_: Ordena los vertices poniendo primero los vertices cuyo color sea el mas usado  a menos usado. Utilizando la funcion _qsort()_ con la comparacion _CompGrandeChico()_.
+
+_ChicoGrande()_: Ordena los vertices poniendo primero los vertices cuyo color sea el menos usado a mas usado. Utilizando la funcion _qsort()_ con la comparacion _CompGrandeChico()_.
+
+_Revierte()_: Como dice el nombre revierte el orden de los vertices. Tambien se utiliza la funcion _qsort()_  y la funcion _DecreCompColores()_.
+
+_OrdenEspecifico()_: la funcion toma un arreglo de elementos del mismo tamaño que el grafo. Luego ordena los vertices en su orden natural con _OrdenNatural_ si el elemento  _orden_natural_ esta vacio. luego hace un loop para chequear que el iesimo elemento i no sean mas grandes que el tamaño del arreglo, tambien se fija que no este repetido. Si no hay problemas, guarda en la posicion iesima del arreglo _orden_, lo que se encuentra en el arreglo _orden_natural_ en la posicion kesima(siendo la posicion kesima el numero que corresponde a la iesima posicion de la copia del arreglo).
+
 
 #### _Coloreo usando greedy_
 
