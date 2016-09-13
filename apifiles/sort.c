@@ -1,4 +1,4 @@
-#include "sort.h"
+#include "Cthulhu.h"
 
 u32 random_number = 0; // numero random_number ver la funcion ReordenAleatorioRestringido.
 
@@ -90,14 +90,16 @@ void ReordenAleatorioRestringido(NimheP G) {
     memset(available, true, (G->cantcolor + 1)*sizeof(bool));
 
     u32 CantVerticesDeColor = NumeroVerticesDeColor(G, random_number);
+    u32 CantVerticesOrdenados = 0;
     qsort(G->orden, G->cantVertices, sizeof(VerticeP), CompReordenAleatorio);
+    CantVerticesOrdenados = CantVerticesDeColor;
     available[random_number] = false;
 
     while(i < G->cantcolor - 1) {
         random_number = rand() % G->cantcolor + 1;
         if(available[random_number]) {
-            qsort(G->orden + CantVerticesDeColor, G->cantVertices - CantVerticesDeColor, sizeof(VerticeP), CompReordenAleatorio);
-            CantVerticesDeColor = CantVerticesDeColor + NumeroVerticesDeColor(G, random_number);
+            qsort(G->orden + CantVerticesOrdenados, G->cantVertices - CantVerticesOrdenados, sizeof(VerticeP), CompReordenAleatorio);
+            CantVerticesOrdenados = CantVerticesOrdenados + NumeroVerticesDeColor(G, random_number);
             available[random_number] = false;
             i++;
         }
@@ -110,7 +112,7 @@ void ReordenAleatorioRestringido(NimheP G) {
  * luego los de Wj2 etc, donde j1,j2,..,etc son tales que |Wj1| >= |Wj2| >= ... >= |Wjr|
  */
 void GrandeChico(NimheP G) {
-     u32 VerticesDeColor[G->cantcolor + 1];
+     u32 VerticesDeColor[G->cantcolor + 1]; // Indice i indica la cantidad de vertices de color i.
      memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
      u32 color;
      for(u32 i = 0; i < G->cantVertices; i++) {

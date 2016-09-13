@@ -1,5 +1,4 @@
-#include "Nimhe.h"
-#include <assert.h>
+#include "Cthulhu.h"
 
 NimheP NuevoNimhe() {
     u32 cantv, cantl; // cant = cantidad de vertices cantl = cantidad de lados
@@ -98,7 +97,10 @@ NimheP NuevoNimhe() {
 }
 
 int DestruirNimhe(NimheP G) {
-    
+    // Se destruyen los vertices y luego se libera el resto de G
+    for(u32 i = 0; i < G->cantVertices; i++)
+        DestruirVertice(G->vertices[i]);
+
     free(G->vertices);
     free(G->orden);
     free(G->vertices_usados);
@@ -169,18 +171,20 @@ struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
 /*struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i) {
     u32 cantidad = G->cantLados;
     cantidad++;
-    struct VerticeSt vecino = &(x.vecinos[i]);
+    struct VerticeSt vecino = x.vecinos[i];
     return vecino;
 }*/\
 
 
 VerticeP AgregarLado(NimheP G, u32 z) {
+
     VerticeP xPuntero = NULL;   // Puntero a vertice
     u32 n = G->cantVertices;    // Numero de vertices
     u32 id_z = z % n;           // El Hash de 'z'
-    
+    u32 contador = 0;           //
     // Buscamos si existe el vertice 'z', en caso que no exista, se le encuentra un lugar.
-    while (G->vertices_usados[id_z]) {
+    while (G->vertices_usados[id_z] && contador < n) {
+        contador++;    
         if (G->vertices[id_z].nombreV == z) {
             xPuntero = &G->vertices[id_z];
             break;
@@ -191,9 +195,14 @@ VerticeP AgregarLado(NimheP G, u32 z) {
                 id_z = 0;
         }
     }
+
+
+    if(contador == n)
+        return NULL;
+
     // En el caso que no exista, se lo crea.
     if(xPuntero == NULL) {
-        struct VerticeSt x = NuevoVertice(z, id_z);
+        struct VerticeSt x = NuevoVertice(z);
         G->vertices[id_z] = x;
         xPuntero = &G->vertices[id_z];
         G->vertices_usados[id_z] = true;

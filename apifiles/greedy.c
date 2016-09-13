@@ -1,5 +1,5 @@
 #define MAX(a,b) (((a)>(b))?(a):(b))
-#include "greedy.h"
+#include "Cthulhu.h"
 
 /*
  * Implementacion de greedy, revisar complejidad
@@ -14,6 +14,7 @@ u32 greedy(NimheP G) {
     u32 max_color = 0;          //Variable para guardar la cantidad maxima de colores
     VerticeP vertice = NULL;    //Puntero para guardar vertice
     bool usado[n+1];            // Array para indicar colores no disponibles. n+1 ya que el color 0 no se usa
+
 
     memset(usado, false, (n+1)*sizeof(bool));   // Inicializo todos los colores en false(sin usar).
     
