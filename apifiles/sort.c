@@ -1,4 +1,4 @@
-#include "sort.h"
+#include "Cthulhu.h"
 
 u32 random_number = 0; // numero random_number ver la funcion ReordenAleatorioRestringido.
 
@@ -64,13 +64,14 @@ int DecreCompColores(const void * x, const void * y) {
 }
 // Ordena los vertices en orden creciente de sus "nombres" reales
 void OrdenNatural(NimheP G) {
-	qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeP), CrecienteCompNombre);
+    qsort(G->orden, G->cantVertices, sizeof(VerticeP), CrecienteCompNombre);
+    memcpy(G->orden_natural, G->orden, G->cantVertices*sizeof(VerticeP));
 }
 
 /*Ordena los vertices de G de acuerdo con el orden Welsh-Powell, es decir,
  * con los grados en orden no creciente. */
 void OrdenWelshPowell(NimheP G) {
-    qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeP), CompWelshPowell);
+    qsort(G->orden, G->cantVertices, sizeof(VerticeP), CompWelshPowell);
 }
 
 
@@ -89,14 +90,16 @@ void ReordenAleatorioRestringido(NimheP G) {
     memset(available, true, (G->cantcolor + 1)*sizeof(bool));
 
     u32 CantVerticesDeColor = NumeroVerticesDeColor(G, random_number);
-    qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeP), CompReordenAleatorio);
+    u32 CantVerticesOrdenados = 0;
+    qsort(G->orden, G->cantVertices, sizeof(VerticeP), CompReordenAleatorio);
+    CantVerticesOrdenados = CantVerticesDeColor;
     available[random_number] = false;
 
     while(i < G->cantcolor - 1) {
         random_number = rand() % G->cantcolor + 1;
         if(available[random_number]) {
-            qsort(G->hashList->orden + CantVerticesDeColor, G->cantVertices - CantVerticesDeColor, sizeof(VerticeP), CompReordenAleatorio);
-            CantVerticesDeColor = CantVerticesDeColor + NumeroVerticesDeColor(G, random_number);
+            qsort(G->orden + CantVerticesOrdenados, G->cantVertices - CantVerticesOrdenados, sizeof(VerticeP), CompReordenAleatorio);
+            CantVerticesOrdenados = CantVerticesOrdenados + NumeroVerticesDeColor(G, random_number);
             available[random_number] = false;
             i++;
         }
@@ -109,11 +112,11 @@ void ReordenAleatorioRestringido(NimheP G) {
  * luego los de Wj2 etc, donde j1,j2,..,etc son tales que |Wj1| >= |Wj2| >= ... >= |Wjr|
  */
 void GrandeChico(NimheP G) {
-     u32 VerticesDeColor[G->cantcolor + 1];
+     u32 VerticesDeColor[G->cantcolor + 1]; // Indice i indica la cantidad de vertices de color i.
      memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
      u32 color;
      for(u32 i = 0; i < G->cantVertices; i++) {
-         color = G->hashList->orden[i]->colorV;
+         color = G->orden[i]->colorV;
          VerticesDeColor[color]++;
      }
      // Funcion de comparacion para Grande Chico
@@ -135,7 +138,7 @@ void GrandeChico(NimheP G) {
         else
             return 1;
     }
-     qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeP), CompGrandeChico  );
+     qsort(G->orden, NumeroDeVertices(G), sizeof(VerticeP), CompGrandeChico  );
  }
 // Igual que el anterior pero al reves los ordenes.. |Wj1| <= |Wj2|<= ...
 void ChicoGrande(NimheP G) {
@@ -143,7 +146,7 @@ void ChicoGrande(NimheP G) {
      memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
      u32 color;
      for(u32 i = 0; i < G->cantVertices; i++) {
-         color = G->hashList->orden[i]->colorV;
+         color = G->orden[i]->colorV;
          VerticesDeColor[color]++;
      }
      // Funcion de comparacion para Chico Grande
@@ -151,7 +154,7 @@ void ChicoGrande(NimheP G) {
         VerticeP v1 = *(VerticeP*) x;
         VerticeP v2 = *(VerticeP*) y;
 
-         if(VerticesDeColor[v1->colorV] < VerticesDeColor[v2->colorV])
+        if(VerticesDeColor[v1->colorV] < VerticesDeColor[v2->colorV])
             return -1;
         else if (VerticesDeColor[v1->colorV] == VerticesDeColor[v2->colorV])
              if(v1->colorV == v2->colorV)
@@ -165,45 +168,45 @@ void ChicoGrande(NimheP G) {
         else
             return 1;
     }
-     qsort(G->hashList->orden, NumeroDeVertices(G), sizeof(VerticeP), CompChicoGrande);
+     qsort(G->orden, NumeroDeVertices(G), sizeof(VerticeP), CompChicoGrande);
 }
 /*Si G esta coloreado con r colores y W 1 son los vertices coloreados con 1, W 2 los coloreados con 2,
  * etc, entonces esta funcion ordena los vertices poniendo primero los vertices de Wr (en algun orden)
  * luego los de W r−1 (en algun orden), etc. */
 
 void Revierte(NimheP G){
-   qsort(G->hashList->orden, G->cantVertices, sizeof(VerticeP), DecreCompColores);
+   qsort(G->orden, G->cantVertices, sizeof(VerticeP), DecreCompColores);
 }
 // Leer el pdf, muy largo.
 void OrdenEspecifico(NimheP G, u32 *x) {
-    u32 x_copia[G->cantVertices];
-    memcpy(x_copia, x, G->cantVertices * sizeof(u32));
-    OrdenNatural(G);
-    u32 i = 0;
-    VerticeP tmp;
-    bool *Xusados = calloc(G->cantVertices, sizeof(bool));
-    while (i < G->cantVertices) {
-        if (x_copia[i] >= G->cantVertices) {
+    u32 *x_copia;                           // Copia del arreglo x.
+    u32 n = G->cantVertices;                // Cantidad de vertices a ordenar.
+    x_copia = malloc(n * sizeof(u32));      //  Pedimos memoria para la copia de x.
+    memcpy(x_copia, x, n * sizeof(u32));    // Copiamos la memoria de x a x_copia.
+
+    bool *Xusados = calloc(n, sizeof(bool));// Array con los vertices usados.
+    
+    // Si no hicimos orden natural todavia, lo hacemos.
+    if(G->orden_natural[0] == NULL) {
+        OrdenNatural(G);
+    }
+    
+    for(u32 i = 0; i < n; i++) {
+        // Nos fijamos si los elementos del array son mas chico que la cantidad de elementos.
+        if (x_copia[i] >= n) {
             printf("x tiene elementos mas grandes que la cantidad de vertices\n");
             return;
         }
+        // Nos fijamos que no se repitan elementos.
         if (!Xusados[x[i]])
             Xusados[x[i]] = true;
         else {
             printf("dos elementos en x iguales\n");
             return;
+        // Ordenamos el array.
         }
-
-        tmp = G->hashList->orden[i];
-        G->hashList->orden[i] = G->hashList->orden[x_copia[i]];
-        G->hashList->orden[x_copia[i]] = tmp;
-        for (u32 j = i; j < G->cantVertices; j++) {
-            if (x_copia[j] == i) {
-                x_copia[j] = x_copia[i];
-                break;
-            }
-        }
-        i++;
+        G->orden[i] = G->orden_natural[x_copia[i]];
     }
+    free(x_copia);
     free(Xusados);
 }

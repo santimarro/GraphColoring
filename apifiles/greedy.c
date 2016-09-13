@@ -1,78 +1,59 @@
-
 #define MAX(a,b) (((a)>(b))?(a):(b))
-#include "Nimhe.h"
+#include "Cthulhu.h"
 
-/*
- * Implementacion de greedy, revisar complejidad
- * Inspirada en una version de greedy encontrada en la web
- * Me gustó ya que es facil de entender pero hay que revisar su
- * complejidad
- */
+u32 Greedy(NimheP G) {
+    u32 n = G->cantVertices;    // Cantidad de vertices
+    u32 color;                  // Variable para guardar color actual del vecino
+    u32 max_color = 0;          //Variable para guardar la cantidad maxima de colores
+    VerticeP vertice = NULL;    //Puntero para guardar vertice
+    bool usado[n+1];            // Array para indicar colores no disponibles. n+1 ya que el color 0 no se usa
+    u32 grado = 0;
 
-u32 greedy(NimheP G) {
-    u32 V = G->cantVertices;
-    u32 color;
-    u32 max_color = 0;
-    u32 q = 0; // Variable para contar los vecinos.
-    VerticeP vertice = NULL;
-    VerticeP vecino = NULL;
-    bool usado[V+1];          // Array para indicar colores no disponibles. V+1 ya que el color 0 no se usa
 
-    memset(usado, false, (V+1)*sizeof(bool));   // Inicializo todos los colores en false(sin usar).
-
-    vertice = G->hashList->orden[0];
-    vertice->colorV = 1;
-    //printf("Vertice: %u Color: %d\n", vertice->nombreV, vertice->colorV);
-    //CambiarColorA(vertice, 1);
-    for (u32 u = 1; u < V; u++) {
-        // Revisamos los vecinos del vertice u
+    memset(usado, false, (n+1)*sizeof(bool));   // Inicializo todos los colores en false(sin usar).
+    
+    // For para resetear los colores de los vertices
+    for(u32 i = 0; i < n; i++) {
+        G->vertices[i].colorV = 0;
+    }
+    vertice = G->orden[0]; // Obtenemos el puntero al primer vertice en el orden
+    vertice->colorV = 1;   // Le ponemos el primer color. 
+    for (u32 u = 1; u < n; u++) {
+        // Revisamos los vecinos del vertice u.
         // y flageamos los colores usados.
-        vertice = G->hashList->orden[u];
-        if (vertice != NULL) {
-            u32 cantVecinos = vertice->gradoV;
-            
-            for (int i = G->hashList->heads_ida[vertice->hashV];i != -1 && q < cantVecinos; i = G->hashList->next_ida[i]) {
-                q++;
-                if(i != -1) {
-                    vecino = ObtenerVerticeY(G->hashList->data[i]);
-                    color = vecino->colorV;
-                    //color = ColorDelVertice(vecino);
-                    if (color != 0) {
-                        usado[color] = true;
-                    }
-                }
-            }
+        vertice = G->orden[u]; // Obtenemos el u'esimo vertice.
+        
+        grado = vertice->gradoV;  // Guardamos en grado el grado del vertice u.
+        
+        // For para recorrer los vecinos, donde chequeamos el color de cada uno de ellos
+        // y marcamos el mismo como usado (siempre y cuando este coloreado).
+        for (u32 i = 0; i < grado; i++) {
 
-            for (int i = G->hashList->heads_vuelta[vertice->hashV];i != -1 && q < cantVecinos; i = G->hashList->next_vuelta[i]) {
-                q++;
-                if(i != -1) {
-                    vecino = ObtenerVerticeX(G->hashList->data[i]);
-                    color = vecino->colorV;
-                    //color = ColorDelVertice(vecino);
-                    if (color != 0) {
-                        usado[color] = true;
-                    }
-                }
+            color = vertice->vecinos[i]->colorV;
+            if (color) {
+                usado[color] = true;
             }
-            q = 0;
-            //Busquemos el primero color disponible
-            for (u32 j = 1; j < V + 1; j++) {
-                if (!usado[j]) {
-                    // Le ponemos el color encontrado
-                    vertice->colorV = j;
-                    max_color = MAX(max_color, j);
-                    G->cantcolor = max_color;
-                    //printf("Vertice: %u Color: %d\n", vertice->nombreV, j);
-                    break;
-                }
-            }
+        }
 
-            // Reseteamos el array de colores disponibles a falso
-            for (u32 i = 0; i < cantVecinos; i++) {
-                usado[i] = false; //TODO Chequear esto qeu esta remil mal
+        //Busquemos el primer color disponible
+        for (u32 j = 1; j < n + 1; j++) {
+            if (!usado[j]) {
+                // Le ponemos el color encontrado
+                vertice->colorV = j;
+                max_color = MAX(max_color, j);
+                break;
+            }
+        }
+
+        // Reseteamos el array de colores disponibles a falso
+       for (u32 i = 0; i < grado; i++) {
+            color = vertice->vecinos[i]->colorV;
+            if (color) {
+                usado[color] = false;
             }
         }
     }
+    G->cantcolor = max_color;
     return max_color;
 }
 
