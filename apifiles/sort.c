@@ -204,6 +204,7 @@ void OrdenEspecifico(NimheP G, u32 *x) {
             printf("dos elementos en x iguales\n");
             return;
         // Ordenamos el array.
+        }
         G->orden[i] = G->orden_natural[x_copia[i]];
     }
     free(x_copia);

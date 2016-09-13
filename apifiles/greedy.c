@@ -8,7 +8,7 @@
  * complejidad
  */
 
-u32 greedy(NimheP G) {
+u32 Greedy(NimheP G) {
     u32 n = G->cantVertices;    // Cantidad de vertices
     u32 color;                  // Variable para guardar color actual del vecino
     u32 max_color = 0;          //Variable para guardar la cantidad maxima de colores

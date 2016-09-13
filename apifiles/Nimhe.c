@@ -91,7 +91,7 @@ NimheP NuevoNimhe() {
             return NULL;
         }
     }
-    free(input);
+    
     printf("TERMINO DE CARGAR\n");
     return grafo;
 }
