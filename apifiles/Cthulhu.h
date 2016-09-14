@@ -1,6 +1,7 @@
 #ifndef CTHULHU_H_
 #define CTHULHU_H_
 
+#define MAX_SIZE    25        // Define maximum length of the queue
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -92,5 +93,19 @@ void ChicoGrande(NimheP G);
 void Revierte(NimheP G);
 
 void OrdenEspecifico(NimheP G, u32* x);
+
+
+// List Function Prototypes
+struct QueueSt {
+    int head;
+    int tail;
+    VerticeP *theQueue;
+};
+
+struct QueueSt CrearQueue(u32 size);                        // Initialize the queue
+void DestruirQueue(struct QueueSt q);       // Remove all items from the queue
+void Enqueue(struct QueueSt q, VerticeP v); // Enter an item in the queue
+VerticeP Dequeue(struct QueueSt q);         // Remove an item from the queue
+u32 isEmpty(struct QueueSt q);             // Return true if queue is empty
 
 #endif  // CTHULHU_H_

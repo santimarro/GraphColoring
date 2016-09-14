@@ -57,5 +57,55 @@ u32 Greedy(NimheP G) {
     return max_color;
 }
 
+int Chidos(NimheP G) {
+    VerticeP x;
+    VerticeP vertice = NULL;
+    struct QueueSt q;
+    u32 indice = 0;
+    u32 n = G->cantVertices;
+    // For para resetear los colores de los vertices
+    for(u32 i = 0; i < n; i++) {
+        G->orden[i]->colorV = 0;
+    }
+
+    u32 vertices_coloreados = 0;
+
+    while (vertices_coloreados < n) {
+        x = G->orden[indice];
+        if(x->colorV == 0) {
+            x->colorV = 1;
+            vertices_coloreados++;
+            q = CrearQueue(n);
+            q.tail++;
+            Enqueue(q, x);
+            while(!isEmpty(q)) {
+                q.head++;
+                vertice = Dequeue(q);
+                for(u32 i = 0; i < vertice->gradoV; i++) {
+                    if(vertice->vecinos[i]->colorV == 0) {
+                        q.tail++;
+                        Enqueue(q, vertice->vecinos[i]);
+                        vertice->vecinos[i]->colorV = (3 - vertice->colorV);
+                        vertices_coloreados++;
+                    }
+                }
+            }
+        }
+        indice++;
+    }
+
+    DestruirQueue(q);
+
+    for(u32 i = 0; i < n; i++) {
+        vertice = G->orden[i];
+        for(u32 j = 0; j < vertice->gradoV; j++) {
+            if(vertice->colorV == vertice->vecinos[j]->colorV)
+                return 0;
+        }
+    }
+
+    return 1;
+}
+
 
  

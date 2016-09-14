@@ -15,11 +15,11 @@ int main() {
         return (EXIT_FAILURE);
     }
 
-    /*
+    
     if (Chidos(grafo)) {
         printf("Grafo Bipartito\n");
         return (EXIT_SUCCESS);
-    }*/
+    }
 
     printf("Grafo No Bipartito\n");
     u32 seed = (u32) time(NULL);
@@ -63,11 +63,6 @@ int main() {
         }
 
         printf("coloreo aleatorio numero %u: %u colores\n", i + 1, alduin);
-        if (alduin == 3) {
-            printf("X(G)=3\n");
-            free(x);
-            return (EXIT_SUCCESS);
-        }
     }
 
     free(x);
