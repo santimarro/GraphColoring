@@ -1,6 +1,37 @@
 #define MAX(a,b) (((a)>(b))?(a):(b))
 #include "Cthulhu.h"
 
+struct QueueSt CrearQueue(u32 size) {
+    struct QueueSt q;
+    q.head = q.tail = -1;
+    q.theQueue = malloc(size*sizeof(VerticeP));
+    return q;
+}
+
+void DestruirQueue(struct QueueSt q) {
+    free(q.theQueue);
+}
+
+void Enqueue(struct QueueSt q, VerticeP v) {
+    // Increment tail index
+    q.tail++;
+    // Add the item to the Queue
+    q.theQueue[q.tail] = v;
+    return;
+}
+
+VerticeP Dequeue(struct QueueSt q) {
+    VerticeP v;
+    q.head++;
+    v = q.theQueue[q.head]; // Get character to return
+    return v;           // Return popped character
+}
+
+u32 isEmpty(struct QueueSt q) {
+    return (q.head == q.tail);
+}
+
+
 u32 Greedy(NimheP G) {
     u32 n = G->cantVertices;    // Cantidad de vertices
     u32 color;                  // Variable para guardar color actual del vecino
@@ -76,26 +107,27 @@ int Chidos(NimheP G) {
             x->colorV = 1;
             vertices_coloreados++;
             q = CrearQueue(n);
-            q.tail++;
             Enqueue(q, x);
             while(!isEmpty(q)) {
-                q.head++;
                 vertice = Dequeue(q);
                 for(u32 i = 0; i < vertice->gradoV; i++) {
                     if(vertice->vecinos[i]->colorV == 0) {
-                        q.tail++;
                         Enqueue(q, vertice->vecinos[i]);
                         vertice->vecinos[i]->colorV = (3 - vertice->colorV);
                         vertices_coloreados++;
                     }
+                    else if (vertice->colorV == vertice->vecinos[i]->colorV) {
+                        DestruirQueue(q);
+                        return 0;
+                    }
                 }
             }
+            DestruirQueue(q);
         }
         indice++;
     }
 
-    DestruirQueue(q);
-
+    
     for(u32 i = 0; i < n; i++) {
         vertice = G->orden[i];
         for(u32 j = 0; j < vertice->gradoV; j++) {
