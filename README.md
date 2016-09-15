@@ -1,4 +1,3 @@
-
 # Laboratorio Discreta 2016.
 
 
@@ -101,3 +100,8 @@ _OrdenEspecifico()_: la funcion toma un arreglo de elementos del mismo tamaño q
 #### _Coloreo usando greedy_
 
 ### Preguntas Puntuales.
+ >¿Como hicieron para resolver el problema de que los vertices pueden ser cualquier u32? Dependiendo de como resuelvan este problema, deben responder otras preguntas
+ 
+ Para resolver este problema decidimos utilizar un array donde guardamos los vertices a medida que se va leyendo el grafo. La primera complicación que tuvimos fue el hecho de saber si un vertice que estabamos leyendo ya lo habiamos leido antes. Recorrer el array no era una opción debido a su complejidad.
+ 
+ Para ello resolvimos utilizar un array de booleanos donde su indice indica el hash del nombre del vertice. Si el array en esa posicion esta seteado en true, quiere decir que el vertice ya fue creado y no se lo crea 
