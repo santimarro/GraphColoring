@@ -110,12 +110,16 @@ int DestruirNimhe(NimheP G) {
 }
 
 void ImprimirVecinosDelVertice(struct VerticeSt x, NimheP G) {
-    for (u32 i = 0; i < x.gradoV; i++) {
-        printf("%u,", x.vecinos[i]->nombreV);
+    u32 grado = x.gradoV;
+    
+    for (u32 i = 0; i < grado; i++) {
+        printf("%u", x.vecinos[i]->nombreV);
+        if(i != grado - 1)
+            printf(",");
     }
     u32 cantidad = G->cantLados;
     cantidad++;
-    printf(".");
+    printf(".\n");
 }
 
 // Funciones para extraer informacion de grafo.
@@ -140,21 +144,28 @@ u32 NumeroVerticesDeColor(NimheP G, u32 i) {
 
 u32 ImprimirVerticesDeColor(NimheP G, u32 i) {
     u32 result = 0; // Numero de vertices del 'i' color.
+    u32 size = NumeroVerticesDeColor(G, i);
+    u32 result_[size];
     printf("Vertices de Color %u: ", i);
+
     bool flag = false;//Flag que se vuelve verdadera si existe un vertices con el color i.
     for(u32 h = 0; h < G->cantVertices; h++){
         if(G->vertices[h].colorV == i) {
-            printf(", ");
-            printf("%u", G->vertices[h].nombreV);
+            result_[result] = G->vertices[h].nombreV;
             result++;
             flag = true;
         }
     }
     if(flag) {
-        printf(".");
+        for(u32 j = 0; j < size; j++) {
+            printf("%u", result_[j]);
+            if(j != size - 1)
+                printf(", ");
+        }
+        printf(".\n");
     }
     else {
-        printf("No hay vertices de color %u: ", i);
+        printf("No hay vertices de color %u: \n", i);
     }
     return result;
 }
@@ -168,12 +179,16 @@ struct VerticeSt IesimoVerticeEnElOrden(NimheP G, u32 i) {
     return *G->orden[i];
 }
 
-/*struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i) {
+struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i) {
     u32 cantidad = G->cantLados;
     cantidad++;
-    struct VerticeSt vecino = x.vecinos[i];
-    return vecino;
-}*/\
+    if(x.vecinos[i] != 0)
+        return *x.vecinos[i];
+    else {
+        printf("Vertice %u no tiene %u vecinos o mas\n", x.nombreV, i);
+        return x;
+    }
+}
 
 
 VerticeP AgregarLado(NimheP G, u32 z) {
