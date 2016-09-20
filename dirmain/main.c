@@ -1,5 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-#include "../apifiles/sort.h"
+
+#include "../apifiles/Cthulhu.h"
 
 int main(void) {
 
@@ -7,9 +11,29 @@ int main(void) {
 
     Greedy(G);
 
-    printf("Colores usados: %d \n", CantidadDeColores(G));
+    printf("Cantidad de vertices: %u \n", NumeroDeVertices(G));
+    printf("Cantidad de lados: %u \n", NumeroDeLados(G));
 
-    printf("Primer orden: \n");
+    printf("Colores usados: %u \n", CantidadDeColores(G));
+
+
+    ImprimirVecinosDelVertice(G->vertices[0], G);
+    ImprimirVecinosDelVertice(G->vertices[1], G);
+    
+    u32 numero = 1;
+
+//    scanf("%u", &numero);
+    printf("Numero de vertices de color %u: %u\n", numero, NumeroVerticesDeColor(G, numero));
+
+    ImprimirVerticesDeColor(G, numero);
+
+
+    struct VerticeSt x = IesimoVerticeEnElOrden(G, numero);
+
+    struct VerticeSt y = IesimoVecino(G, x, numero);
+    printf("%u\n", y.nombreV);
+
+    /*printf("Primer orden: \n");
     for(u32 i = 0; i < G->cantVertices; i++) {
         printf("%u, ", G->orden[i]->colorV);
     }
@@ -24,7 +48,7 @@ int main(void) {
         printf("%u, ", G->orden[i]->colorV);
     }
     printf(".\n");
-
+    */
     DestruirNimhe(G);
 
     return 1;
