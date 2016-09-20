@@ -88,6 +88,7 @@ La función _AgregarLado()_ realiza la siguiente tarea. Se le asigna un id provi
 
 La función _AgregarVecino()_ chequea si tiene capacidad para agregar un vecino a un vértice dado. Si ya esta lleno pide mas memoria y luego lo agrega al arreglo vecinos que es parte del vértice. Si no solo lo agrega.
 
+
 #### _El ordenamiento de sus vértices._
 
 Luego de cargar el grafo, lo ordenamos de diferentes formas. A continuación explicamos cada una de ellas.
@@ -106,8 +107,23 @@ _Revierte()_: Como dice el nombre revierte el orden de los vértices. También s
 
 _OrdenEspecifico()_: la función toma un arreglo de elementos del mismo tamaño que el grafo. Luego ordena los vértices en su orden natural con _OrdenNatural_ si el elemento  _orden_natural_ esta vacio. Luego hace un loop para chequear que el iesimo elemento no sea mas grande que el tamaño del arreglo, también se fija que no este repetido. Si no hay problemas, guarda en la posición iesima del arreglo _orden_, lo que se encuentra en el arreglo _orden_natural_ en la posición k-esima(siendo la posición k-esima el numero que corresponde a la iesima posición de la copia del arreglo).
 
+Parte fundamental de los algoritmos de ordenación es la función _q_sort_, asi que le daremos una breve explicación a continuacion.
 
-#### _Coloreo usando Greedy_
+La funcion _q_sort_ toma la informacion de un arreglo de elementos, su tamaño y cantidad como tambien una función para comparar cada uno. Si la funcion que se usa para comparar devuelve 0 no se hace nada, pues lo dos elementos son iguales. Pero si la funcion devuelve 1 o -1 entonces q_sort lo mueve a la derecha o izquierda correspondientmente.
+
+#### _Main y el coloreo de los vertices._
+
+Empezamos cargando el grafo con la funcion _NuevoNihme()_. Para luego correr _Chidos_  y verificar si el grafo es bipartito o no, si el grafo es bipartito el program termina. Si el grafo no es bipartito, entonces corremos 10 veces el algoritmo de _Greedy()_ usando los ordenes que duelve la funcion _OrdenEspecifico()_. Cada vez que ordenamos pasamos un arreglo x hecho al azar. Siempre fijandonos cual fue el mejor coloreo y su orden.
+luego de los 10 _Greedy_, ordenamos una vez mas usando Welsh-Powell y si con ese orden el coloreo es 3. Entonces el programa termina y devuelve que 3 es el mejor coloreo posible. Si es distinto de 3, se realizan 1001 _Greedy()_ mas con ordenes elegidos al azar.
+
+- 50% para el orden _ChicoGrande()_.
+- 12,5% para el orden _GrandeChico()_.
+- 31,25% para el orden _Revierte()_.
+- 6,25% para el orden _ReordenAleatorioRestringido()_.
+
+A continuacion se duvuelve el mejor coloreo y la cantidad de veces que se uso cada orden.
+
+Para las funciones _Greedy()_ y _Chidos()_ se usaron los algoritmos que fueron enseñados en la catedra.
 
 ### Preguntas Puntuales.
  >¿Como hicieron para resolver el problema de que los vértices pueden ser cualquier u32? Dependiendo de como resuelvan este problema, deben responder otras preguntas
