@@ -116,10 +116,12 @@ La función _qsort()_ toma la información de un arreglo de elementos, su tamañ
 Empezamos cargando el grafo con la función _NuevoNihme()_. Para luego correr _Chidos_  y verificar si el grafo es bipartito o no, si el grafo es bipartito el programa termina. Si el grafo no es bipartito, entonces corremos 10 veces el algoritmo de _Greedy()_ usando los ordenes que devuelve la función _OrdenEspecifico()_. Cada vez que ordenamos pasamos un arreglo x hecho al azar. Siempre fijándonos cual fue el mejor coloreo y su orden.
 luego de los 10 _Greedy_, ordenamos una vez mas usando Welsh-Powell y si con ese orden el coloreo es 3. Entonces el programa termina y devuelve que 3 es el mejor coloreo posible. Si es distinto de 3, se realizan 1001 _Greedy()_ mas con ordenes elegidos al azar.
 
-- 50% para el orden _ChicoGrande()_.
-- 12,5% para el orden _GrandeChico()_.
-- 31,25% para el orden _Revierte()_.
-- 6,25% para el orden _ReordenAleatorioRestringido()_.
+| Orden | Posibilidad de uso |
+| ------ | ----------- |
+| _ChicoGrande()_  | 50%. |
+| _GrandeChico()_ | 12.5%. |
+| _Revierte()_   | 31.25%. |
+| _ReordenAleatorioRestringido()_ | 6.25% |
 
 A continuación se devuelve el mejor coloreo y la cantidad de veces que se uso cada orden.
 
