@@ -107,9 +107,9 @@ _Revierte()_: Como dice el nombre revierte el orden de los vértices. También s
 
 _OrdenEspecifico()_: la función toma un arreglo de elementos del mismo tamaño que el grafo. Luego ordena los vértices en su orden natural con _OrdenNatural_ si el elemento  _orden_natural_ esta vació. Luego hace un loop para chequear que el iesimo elemento no sea mas grande que el tamaño del arreglo, también se fija que no este repetido. Si no hay problemas, guarda en la posición iesima del arreglo _orden_, lo que se encuentra en el arreglo _orden_natural_ en la posición k-esima(siendo la posición k-esima el numero que corresponde a la iesima posición de la copia del arreglo).
 
-Parte fundamental de los algoritmos de ordenación es la función _q_sort()_, así que le daremos una breve explicación a continuación.
+Parte fundamental de los algoritmos de ordenación es la función _qsort()_, así que le daremos una breve explicación a continuación.
 
-La función _q_sort()_ toma la información de un arreglo de elementos, su tamaño y cantidad como también una función para comparar cada uno. Si la función que se usa para comparar devuelve 0 no se hace nada, pues lo dos elementos son iguales. Pero si la función devuelve 1 o -1 entonces _q_sort()_ lo mueve a la derecha o izquierda correspondientemente.
+La función _qsort()_ toma la información de un arreglo de elementos, su tamaño y cantidad como también una función para comparar cada uno. Si la función que se usa para comparar devuelve 0 no se hace nada, pues lo dos elementos son iguales. Pero si la función devuelve 1 o -1 entonces _qsort()_ lo mueve a la derecha o izquierda correspondientemente.
 
 #### _Main y el coloreo de los vertices._
 
