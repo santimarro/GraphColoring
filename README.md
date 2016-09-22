@@ -166,7 +166,9 @@ Para implementar Greedy decidimos utilizar las siguientes variables:
     bool usado[n+1];            // Array para indicar colores no disponibles. n+1 ya que el color 0 no se usa
     u32 grado = 0;
 ```
+
 Antes de arrancar con el coloreo, despintamos todos los vertices del grafo, recorriendo uno por uno y asignandole _0_ a su _color_.
+
 
  ```c
     // For para resetear los colores de los vertices
@@ -174,7 +176,10 @@ Antes de arrancar con el coloreo, despintamos todos los vertices del grafo, reco
         G->vertices[i].colorV = 0;
     }
 ```
+
 Luego obtenemos el primer vértice según, el orden determinado, y lo copiamos en la variable _vertice_. Con el mismo lo coloreamos con el primer color, _1_, y luego empezamos a colorear los siguientes vertices en el orden determinado.
+
+
  ```c
     vertice = G->orden[0]; // Obtenemos el puntero al primer vertice en el orden
     vertice->colorV = 1;   // Le ponemos el primer color.
@@ -183,7 +188,10 @@ Luego obtenemos el primer vértice según, el orden determinado, y lo copiamos e
         // y flageamos los colores usados.
         vertice = G->orden[u]; // Obtenemos el u'esimo vertice.
 ```
+
 Mientras se va copiando vertice a vertice, se guarda su grado en la variable _grado_, para luego recorrer todos sus vecinos.
+
+
  ```c
         grado = vertice->gradoV;  // Guardamos en grado el grado del vertice u.
         
@@ -191,7 +199,10 @@ Mientras se va copiando vertice a vertice, se guarda su grado en la variable _gr
         // y marcamos el mismo como usado (siempre y cuando este coloreado).
         for (u32 i = 0; i < grado; i++) {
 ```
+
 Luego, a medida que vemos cada vecino, si está coloreado, asignamos en la posición del color, en el array de _bool_ _usado_, como true. Esto nos servirá para poder elegir el color del _vertice_
+
+
  ```c
             color = vertice->vecinos[i]->colorV;
             if (color) {
@@ -199,7 +210,10 @@ Luego, a medida que vemos cada vecino, si está coloreado, asignamos en la posic
             }
         }
 ```
+
 Al terminar de recorrer todos los vecinos del _vertice_ actual, se busca por el primer color no usado en el array _usado_. Dicho color será el que se le asigne al _vertice_. También vamos guardando en _max_color_ el maximo color utilizado hasta el momento.
+
+
  ```c
         //Busquemos el primer color disponible
         for (u32 j = 1; j < n + 1; j++) {
@@ -211,7 +225,9 @@ Al terminar de recorrer todos los vecinos del _vertice_ actual, se busca por el 
             }
         }
 ```
+
 Para poder seguir con el algoritmo, se resetea el array _usado_ y se repite con el proximo _vertice_ en el orden especificado.
+
 
  ```c
         // Reseteamos el array de colores disponibles a falso
