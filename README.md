@@ -224,10 +224,12 @@ Para poder seguir con el algoritmo, se resetea el array _usado_ y se repite con 
     }
 ```
 Para finalizar, se guarda la cantidad de colores utilizados en _G->cantcolor_ y se devuelve como resultado la misma.
+
  ```c
+
     G->cantcolor = max_color;
     return max_color;
 }
 ```
 
-Analizando el algoritmo y su complejidad, vemos que se comporta en _O(n*m)_, donde _n_ es la cantidad de vertices y _m_ la cantidad de lados. Esto se debe a que, por cada vertice (n veces), se recorren todos su _k_ vecinos, donde _k_, puede ser _m_. 
+Analizando el algoritmo y su complejidad, vemos que se comporta en _O(n*m)_, donde _n_ es la cantidad de vertices y _m_ la cantidad de lados. Esto se debe a que, por cada vertice (n veces), se recorren todos su _k_ vecinos, donde _k_, puede ser _m_.
