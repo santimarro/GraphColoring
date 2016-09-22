@@ -155,4 +155,79 @@ Side note: Para facilitar la función _OrdenEspecifico_ también tenemos un arra
 
 >Cómo implementaron Greedy? ¿Qué estrategia usaron para lograr reducir la velocidad?
 
-La complejidad de Greedy termina siendo O(n.m) donde el pero caso "n" es igual a "m". Para lograr el coloreo, agarramos el primer vértice y lo coloreamos. Luego nos movemos a uno de sus vecinos y revisamos los colores de los vecinos de este nuevo vértice, guardándolos en un arreglo a los que estén usados. Luego buscamos un color que no este usado y se lo asignamos. hacemos esto hasta que todos los vértices estén coloreados. 
+La complejidad de Greedy termina siendo O(n.m) donde el pero caso "n" es igual a "m". Para lograr el coloreo, agarramos el primer vértice y lo coloreamos. Luego nos movemos a uno de sus vecinos y revisamos los colores de los vecinos de este nuevo vértice, guardándolos en un arreglo a los que estén usados. Luego buscamos un color que no este usado y se lo asignamos. hacemos esto hasta que todos los vértices estén coloreados.
+Para implementar Greedy decidimos utilizar las siguientes variables:
+
+ ```c
+    u32 n = G->cantVertices;    // Cantidad de vertices del grafo
+    u32 color;                  // Variable para guardar color actual del vecino
+    u32 max_color = 0;          //Variable para guardar la cantidad maxima de colores
+    VerticeP vertice = NULL;    //Puntero para guardar vertice
+    bool usado[n+1];            // Array para indicar colores no disponibles. n+1 ya que el color 0 no se usa
+    u32 grado = 0;
+```
+Antes de arrancar con el coloreo, despintamos todos los vertices del grafo, recorriendo uno por uno y asignandole _0_ a su _color_.
+
+ ```c
+    // For para resetear los colores de los vertices
+    for(u32 i = 0; i < n; i++) {
+        G->vertices[i].colorV = 0;
+    }
+```
+Luego obtenemos el primer vértice según, el orden determinado, y lo copiamos en la variable _vertice_. Con el mismo lo coloreamos con el primer color, _1_, y luego empezamos a colorear los siguientes vertices en el orden determinado.
+ ```c
+    vertice = G->orden[0]; // Obtenemos el puntero al primer vertice en el orden
+    vertice->colorV = 1;   // Le ponemos el primer color.
+    for (u32 u = 1; u < n; u++) {
+        // Revisamos los vecinos del vertice u.
+        // y flageamos los colores usados.
+        vertice = G->orden[u]; // Obtenemos el u'esimo vertice.
+```
+Mientras se va copiando vertice a vertice, se guarda su grado en la variable _grado_, para luego recorrer todos sus vecinos.
+ ```c
+        grado = vertice->gradoV;  // Guardamos en grado el grado del vertice u.
+        
+        // For para recorrer los vecinos, donde chequeamos el color de cada uno de ellos
+        // y marcamos el mismo como usado (siempre y cuando este coloreado).
+        for (u32 i = 0; i < grado; i++) {
+```
+Luego, a medida que vemos cada vecino, si está coloreado, asignamos en la posición del color, en el array de _bool_ _usado_, como true. Esto nos servirá para poder elegir el color del _vertice_
+ ```c
+            color = vertice->vecinos[i]->colorV;
+            if (color) {
+                usado[color] = true;
+            }
+        }
+```
+Al terminar de recorrer todos los vecinos del _vertice_ actual, se busca por el primer color no usado en el array _usado_. Dicho color será el que se le asigne al _vertice_. También vamos guardando en _max_color_ el maximo color utilizado hasta el momento.
+ ```c
+        //Busquemos el primer color disponible
+        for (u32 j = 1; j < n + 1; j++) {
+            if (!usado[j]) {
+                // Le ponemos el color encontrado
+                vertice->colorV = j;
+                max_color = MAX(max_color, j);
+                break;
+            }
+        }
+```
+Para poder seguir con el algoritmo, se resetea el array _usado_ y se repite con el proximo _vertice_ en el orden especificado.
+
+ ```c
+        // Reseteamos el array de colores disponibles a falso
+       for (u32 i = 0; i < grado; i++) {
+            color = vertice->vecinos[i]->colorV;
+            if (color) {
+                usado[color] = false;
+            }
+        }
+    }
+```
+Para finalizar, se guarda la cantidad de colores utilizados en _G->cantcolor_ y se devuelve como resultado la misma.
+ ```c
+    G->cantcolor = max_color;
+    return max_color;
+}
+```
+
+Analizando el algoritmo y su complejidad, vemos que se comporta en _O(n*m)_, donde _n_ es la cantidad de vertices y _m_ la cantidad de lados. Esto se debe a que, por cada vertice (n veces), se recorren todos su _k_ vecinos, donde _k_, puede ser _m_. 
