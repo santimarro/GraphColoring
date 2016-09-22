@@ -1,7 +1,7 @@
 #include "Cthulhu.h"
 
 u32 random_number = 0; // numero random_number ver la funcion ReordenAleatorioRestringido.
-
+u32 *VerticesDeColor; // Indice i indica la cantidad de vertices de color i.
 //funcion auxiliar para comparar nombres de vertices.
 int CrecienteCompNombre(const void * x, const void * y) {
     VerticeP v1 = *(VerticeP*) x;
@@ -111,16 +111,10 @@ void ReordenAleatorioRestringido(NimheP G) {
  * W2 los con 2, etc. Se ordena poniendo primero los vertices de Wj1(en algun orden)
  * luego los de Wj2 etc, donde j1,j2,..,etc son tales que |Wj1| >= |Wj2| >= ... >= |Wjr|
  */
-void GrandeChico(NimheP G) {
-     u32 VerticesDeColor[G->cantcolor + 1]; // Indice i indica la cantidad de vertices de color i.
-     memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
-     u32 color;
-     for(u32 i = 0; i < G->cantVertices; i++) {
-         color = G->orden[i]->colorV;
-         VerticesDeColor[color]++;
-     }
-     // Funcion de comparacion para Grande Chico
-     int CompGrandeChico(const void * x, const void * y) {
+
+ 
+ // Funcion de comparacion para Grande Chico
+int CompGrandeChico(const void * x, const void * y) {
         VerticeP v1 = *(VerticeP*) x;
         VerticeP v2 = *(VerticeP*) y;
 
@@ -137,20 +131,22 @@ void GrandeChico(NimheP G) {
              }
         else
             return 1;
-    }
-     qsort(G->orden, NumeroDeVertices(G), sizeof(VerticeP), CompGrandeChico  );
- }
-// Igual que el anterior pero al reves los ordenes.. |Wj1| <= |Wj2|<= ...
-void ChicoGrande(NimheP G) {
-     u32 VerticesDeColor[G->cantcolor + 1];
+}
+
+void GrandeChico(NimheP G) {
      memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
      u32 color;
      for(u32 i = 0; i < G->cantVertices; i++) {
          color = G->orden[i]->colorV;
          VerticesDeColor[color]++;
      }
-     // Funcion de comparacion para Chico Grande
-     int CompChicoGrande(const void * x, const void * y) {
+     qsort(G->orden, NumeroDeVertices(G), sizeof(VerticeP), CompGrandeChico);
+     free(VerticesDeColor);
+ }
+
+
+ // Funcion de comparacion para Chico Grande
+int CompChicoGrande(const void * x, const void * y) {
         VerticeP v1 = *(VerticeP*) x;
         VerticeP v2 = *(VerticeP*) y;
 
@@ -167,9 +163,22 @@ void ChicoGrande(NimheP G) {
              }
         else
             return 1;
-    }
-     qsort(G->orden, NumeroDeVertices(G), sizeof(VerticeP), CompChicoGrande);
 }
+// Igual que el anterior pero al reves los ordenes.. |Wj1| <= |Wj2|<= ...
+void ChicoGrande(NimheP G) {
+     u32 VerticesDeColor[G->cantcolor + 1];
+     memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
+     u32 color;
+     for(u32 i = 0; i < G->cantVertices; i++) {
+         color = G->orden[i]->colorV;
+         VerticesDeColor[color]++;
+     }
+     qsort(G->orden, NumeroDeVertices(G), sizeof(VerticeP), CompChicoGrande);
+     free(VerticesDeColor);
+}
+
+
+
 /*Si G esta coloreado con r colores y W 1 son los vertices coloreados con 1, W 2 los coloreados con 2,
  * etc, entonces esta funcion ordena los vertices poniendo primero los vertices de Wr (en algun orden)
  * luego los de W r−1 (en algun orden), etc. */
