@@ -108,14 +108,19 @@ int Chidos(NimheP G) {
             vertices_coloreados++;
             q = CrearQueue(n);
             Enqueue(q, x);
+            // While para desencolar q
             while(!isEmpty(q)) {
                 vertice = Dequeue(q);
+                // For para recorrer los vecino.
                 for(u32 i = 0; i < vertice->gradoV; i++) {
+                    // Si el vecino no tiene color, se encola y se colorea.
                     if(vertice->vecinos[i]->colorV == 0) {
                         Enqueue(q, vertice->vecinos[i]);
                         vertice->vecinos[i]->colorV = (3 - vertice->colorV);
+                        //aumento los vertices coloreados
                         vertices_coloreados++;
                     }
+                    // Si un vecino ya tenia el mismo color entonces no es bipartito. Hago return 0
                     else if (vertice->colorV == vertice->vecinos[i]->colorV) {
                         DestruirQueue(q);
                         return 0;
@@ -127,7 +132,7 @@ int Chidos(NimheP G) {
         indice++;
     }
 
-    
+    // For que revisa que un color no se repita entre vecino
     for(u32 i = 0; i < n; i++) {
         vertice = G->orden[i];
         for(u32 j = 0; j < vertice->gradoV; j++) {
