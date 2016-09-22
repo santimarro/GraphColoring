@@ -1,11 +1,25 @@
 # Laboratorio Discreta 2016.
 
-
 Integrantes:
 
   - Santiago Marro
   - Ramiro Barraco
+## Indice
+1. Introducción.
 
+2. Especificación.
+
+  - 2.1. VerticeSt.
+  
+  - 2.2.  NihmeSt.
+
+3. Las 3 etapas del programa.
+  - 3.1. Carga del grafo.
+  - 3.2. El ordenamiento de sus vértices.
+  - 3.3. Main y el coloreo de los vértices.
+
+4. Preguntas frecuentes.
+  
 ### Introducción
 Realizamos un programa que afronta el problema de encontrar el numero cromático de un grafo determinado. Como sabemos por lo visto en la cátedra, no existe algoritmo alguno que resuelva esto en orden polinomial, al menos cuando el grafo no es bipartito (X(G) > 2). 
 
@@ -78,7 +92,7 @@ _vertices_usados_: Arreglo para saber si ya creamos el vértice o no.
 
 _orden_natural_: Arreglo con los vértices ordenados en su orden natural.
 
-### Ahora procederemos a explicar la 3 etapas del programa:
+### las 3 etapas del programa:
 
 #### _La carga del grafo._
 
@@ -161,15 +175,15 @@ La complejidad de Greedy termina siendo O(n.m) donde el pero caso "n" es igual a
 Para implementar Greedy decidimos utilizar las siguientes variables:
 
 ```c
-    u32 n = G->cantVertices;    // Cantidad de vertices del grafo
+    u32 n = G->cantVertices;    // Cantidad de vértices del grafo
     u32 color;                  // Variable para guardar color actual del vecino
-    u32 max_color = 0;          //Variable para guardar la cantidad maxima de colores
-    VerticeP vertice = NULL;    //Puntero para guardar vertice
+    u32 max_color = 0;          //Variable para guardar la cantidad máxima de colores
+    VerticeP vertice = NULL;    //Puntero para guardar vértice
     bool usado[n+1];            // Array para indicar colores no disponibles. n+1 ya que el color 0 no se usa
     u32 grado = 0;
 ```
 
-Antes de arrancar con el coloreo, despintamos todos los vertices del grafo, recorriendo uno por uno y asignandole _0_ a su _color_.
+Antes de arrancar con el coloreo, despintamos todos los vértices del grafo, recorriendo uno por uno y asignándole _0_ a su _color_.
 
 
 ```c
@@ -179,19 +193,19 @@ Antes de arrancar con el coloreo, despintamos todos los vertices del grafo, reco
     }
 ```
 
-Luego obtenemos el primer vértice según, el orden determinado, y lo copiamos en la variable _vertice_. Con el mismo lo coloreamos con el primer color, _1_, y luego empezamos a colorear los siguientes vertices en el orden determinado.
+Luego obtenemos el primer vértice según, el orden determinado, y lo copiamos en la variable _vertice_. Con el mismo lo coloreamos con el primer color, _1_, y luego empezamos a colorear los siguientes vértices en el orden determinado.
 
 
 ```c
-    vertice = G->orden[0]; // Obtenemos el puntero al primer vertice en el orden
+    vertice = G->orden[0]; // Obtenemos el puntero al primer vértice en el orden
     vertice->colorV = 1;   // Le ponemos el primer color.
     for (u32 u = 1; u < n; u++) {
-        // Revisamos los vecinos del vertice u.
-        // y flageamos los colores usados.
-        vertice = G->orden[u]; // Obtenemos el u'esimo vertice.
+        // Revisamos los vecinos del vértice u.
+        // y flagramos los colores usados.
+        vertice = G->orden[u]; // Obtenemos el u'esimo vértice.
 ```
 
-Mientras se va copiando vertice a vertice, se guarda su grado en la variable _grado_, para luego recorrer todos sus vecinos.
+Mientras se va copiando vértice a vértice, se guarda su grado en la variable _grado_, para luego recorrer todos sus vecinos.
 
 
 ```c
@@ -213,7 +227,7 @@ Luego, a medida que vemos cada vecino, si está coloreado, asignamos en la posic
         }
 ```
 
-Al terminar de recorrer todos los vecinos del _vertice_ actual, se busca por el primer color no usado en el array _usado_. Dicho color será el que se le asigne al _vertice_. También vamos guardando en _max_color_ el maximo color utilizado hasta el momento.
+Al terminar de recorrer todos los vecinos del _vertice_ actual, se busca por el primer color no usado en el array _usado_. Dicho color será el que se le asigne al _vertice_. También vamos guardando en _max_color_ el máximo color utilizado hasta el momento.
 
 
 ```c
@@ -228,7 +242,7 @@ Al terminar de recorrer todos los vecinos del _vertice_ actual, se busca por el 
         }
 ```
 
-Para poder seguir con el algoritmo, se resetea el array _usado_ y se repite con el proximo _vertice_ en el orden especificado.
+Para poder seguir con el algoritmo, se resetea el array _usado_ y se repite con el próximo _vertice_ en el orden especificado.
 
 ```c
         // Reseteamos el array de colores disponibles a falso
@@ -249,4 +263,4 @@ Para finalizar, se guarda la cantidad de colores utilizados en _G->cantcolor_ y 
 }
 ```
 
-Analizando el algoritmo y su complejidad, vemos que se comporta en _O(n*m)_, donde _n_ es la cantidad de vertices y _m_ la cantidad de lados. Esto se debe a que, por cada vertice (n veces), se recorren todos su _k_ vecinos, donde _k_, puede ser _m_.
+Analizando el algoritmo y su complejidad, vemos que se comporta en _O(n*m)_, donde _n_ es la cantidad de vértices y _m_ la cantidad de lados. Esto se debe a que, por cada vértice (n veces), se recorren todos su _k_ vecinos, donde _k_, puede ser _m_.
