@@ -132,7 +132,7 @@ int Chidos(NimheP G) {
         indice++;
     }
 
-    // For que revisa que un color no se repita entre vecino
+    // For que revisa que sea un coloreo propio.
     for(u32 i = 0; i < n; i++) {
         vertice = G->orden[i];
         for(u32 j = 0; j < vertice->gradoV; j++) {
