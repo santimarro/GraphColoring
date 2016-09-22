@@ -14,8 +14,11 @@ Integrantes:
   - 2.2.  NihmeSt.
 
 3. Las 3 etapas del programa.
+
   - 3.1. Carga del grafo.
+
   - 3.2. El ordenamiento de sus vértices.
+
   - 3.3. Main y el coloreo de los vértices.
 
 4. Preguntas frecuentes.
