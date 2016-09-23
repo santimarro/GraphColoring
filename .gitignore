@@ -37,3 +37,4 @@ perf.*
 # Debug files
 *.dSYM/
 *.su
+BM

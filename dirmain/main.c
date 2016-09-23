@@ -9,7 +9,7 @@ int main(void) {
 
     NimheP G = NuevoNimhe();
 
-    Greedy(G);
+    /*Greedy(G);
 
     printf("Cantidad de vertices: %u \n", NumeroDeVertices(G));
     printf("Cantidad de lados: %u \n", NumeroDeLados(G));
@@ -33,7 +33,7 @@ int main(void) {
     struct VerticeSt y = IesimoVecino(G, x, numero);
     printf("%u\n", y.nombreV);
 
-    /*printf("Primer orden: \n");
+        printf("Primer orden: \n");
     for(u32 i = 0; i < G->cantVertices; i++) {
         printf("%u, ", G->orden[i]->colorV);
     }
