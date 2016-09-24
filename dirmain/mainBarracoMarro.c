@@ -74,7 +74,14 @@ int main() {
 
     printf(" coloreo con Greedy en WelshPowell:%u colores\n", alduin);
 
-    if (alduin == 3) {
+    if (alduin < minimos_colores) {
+        minimos_colores = alduin;
+        for (u32 h = 0; h != n; ++h) {
+            mejor_orden[h] = x[h];
+        }
+    }
+
+    if (minimos_colores == 3) {
         printf("X(G)=3\n");
         return (EXIT_SUCCESS);
     }
