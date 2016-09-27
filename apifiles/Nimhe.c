@@ -67,8 +67,8 @@ NimheP NuevoNimhe() {
             else {
                 
                 //Agrego el lado.
-                xPuntero = AgregarLado(grafo, n);
-                yPuntero = AgregarLado(grafo, m);
+                xPuntero = AgregarVertice(grafo, n);
+                yPuntero = AgregarVertice(grafo, m);
                 
                 if(xPuntero != NULL)
                     AgregarVecino(xPuntero, yPuntero);
@@ -91,8 +91,6 @@ NimheP NuevoNimhe() {
             return NULL;
         }
     }
-    
-    printf("TERMINO DE CARGAR\n");
     return grafo;
 }
 
@@ -191,7 +189,7 @@ struct VerticeSt IesimoVecino(NimheP G, struct VerticeSt x, u32 i) {
 }
 
 
-VerticeP AgregarLado(NimheP G, u32 z) {
+VerticeP AgregarVertice(NimheP G, u32 z) {
 
     VerticeP xPuntero = NULL;   // Puntero a vertice
     u32 n = G->cantVertices;    // Numero de vertices
