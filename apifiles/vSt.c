@@ -22,13 +22,6 @@ u32 NombreDelVertice(struct VerticeSt x) {
     return(x.nombreV);
 }
 
-void CambiaColorA(struct VerticeSt x, u32 i) {
-    u32 color = i;
-    x.colorV = color;
-    return;
-}
-
-
 void AgregarVecino(VerticeP x, VerticeP y) {
     u32 grado = x->gradoV;
     //Chequeamos si tenemos memoria para poner el nuevo vecinos.

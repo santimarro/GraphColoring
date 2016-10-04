@@ -40,7 +40,7 @@ NimheP NuevoNimhe();
 
 int DestruirNimhe(NimheP G);
 
-VerticeP AgregarLado(NimheP G, u32 z);
+VerticeP AgregarVertice(NimheP G, u32 z);
 
 // Funciones de los vértices
 u32 ColorDelVertice(struct VerticeSt x);

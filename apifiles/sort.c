@@ -134,7 +134,7 @@ int CompGrandeChico(const void * x, const void * y) {
 }
 
 void GrandeChico(NimheP G) {
-     memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
+     VerticesDeColor = calloc(G->cantcolor + 1, sizeof(u32));
      u32 color;
      for(u32 i = 0; i < G->cantVertices; i++) {
          color = G->orden[i]->colorV;
@@ -166,8 +166,7 @@ int CompChicoGrande(const void * x, const void * y) {
 }
 // Igual que el anterior pero al reves los ordenes.. |Wj1| <= |Wj2|<= ...
 void ChicoGrande(NimheP G) {
-     u32 VerticesDeColor[G->cantcolor + 1];
-     memset(VerticesDeColor, 0, (G->cantcolor + 1)*sizeof(u32));
+     VerticesDeColor = calloc(G->cantcolor + 1, sizeof(u32));
      u32 color;
      for(u32 i = 0; i < G->cantVertices; i++) {
          color = G->orden[i]->colorV;
