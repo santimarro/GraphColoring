@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "Nimhe.h"
 #include <time.h>
 
 typedef unsigned int u32;
@@ -103,9 +102,9 @@ struct QueueSt {
 };
 
 struct QueueSt CrearQueue(u32 size);                        // Initialize the queue
-void DestruirQueue(struct QueueSt q);       // Remove all items from the queue
-void Enqueue(struct QueueSt q, VerticeP v); // Enter an item in the queue
-VerticeP Dequeue(struct QueueSt q);         // Remove an item from the queue
-u32 isEmpty(struct QueueSt q);             // Return true if queue is empty
+void DestruirQueue(struct QueueSt *q);       // Remove all items from the queue
+void Enqueue(struct QueueSt *q, VerticeP v); // Enter an item in the queue
+VerticeP Dequeue(struct QueueSt *q);         // Remove an item from the queue
+u32 isEmpty(struct QueueSt *q);             // Return true if queue is empty
 
 #endif  // CTHULHU_H_
