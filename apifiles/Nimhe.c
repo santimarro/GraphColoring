@@ -200,6 +200,7 @@ VerticeP AgregarVertice(NimheP G, u32 z) {
         contador++;    
         if (G->vertices[id_z].nombreV == z) {
             xPuntero = &G->vertices[id_z];
+            contador = 0;
             break;
         }
         else {

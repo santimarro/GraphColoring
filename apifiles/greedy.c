@@ -8,27 +8,27 @@ struct QueueSt CrearQueue(u32 size) {
     return q;
 }
 
-void DestruirQueue(struct QueueSt q) {
-    free(q.theQueue);
+void DestruirQueue(struct QueueSt *q) {
+    free(q->theQueue);
 }
 
-void Enqueue(struct QueueSt q, VerticeP v) {
+void Enqueue(struct QueueSt *q, VerticeP v) {
     // Increment tail index
-    q.tail++;
+    q->tail++;
     // Add the item to the Queue
-    q.theQueue[q.tail] = v;
+    q->theQueue[q->tail] = v;
     return;
 }
 
-VerticeP Dequeue(struct QueueSt q) {
+VerticeP Dequeue(struct QueueSt *q) {
     VerticeP v;
-    q.head++;
-    v = q.theQueue[q.head]; // Get character to return
+    q->head++;
+    v = q->theQueue[q->head]; // Get character to return
     return v;           // Return popped character
 }
 
-u32 isEmpty(struct QueueSt q) {
-    return (q.head == q.tail);
+u32 isEmpty(struct QueueSt *q) {
+    return (q->head == q->tail);
 }
 
 
@@ -107,27 +107,27 @@ int Chidos(NimheP G) {
             x->colorV = 1;
             vertices_coloreados++;
             q = CrearQueue(n);
-            Enqueue(q, x);
+            Enqueue(&q, x);
             // While para desencolar q
-            while(!isEmpty(q)) {
-                vertice = Dequeue(q);
+            while(!isEmpty(&q)) {
+                vertice = Dequeue(&q);
                 // For para recorrer los vecino.
                 for(u32 i = 0; i < vertice->gradoV; i++) {
                     // Si el vecino no tiene color, se encola y se colorea.
                     if(vertice->vecinos[i]->colorV == 0) {
-                        Enqueue(q, vertice->vecinos[i]);
+                        Enqueue(&q, vertice->vecinos[i]);
                         vertice->vecinos[i]->colorV = (3 - vertice->colorV);
                         //aumento los vertices coloreados
                         vertices_coloreados++;
                     }
                     // Si un vecino ya tenia el mismo color entonces no es bipartito. Hago return 0
                     else if (vertice->colorV == vertice->vecinos[i]->colorV) {
-                        DestruirQueue(q);
+                        DestruirQueue(&q);
                         return 0;
                     }
                 }
             }
-            DestruirQueue(q);
+            DestruirQueue(&q);
         }
         indice++;
     }
